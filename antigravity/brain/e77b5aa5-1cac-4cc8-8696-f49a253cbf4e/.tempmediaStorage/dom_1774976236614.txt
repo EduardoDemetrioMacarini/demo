@@ -1,0 +1,78 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (94,45)<button class='json-schema-2020-12-accordion' />
+	[1] (86,45)<div  />
+		[2] (86,45)<div >Absence />
+	[3] (114,45)<span  />
+[4] (144,46)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[5] (127,126)<button class='json-schema-2020-12-accordion' />
+	[6] (120,126)<div  />
+		[7] (120,126)<div >ResponseDtoAbsence />
+	[8] (181,127)<span  />
+[9] (211,128)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[10] (161,208)<button class='json-schema-2020-12-accordion' />
+	[11] (154,208)<div  />
+		[12] (154,208)<div >ResponseDtoWorkplaceVacancyDto />
+	[13] (249,208)<span  />
+[14] (279,209)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[15] (130,289)<button class='json-schema-2020-12-accordion' />
+	[16] (122,289)<div  />
+		[17] (122,289)<div >WorkplaceScheduleDto />
+	[18] (186,289)<span  />
+[19] (216,290)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[20] (173,371)<button class='json-schema-2020-12-accordion' />
+	[21] (165,371)<div  />
+		[22] (165,371)<div >ResponseDtoListWorkplaceScheduleDto />
+	[23] (272,371)<span  />
+[24] (302,372)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[25] (131,452)<button class='json-schema-2020-12-accordion' />
+	[26] (123,452)<div  />
+		[27] (123,452)<div >WorkplaceCommentDto />
+	[28] (188,452)<span  />
+[29] (218,453)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[30] (165,533)<button class='json-schema-2020-12-accordion' />
+	[31] (157,533)<div  />
+		[32] (157,533)<div >ResponseDtoWorkplaceCommentDto />
+	[33] (255,534)<span  />
+[34] (285,535)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[35] (131,615)<button class='json-schema-2020-12-accordion' />
+	[36] (123,615)<div  />
+		[37] (123,615)<div >TimeTrackingPeriodDto />
+	[38] (187,615)<span  />
+[39] (217,616)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[40] (164,696)<button class='json-schema-2020-12-accordion' />
+	[41] (156,696)<div  />
+		[42] (156,696)<div >ResponseDtoTimeTrackingPeriodDto />
+	[43] (254,696)<span  />
+[44] (284,697)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[45] (133,777)<button class='json-schema-2020-12-accordion' />
+	[46] (126,777)<div  />
+		[47] (126,777)<div >TimeCardInformationDto />
+	[48] (193,778)<span  />
+[49] (223,779)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[50] (167,859)<button class='json-schema-2020-12-accordion' />
+	[51] (159,859)<div  />
+		[52] (159,859)<div >ResponseDtoTimeCardInformationDto />
+	[53] (260,859)<span  />
+[54] (290,860)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+[55] (123,940)<button class='json-schema-2020-12-accordion' />
+	[56] (115,940)<div  />
+		[57] (115,940)<div >BonusWorkplaceDto />
+	[58] (172,940)<span  />
+[59] (202,941)<button class='json-schema-2020-12-expand-deep-button'>Expand all />
+object
+
+</current_dom>

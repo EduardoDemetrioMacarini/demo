@@ -1,0 +1,48 @@
+# Plano de Correção: Vale Alimentação (Dados Zerados)
+
+Este plano visa corrigir o problema onde os campos de Base, Vlr. Diário, Extras e Ausências estão aparecendo como zero para os colaboradores.
+
+## Problemas Identificados
+
+1.  **Dados Senior (Base/Valor)**: A tabela `vbs_valcol_agrupado` não contém dados para alguns colaboradores ativos (como o Valdeir). Precisamos identificar a fonte correta de vales (possivelmente as tabelas `R040...` do módulo de benefícios do Senior).
+2.  **Dados Nexti (Extras/Faltas)**: A integração via API está retornando zero para todos. Prováveis causas:
+    *   Endpoints de ocorrências/ausências incorretos.
+    *   Propriedades do JSON (como `overtimeMinutes`) com nomes diferentes no ambiente do cliente.
+    *   Mapeamento de Matrícula inconsistente.
+
+## Pesquisa Técnica Necessária
+
+> [!IMPORTANT]
+> **Investigação Senior**: Identificar onde estão os "15 dias" e "R$ 47,50" citados pelo usuário (tabelas `R040PRE`, `R040PER`, etc).
+> **Investigação Nexti**: Tentar realizar chamadas de "descoberta" para entender a estrutura real do JSON retornado pelos endpoints de ocorrências e ausências.
+
+## Proposta de Mudanças
+
+### 1. Backend
+
+#### [MODIFY] [Program.cs](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+*   **Ajuste SQL**: Refatorar a query de sincronização da Senior para buscar dados de benefícios em tabelas mais abrangentes caso a `vbs_valcol_agrupado` falhe.
+*   **Depuração Nexti**: Adicionar logs detalhados (ou salvar um JSON de exemplo temporário) durante a sincronização para validar a resposta da API do Nexti.
+*   **Correção de Nomes**: Ajustar os nomes das propriedades JSON conforme a descoberta (ex: mapear campo de horas extras diárias).
+
+### 2. Frontend
+
+*   **Tratamento de Dados**: Garantir que o frontend não oculte dados ou mostre zero caso o backend retorne nulo por algum erro de integração, fornecendo avisos mais claros.
+
+## Perguntas em Aberto
+
+> [!IMPORTANT]
+> **Onde exatamente no Senior estão cadastrados esses valores de R$ 47,50?**
+> Se não estão na tabela `vbs_valcol`, pode ser que estejam no cadastro de Benefícios por Colaborador (`R034BEN`) ou no fechamento mensal (`R040...`).
+
+> [!NOTE]
+> **O Nexti utiliza o campo `registration` ou `matricula` no JSON?** 
+> Preciso confirmar o nome exato do campo no JSON retornado pela API para fazer o `TryGetProperty` corretamente.
+
+---
+
+## Verificação
+
+1.  Rodar um script de teste para validar a query SQL da Senior e as chamadas HTTP do Nexti.
+2.  Executar a sincronização manual.
+3.  Validar se o Valdeir (6000253) e a Eliane agora exibem os números corretos.

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos e Permissões - ControlPro</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .screen-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .screen-item:hover { background: rgba(255,255,255,0.1); }
+        .screen-item input { width: 18px; height: 18px; cursor: pointer; }
+    </style>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 100 100" width="45" height="45" style="vertical-align: middle;">
+                   <path d="M 50 15 Q 90 15 90 45 Q 90 60 50 60 Q 15 60 15 75 Q 15 95 50 95 Q 90 95 90 75" fill="none" stroke="#3b82f6" stroke-width="12" stroke-linecap="round"/>
+                </svg>
+                <div style="font-weight: 600; font-size: 1.4rem; color: white; margin-left: 15px;" class="logo-text">Control<span style="font-weight: 300;">Pro</span></div>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="home.html"><i class='bx bx-home-alt'></i><span class="menu-text">Página Inicial</span></a></li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event, 'submenu-ti')"><i class='bx bx-laptop'></i><span class="menu-text">TI</span><i class='bx bx-chevron-down submenu-icon' style="margin-left:auto;"></i></a>
+                    <ul class="submenu" id="submenu-ti" style="display:block; list-style:none; padding-left: 35px; margin-top: 5px;">
+                        <li><a href="rotinas.html" style="padding: 8px 0; font-size: 0.9rem; color: rgba(255,255,255,0.7);"><i class='bx bx-data'></i> Rotinas</a></li>
+                        <li><a href="usuarios.html" style="padding: 8px 0; font-size: 0.9rem; color: rgba(255,255,255,0.7);"><i class='bx bx-user-circle'></i> Usuários</a></li>
+                        <li><a href="grupos.html" class="active" style="padding: 8px 0; font-size: 0.9rem;"><i class='bx bx-group'></i> Grupos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Gestão de Grupos e Acessos</h1>
+                <div class="user-info">
+                    <span id="welcomeUser">Carregando...</span>
+                    <div class="avatar-circle">TI</div>
+                </div>
+            </header>
+            
+            <div class="content-area" style="display: grid; grid-template-columns: 350px 1fr; gap: 20px;">
+                <!-- Lista de Grupos -->
+                <div class="glass-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
+                        <h3 style="margin:0;">Grupos</h3>
+                        <button onclick="newGroup()" class="btn-primary" style="width:auto; margin:0; padding:5px 10px;"><i class='bx bx-plus'></i></button>
+                    </div>
+                    <div id="groupsList">Carregando...</div>
+                </div>
+
+                <!-- Permissões do Grupo Selecionado -->
+                <div class="glass-card" id="permissionsCard" style="display:none;">
+                    <h3 id="selectedGroupName">Editar Grupo</h3>
+                    <p style="color:rgba(255,255,255,0.5); font-size:0.85rem;">Selecione as telas que este grupo pode acessar.</p>
+                    
+                    <div class="screens-grid" id="screensList">
+                        <!-- Telas aqui -->
+                    </div>
+
+                    <div style="margin-top: 2rem; display:flex; gap:10px;">
+                        <button onclick="savePermissions()" class="btn-primary" style="width:200px; margin:0;">Salvar Alterações</button>
+                        <button onclick="deleteGroup()" id="btnDeleteGroup" class="btn-primary" style="width:auto; margin:0; background:#ff4b4b;">Excluir Grupo</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        const user = localStorage.getItem('loggedUsername');
+        if (!user) window.location.replace('index.html');
+        else document.getElementById('welcomeUser').textContent = "Olá, " + user;
+
+        function toggleSubmenu(e, id) {
+            e.preventDefault();
+            const el = document.getElementById(id);
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        const availableScreens = [
+            { name: "Página Inicial", path: "home.html" },
+            { name: "Dossiê Colaborador (DP)", path: "dp.html" },
+            { name: "Vale Alimentação", path: "vale_alimentacao.html" },
+            { name: "Rotinas (TI)", path: "rotinas.html" },
+            { name: "Usuários (TI)", path: "usuarios.html" },
+            { name: "Grupos (TI)", path: "grupos.html" }
+        ];
+
+        let selectedGroupId = null;
+
+        async function loadGroups() {
+            try {
+                const res = await fetch(`${API_URL}/groups`);
+                const data = await res.json();
+                const list = document.getElementById('groupsList');
+                list.innerHTML = data.map(g => `
+                    <div onclick="selectGroup(${g.id}, '${g.name}')" style="padding:12px; border-radius:8px; background:rgba(255,255,255,0.05); margin-bottom:8px; cursor:pointer; color:white; display:flex; justify-content:space-between; align-items:center;" onmouseover="this.style.background='rgba(59,130,246,0.1)'" onmouseout="if(selectedGroupId!=${g.id}) this.style.background='rgba(255,255,255,0.05)'">
+                        <span>${g.name}</span>
+                        <i class='bx bx-chevron-right'></i>
+                    </div>
+                `).join('');
+            } catch(e) { console.error(e); }
+        }
+
+        async function selectGroup(id, name) {
+            selectedGroupId = id;
+            document.getElementById('selectedGroupName').textContent = `Editar Grupo: ${name}`;
+            document.getElementById('permissionsCard').style.display = 'block';
+            document.getElementById('btnDeleteGroup').style.display = id <= 2 ? 'none' : 'block';
+
+            // Carrega permissões
+            const res = await fetch(`${API_URL}/groups/${id}/screens`);
+            const allowed = await res.json();
+
+            const list = document.getElementById('screensList');
+            list.innerHTML = availableScreens.map(s => `
+                <label class="screen-item">
+                    <input type="checkbox" value="${s.path}" ${allowed.includes(s.path) ? 'checked' : ''}>
+                    <span>${s.name}</span>
+                </label>
+            `).join('');
+
+            // Highlight selected in list
+            loadGroups(); // to refresh backgrounds, simplified here
+        }
+
+        async function savePermissions() {
+            const name = document.getElementById('selectedGroupName').textContent.replace('Editar Grupo: ', '');
+            const checkboxes = document.querySelectorAll('#screensList input:checked');
+            const screens = Array.from(checkboxes).map(cb => cb.value);
+
+            try {
+                const res = await fetch(`${API_URL}/groups`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Id: selectedGroupId, Name: name, Screens: screens })
+                });
+                if(res.ok) {
+                   alert("Alterações salvas com sucesso!");
+                   loadGroups();
+                }
+            } catch(e) { alert("Erro ao salvar: " + e.message); }
+        }
+
+        async function newGroup() {
+            const name = prompt("Nome do novo grupo:");
+            if (!name) return;
+            try {
+                const res = await fetch(`${API_URL}/groups`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Id: 0, Name: name, Screens: ['home.html'] })
+                });
+                if(res.ok) loadGroups();
+            } catch(e) { alert("Erro: " + e.message); }
+        }
+
+        async function deleteGroup() {
+            if(!confirm("Tem certeza que deseja excluir este grupo?")) return;
+            try {
+                const res = await fetch(`${API_URL}/groups/${selectedGroupId}`, { method: 'DELETE' });
+                if(res.ok) {
+                    selectedGroupId = null;
+                    document.getElementById('permissionsCard').style.display = 'none';
+                    loadGroups();
+                }
+            } catch(e) { alert("Erro: " + e.message); }
+        }
+
+        loadGroups();
+    </script>
+</body>
+</html>
+

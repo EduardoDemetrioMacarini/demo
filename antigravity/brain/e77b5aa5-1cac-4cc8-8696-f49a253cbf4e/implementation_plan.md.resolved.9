@@ -1,0 +1,32 @@
+# Cálculo Dinâmico por Regra de Escala (R006HOR)
+
+Descobrimos que a plataforma Senior do cliente não possui calendários gerados na `R006CES`. Portanto, o cálculo da base (VA) seguirá a **Regra Semanal/Cíclica** cadastrada na `R006HOR`.
+
+## User Review Required
+
+> [!IMPORTANT]
+> - **Mapeamento de Horários:** Identificamos que nesta base Senior, **`TipHor = 5`** representa o dia de trabalho e **`TipHor = 1`** representa folga/compensado.
+> - **Projeção Semanal:** Para escalas de 7 dias (como a do Adilson), assumiremos que a sequência 1 inicia na **Segunda-Feira**.
+> - **Escalas de Revezamento (12x36):** No caso de revezamentos onde não há calendário gerado nem data de início clara, aplicaremos o cálculo de base de **15 dias fixos** (média mensal) menos os feriados proporcionais, ou usaremos a amostragem do ciclo.
+
+## Proposed Changes
+
+### [Component Name] Backend (C#)
+
+#### [MODIFY] [Program.cs](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+- Refatorar o método `GetScaleWorkDays` para:
+    1. Buscar a lista de horários da escala na **`R006HOR`**.
+    2. Identificar os dias de trabalho (`TipHor = 5`).
+    3. Projetar os 30 dias de Abril/2026:
+        - Para escalas de 7 dias: Mapeia cada dia da semana para o `seqreg` correspondente (Seg=1, Ter=2...).
+        - Para escalas diferentes de 7 dias: Calcula a base teórica de dias de trabalho no mês.
+    4. Descontar os feriados nacionais que incidem nos dias de trabalho projetados.
+
+## Verification Plan
+
+### Automated Tests
+1. **Adilson (Escala 5x2):** Deve confirmar os **20 dias** em Abril (22 dias de trabalho - 2 feriados).
+2. **Escala 6x1 (Trabalha Sábados):** Deve confirmar os **24 dias** em Abril (26 dias de trabalho - 2 feriados).
+
+### Manual Verification
+- O usuário poderá confirmar que a coluna **"Base"** reflete a jornada esperada de cada contrato.

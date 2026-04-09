@@ -1,0 +1,48 @@
+# Cadastro Manual de Valores de Vale Alimentação por Cargo
+
+Este plano detalha a criação de um sistema de gerenciamento manual de valores de VA associados a funções (cargos), permitindo que o usuário defina o valor diário diretamente na interface, uma vez que esses dados não estão disponíveis de forma estruturada no Senior.
+
+## User Review Required
+
+> [!IMPORTANT]
+> A sincronização deixará de depender da view `vbs_valcol_agrupado` (que estava incompleta) e passará a cruzar os dados dos colaboradores diretamente com esta nova tabela de configurações locais.
+
+> [!NOTE]
+> Vou precisar que você confirme alguns valores iniciais ou eu farei uma carga genérica (ex: R$ 47,50 para cargos operacionais) que você poderá editar depois.
+
+## Proposed Changes
+
+### Backend (.NET Core)
+
+#### [MODIFY] [Program.cs](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+- **Nova Tabela**: Criar a tabela `ValeAlimentacaoSettings (Cargo PRIMARY KEY, ValorDiario DECIMAL)`.
+- **API Settings**:
+    - `GET /api/dp/vale_alimentacao/settings`: Retorna a lista de cargos únicos do Senior cruzada com os valores locais.
+    - `POST /api/dp/vale_alimentacao/settings`: Salva/Atualiza o valor de um cargo.
+- **Refatoração do Sync**:
+    - Alterar a query inicial para buscar colaboradores de `R034FUN` (Filtrando TIPCOL <> 2 e situação adequada).
+    - Fazer JOIN com a nova tabela `ValeAlimentacaoSettings` para obter o `ValorDiario`.
+    - Manter a integração com Nexti para Extras e Ausências.
+
+---
+
+### Frontend
+
+#### [MODIFY] [vale_alimentacao.html](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/vale_alimentacao.html)
+- **Interface de Configuração**: Adicionar um botão "Configurar Valores por Cargo" que abre um modal ou seção lateral.
+- **Tabela de Edição**: Listar todos os cargos e permitir a edição inline do valor unitário.
+- **Feedback Visual**: Alertar na tabela principal se houver colaboradores com cargo sem valor definido.
+
+## Open Questions
+
+- Você consegue me passar os valores de alguns cargos principais para eu já deixar "chumbado" na carga inicial (além do 47,50)?
+- A regra de "Trazer somente demitidos na competência atual" deve ser mantida rigorosamente? (Sim, conforme pedido anterior).
+
+## Verification Plan
+
+### Automated Tests
+- Executar o Job de sincronização e verificar se os valores batem com as configurações manuais.
+- Testar o salvamento de um novo valor para um cargo e verificar se reflete no cálculo do VA após novo sync.
+
+### Manual Verification
+- O usuário deve abrir a tela, clicar em "Configurar Valores", alterar um valor e clicar em "Sincronizar" para ver a mudança.

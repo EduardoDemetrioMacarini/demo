@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_TASK",
+  "summary": "Implementação do Dossiê do Colaborador no módulo DP concluída.\n- Backend: Endpoints de busca e dossiê finalizados e validados com o esquema da Senior.\n- Frontend: Página dp.html com busca e visualização em modo Drawer implementada.\n- Navegação: Sidebar atualizada em todo o sistema.\n- Correções: Ajustados nomes de colunas e tabelas (R038AFA, NUMCID, DDDTEL, valeve).",
+  "updatedAt": "2026-03-20T18:13:57.262542800Z",
+  "version": "4"
+}

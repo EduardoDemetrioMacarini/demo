@@ -1,0 +1,26 @@
+# Task: Implement Connections Management and Improve Stability
+
+- [ ] Planning and Analysis [/]
+    - [x] Review `Program.cs` for crash points
+    - [x] Review `conexoes.html` implementation
+    - [x] Check `run_error.txt` for recent crash info
+    - [ ] Audit all frontend files for navigation consistency [/]
+        - [x] `dp.html`
+        - [ ] `rh.html`
+        - [ ] `precificacao.html`
+        - [ ] `grupos.html`
+        - [ ] `usuarios.html`
+        - [ ] `rotinas.html`
+        - [ ] `home.html`
+- [x] Backend Stability Improvements [/]
+    - [x] Establish and verify Nexti Connection
+    - [x] Add `try-catch` to critical endpoints in `Program.cs`
+    - [x] Refactor `GetSeniorToken` for better resilience
+    - [x] Implement Global Exception Middleware
+- [ ] Frontend Enhancements [/]
+    - [ ] Synchronize navigation menus across all pages
+    - [ ] Improve error reporting on the Connections page
+- [ ] Verification [ ]
+    - [ ] Test all connections in the UI
+    - [ ] Simulate database downtime to verify error handling
+    - [ ] Verify navigation on all pages

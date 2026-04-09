@@ -1,0 +1,154 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,6)<div  />
+	[1] (480,6)<button class='opblock-summary-control' />
+		[2] (68,6)<span >PUT />
+		[3] (506,6)<div  />
+			[4] (212,6)<span  />
+				[5] (212,6)<a class='nostyle' href='#/Grupo%20de%20escalas%20/%20Schedule%20group/updateByExternalId_8' />
+					[6] (212,6)<span >/schedulegroups
+/externalId
+/{externalId} />
+			[7] (364,6)<div >Atualizar / Update />
+	[8] (928,6)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[9] (948,6)<button aria-label='put ​/schedulegroups​/externalId​/{externalId}' class='opblock-control-arrow' />
+[10] (500,99)<h3  />
+	[11] (164,99)<a class='nostyle' href='#/Grupos%20do%20Direct%20/%20Direct%20Topics' />
+		[12] (164,98)<span >Grupos do Direct / Direct Topics />
+	[13] (606,99)<small  />
+		[14] (606,99)<div  />
+			[15] (606,99)<p >Grupos / Topics />
+	[16] (939,99)<button class='expand-operation' title='Collapse operation' />
+[17] (500,179)<div  />
+	[18] (480,179)<button class='opblock-summary-control' />
+		[19] (68,179)<span >GET />
+		[20] (506,179)<div  />
+			[21] (132,179)<span  />
+				[22] (132,179)<a class='nostyle' href='#/Grupos%20do%20Direct%20/%20Direct%20Topics/getAllTopics' />
+					[23] (132,179)<span >/topics
+/all />
+			[24] (265,179)<div >Lista grupos do direct existentes / List Direct topics />
+	[25] (928,179)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[26] (948,179)<button aria-label='get ​/topics​/all' class='opblock-control-arrow' />
+[27] (500,272)<h3  />
+	[28] (187,271)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history' />
+		[29] (187,271)<span >Histórico de posto / Workplace history />
+	[30] (629,271)<small  />
+		[31] (629,271)<div  />
+			[32] (629,271)<p >[PT]Clientes Nexti podem gerenciar as trocas de posto dos colaboradores.[EN]Nexti Customers can manage employee Workplace exchanges. />
+	[33] (939,271)<button class='expand-operation' title='Collapse operation' />
+[34] (500,351)<div  />
+	[35] (480,351)<button class='opblock-summary-control' />
+		[36] (68,351)<span >POST />
+		[37] (506,351)<div  />
+			[38] (155,351)<span  />
+				[39] (155,351)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/createTransfer' />
+					[40] (155,351)<span >/workplacetransfers />
+			[41] (243,351)<div >Cadastro / Add />
+	[42] (928,351)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[43] (948,351)<button aria-label='post ​/workplacetransfers' class='opblock-control-arrow' />
+[44] (500,427)<div  />
+	[45] (480,427)<button class='opblock-summary-control' />
+		[46] (68,427)<span >GET />
+		[47] (506,427)<div  />
+			[48] (169,427)<span  />
+				[49] (169,427)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/findWorkplaceTransferById' />
+					[50] (169,427)<span >/workplacetransfers
+/{id} />
+			[51] (382,427)<div >[PT] Consultar um histórico de posto. [EN] Get a single workplace history. />
+	[52] (928,427)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[53] (948,427)<button aria-label='get ​/workplacetransfers​/{id}' class='opblock-control-arrow' />
+[54] (500,503)<div  />
+	[55] (480,503)<button class='opblock-summary-control' />
+		[56] (68,503)<span >PUT />
+		[57] (506,503)<div  />
+			[58] (169,503)<span  />
+				[59] (169,503)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/update' />
+					[60] (169,503)<span >/workplacetransfers
+/{id} />
+			[61] (278,503)<div >Atualizar / Update />
+	[62] (928,503)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[63] (948,503)<button aria-label='put ​/workplacetransfers​/{id}' class='opblock-control-arrow' />
+[64] (500,579)<div  />
+	[65] (480,579)<button class='opblock-summary-control' />
+		[66] (68,579)<span >DELETE />
+		[67] (506,579)<div  />
+			[68] (169,579)<span  />
+				[69] (169,579)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/delete' />
+					[70] (169,579)<span >/workplacetransfers
+/{id} />
+			[71] (273,579)<div >Excluir / Delete />
+	[72] (928,579)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[73] (948,579)<button aria-label='delete ​/workplacetransfers​/{id}' class='opblock-control-arrow' />
+[74] (500,655)<div  />
+	[75] (480,655)<button class='opblock-summary-control' />
+		[76] (68,655)<span >DELETE />
+		[77] (506,655)<div  />
+			[78] (175,655)<span  />
+				[79] (175,655)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/delete_34' />
+					[80] (175,655)<span >/workplacetransfers
+/delete />
+			[81] (284,655)<div >Excluir / Delete />
+	[82] (928,655)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[83] (948,655)<button aria-label='delete ​/workplacetransfers​/delete' class='opblock-control-arrow' />
+[84] (500,734)<div  />
+	[85] (480,734)<button class='opblock-summary-control' />
+		[86] (68,734)<span >GET />
+		[87] (506,734)<div  />
+			[88] (432,724)<span  />
+				[89] (432,724)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/findByTransferPeriodBusinessUnitExternalIdReasons' />
+					[90] (432,724)<span >/workplacetransfers
+/lastupdate
+/businessunitexternalid
+/{businessUnitExternalId}
+/start
+/{start}
+/finish
+/{finish}
+/reasons />
+			[91] (213,747)<div >Lista todos os históricos de posto / Lists all history by period />
+	[92] (928,734)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[93] (948,734)<button aria-label='get ​/workplacetransfers​/lastupdate​/businessunitexternalid​/{businessUnitExternalId}​/start​/{start}​/finish​/{finish}​/reasons' class='opblock-control-arrow' />
+[94] (500,817)<div  />
+	[95] (480,817)<button class='opblock-summary-control' />
+		[96] (68,817)<span >GET />
+		[97] (506,817)<div  />
+			[98] (301,806)<span  />
+				[99] (301,806)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/findByTransferPeriodNextiUser' />
+					[100] (301,806)<span >/workplacetransfers
+/lastupdate
+/nextiuser
+/start
+/{start}
+/finish
+/{finish} />
+			[101] (303,829)<div >Lista todos os históricos de posto  criados por usuários Nexti/ Lists all history by period created by user Nexti />
+	[102] (928,817)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[103] (948,817)<button aria-label='get ​/workplacetransfers​/lastupdate​/nextiuser​/start​/{start}​/finish​/{finish}' class='opblock-control-arrow' />
+[104] (500,896)<div  />
+	[105] (480,896)<button class='opblock-summary-control' />
+		[106] (68,896)<span >GET />
+		[107] (506,896)<div  />
+			[108] (272,896)<span  />
+				[109] (272,896)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/findByTransferPeriod' />
+					[110] (272,896)<span >/workplacetransfers
+/lastupdate
+/start
+/{start}
+/finish
+/{finish} />
+			[111] (563,896)<div >Lista todos os históricos de posto / Lists all history by period />
+	[112] (928,896)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[113] (948,896)<button aria-label='get ​/workplacetransfers​/lastupdate​/start​/{start}​/finish​/{finish}' class='opblock-control-arrow' />
+[114] (68,972)<span >POST />
+[115] (175,972)<span  />
+	[116] (175,972)<a class='nostyle' href='#/Histórico%20de%20posto%20/%20Workplace%20history/createLegacyTransfer' />
+		[117] (175,972)<span >/workplacetransfers
+/legacy />
+[118] (320,972)<div >Cadastro de Legado / Add Legacy />
+[119] (928,972)<button aria-label='authorization button unlocked' class='authorization__btn' />
+[120] (948,972)<button aria-label='post ​/workplacetransfers​/legacy' class='opblock-control-arrow' />
+
+</current_dom>

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ControlPro AI — Business Intelligence de Nova Geração</title>
+    <meta name="description" content="Transforme dados em decisões estratégicas. ControlPro AI é a plataforma de Business Intelligence com inteligência artificial que impulsiona os resultados do seu negócio.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy:       #060d1a;
+            --navy-mid:   #0a1628;
+            --navy-card:  #0e1f38;
+            --blue:       #3b82f6;
+            --blue-light: #60a5fa;
+            --indigo:     #6366f1;
+            --purple:     #8b5cf6;
+            --cyan:       #06b6d4;
+            --text:       #e2e8f0;
+            --text-muted: #94a3b8;
+            --border:     rgba(59,130,246,0.15);
+            --glow:       rgba(59,130,246,0.25);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--navy);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── GRID BACKGROUND ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 0 5%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            background: rgba(6,13,26,0.85);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .nav-logo-text span {
+            background: linear-gradient(90deg, var(--blue), var(--indigo));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--blue-light); }
+
+        .btn-nav {
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            color: #fff !important;
+            padding: 9px 22px;
+            border-radius: 8px;
+            font-weight: 600 !important;
+            font-size: 0.875rem !important;
+            transition: opacity 0.2s, transform 0.2s !important;
+        }
+        .btn-nav:hover { opacity: 0.85; transform: translateY(-1px); }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 5% 80px;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Glow blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            animation: pulse 8s ease-in-out infinite;
+        }
+        .blob-1 { width: 600px; height: 600px; background: rgba(59,130,246,0.12); top: -150px; left: -100px; }
+        .blob-2 { width: 500px; height: 500px; background: rgba(99,102,241,0.12); bottom: -100px; right: -100px; animation-delay: -4s; }
+        .blob-3 { width: 300px; height: 300px; background: rgba(6,182,212,0.08); top: 40%; left: 50%; transform: translate(-50%,-50%); animation-delay: -2s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59,130,246,0.1);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--blue-light);
+            margin-bottom: 32px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            animation: fadeDown 0.8s ease forwards;
+        }
+
+        .hero-badge .dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: blink 2s infinite; }
+
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+        @keyframes fadeDown { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:translateY(0);} }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+            margin-bottom: 24px;
+            animation: fadeUp 0.9s 0.1s ease both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--blue-light), var(--indigo), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 44px;
+            font-weight: 400;
+            animation: fadeUp 0.9s 0.2s ease both;
+        }
+
+        @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeUp 0.9s 0.3s ease both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--indigo) 100%);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 0 30px rgba(59,130,246,0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(59,130,246,0.5); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover { border-color: var(--blue); color: var(--blue-light); transform: translateY(-3px); }
+
+        /* Hero dashboard mockup */
+        .hero-visual {
+            margin-top: 70px;
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            animation: fadeUp 1s 0.5s ease both;
+        }
+
+        .dashboard-mockup {
+            background: var(--navy-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.1) inset;
+            backdrop-filter: blur(10px);
+        }
+
+        .mockup-topbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topbar-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ff5f57; }
+        .dot-yellow { background: #febc2e; }
+        .dot-green { background: #28c840; }
+
+        .mockup-topbar-title {
+            margin-left: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .mockup-kpi {
+            background: rgba(59,130,246,0.06);
+            border: 1px solid rgba(59,130,246,0.12);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .kpi-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+        .kpi-value { font-size: 1.6rem; font-weight: 800; color: #fff; }
+        .kpi-delta { font-size: 0.72rem; color: #34d399; margin-top: 2px; }
+        .kpi-delta.red { color: #f87171; }
+
+        .mockup-charts {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 14px;
+        }
+
+        .chart-box {
+            background: rgba(99,102,241,0.05);
+            border: 1px solid rgba(99,102,241,0.1);
+            border-radius: 12px;
+            padding: 16px;
+            height: 130px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-box-label { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 10px; }
+
+        /* Fake animated chart bars */
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 80px;
+        }
+
+        .bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            background: linear-gradient(180deg, var(--indigo), var(--blue));
+            animation: growBar 1.5s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        @keyframes growBar { from {transform: scaleY(0);} to {transform: scaleY(1);} }
+
+        /* Fake line chart */
+        .line-chart svg { width: 100%; height: 80px; }
+
+        /* ─── STATS SECTION ─── */
+        .stats {
+            position: relative;
+            z-index: 1;
+            padding: 80px 5%;
+            background: linear-gradient(180deg, transparent, rgba(59,130,246,0.04), transparent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            max-width: 1100px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .stat-item {
+            padding: 40px 30px;
+            text-align: center;
+            background: var(--navy-card);
+            border-right: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-item:hover { background: rgba(59,130,246,0.06); }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, var(--blue-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ─── FEATURES ─── */
+        section { position: relative; z-index: 1; }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .section-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99,102,241,0.1);
+            border: 1px solid rgba(99,102,241,0.25);
+            border-radius: 100px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .features { padding: 100px 5%; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--navy-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(59,130,246,0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(59,130,246,0.1);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .icon-blue { background: rgba(59,130,246,0.15); }
+        .icon-indigo { background: rgba(99,102,241,0.15); }
+        .icon-purple { background: rgba(139,92,246,0.15); }
+        .icon-cyan { background: rgba(6,182,212,0.15); }
+        .icon-green { background: rgba(52,211,153,0.15); }
+        .icon-amber { background: rgba(251,191,36,0.15); }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ─── HOW IT WORKS ─── */
+        .how {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, transparent, rgba(99,102,241,0.04), transparent);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 12.5%;
+            width: 75%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--blue), var(--indigo), var(--purple));
+            opacity: 0.4;
+        }
+
+        .step {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .step-number {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin: 0 auto 24px;
+            box-shadow: 0 0 30px rgba(59,130,246,0.3);
+        }
+
+        .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+        .step p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ─── SOCIAL PROOF ─── */
+        .social-proof { padding: 100px 5%; }
+
+        .logos-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 48px;
+            max-width: 900px;
+            margin: 0 auto 80px;
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        .logos-bar span {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: #fff;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: var(--navy-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        .testimonial:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-4px); }
+
+        .stars { color: #fbbf24; font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 2px; }
+
+        .testimonial p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .author-info strong { font-size: 0.9rem; color: #fff; display: block; }
+        .author-info small { font-size: 0.78rem; color: var(--text-muted); }
+
+        /* ─── PRICING ─── */
+        .pricing { padding: 100px 5%; }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--navy-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--blue);
+            background: rgba(59,130,246,0.07);
+            box-shadow: 0 0 50px rgba(59,130,246,0.15);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            color: #fff;
+            padding: 5px 18px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .pricing-name { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+        .pricing-price { font-size: 3rem; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 4px; }
+        .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+        .pricing-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 28px; }
+
+        .pricing-features { list-style: none; margin-bottom: 32px; }
+        .pricing-features li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pricing-features li::before { content: '✓'; color: var(--cyan); font-weight: 700; }
+
+        .btn-plan {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-plan-primary { background: linear-gradient(135deg,var(--blue),var(--indigo)); color:#fff; }
+        .btn-plan-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(59,130,246,0.4); }
+        .btn-plan-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-plan-outline:hover { border-color: var(--blue); color: var(--blue-light); }
+
+        /* ─── CTA ─── */
+        .cta {
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(99,102,241,0.1));
+            border: 1px solid rgba(99,102,241,0.3);
+            border-radius: 28px;
+            padding: 72px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .cta-box p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 36px;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            padding: 48px 5%;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p { font-size: 0.85rem; color: var(--text-muted); }
+        footer .footer-links { display: flex; gap: 28px; }
+        footer .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        footer .footer-links a:hover { color: var(--blue-light); }
+
+        /* Counter animation */
+        .counter { font-variant-numeric: tabular-nums; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mockup-grid { grid-template-columns: repeat(2,1fr); }
+            .mockup-charts { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2,1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: repeat(2,1fr); row-gap: 40px; }
+            .steps::before { display: none; }
+            .testimonials { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <img src="logo.png" alt="ControlPro AI">
+            <span class="nav-logo-text">Control<span>Pro AI</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Funcionalidades</a></li>
+            <li><a href="#how">Como Funciona</a></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li><a href="#pricing">Planos</a></li>
+            <li><a href="#demo" class="btn-nav">Solicitar Demo</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="hero-badge">
+            <div class="dot"></div>
+            IA Gerencial de Nova Geração
+        </div>
+
+        <h1>Decisões Inteligentes,<br>Resultados <span class="gradient-text">Extraordinários</span></h1>
+
+        <p>A plataforma de Business Intelligence com IA que transforma dados brutos em estratégias vencedoras — em tempo real, para qualquer escala de negócio.</p>
+
+        <div class="hero-cta">
+            <a href="#demo" class="btn-primary">
+                🚀 Começar Gratuitamente
+            </a>
+            <a href="#how" class="btn-outline">
+                ▶ Ver Demonstração
+            </a>
+        </div>
+
+        <!-- Dashboard mockup -->
+        <div class="hero-visual">
+            <div class="dashboard-mockup">
+                <div class="mockup-topbar">
+                    <div class="topbar-dot dot-red"></div>
+                    <div class="topbar-dot dot-yellow"></div>
+                    <div class="topbar-dot dot-green"></div>
+                    <span class="mockup-topbar-title">ControlPro AI — Dashboard Executivo | Q1 2026</span>
+                </div>
+
+                <div class="mockup-grid">
+                    <div class="mockup-kpi">
+                        <div class="kpi-label">Receita Mensal</div>
+                        <div class="kpi-value">R$ 4,2M</div>
+                        <div class="kpi-delta">↑ +18,4% vs. mês anterior</div>
+                    </div>
+                    <div class="mockup-kpi">
+                        <div class="kpi-label">NPS Score</div>
+                        <div class="kpi-value">94</div>
+                        <div class="kpi-delta">↑ +7 pts este trimestre</div>
+                    </div>
+                    <div class="mockup-kpi">
+                        <div class="kpi-label">Churn Rate</div>
+                        <div class="kpi-value">1,2%</div>
+                        <div class="kpi-delta red">↓ -0.8% (melhora)</div>
+                    </div>
+                    <div class="mockup-kpi">
+                        <div class="kpi-label">Usuários Ativos</div>
+                        <div class="kpi-value">23.8K</div>
+                        <div class="kpi-delta">↑ +2.1K em 30 dias</div>
+                    </div>
+                </div>
+
+                <div class="mockup-charts">
+                    <div class="chart-box">
+                        <div class="chart-box-label">CRESCIMENTO DE RECEITA — ÚLTIMOS 8 MESES</div>
+                        <div class="chart-bars">
+                            <div class="bar" style="height:35%; animation-delay:0s;"></div>
+                            <div class="bar" style="height:45%; animation-delay:0.1s; opacity:0.85;"></div>
+                            <div class="bar" style="height:40%; animation-delay:0.2s; opacity:0.9;"></div>
+                            <div class="bar" style="height:60%; animation-delay:0.3s;"></div>
+                            <div class="bar" style="height:55%; animation-delay:0.4s; opacity:0.9;"></div>
+                            <div class="bar" style="height:75%; animation-delay:0.5s;"></div>
+                            <div class="bar" style="height:85%; animation-delay:0.6s;"></div>
+                            <div class="bar" style="height:100%; animation-delay:0.7s; background: linear-gradient(180deg,#06b6d4,#3b82f6);"></div>
+                        </div>
+                    </div>
+                    <div class="chart-box">
+                        <div class="chart-box-label">SCORE DE PREVISÃO IA</div>
+                        <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+                            <div>
+                                <div style="font-size:0.7rem;color:#94a3b8;margin-bottom:4px;">Acurácia Preditiva</div>
+                                <div style="height:8px;border-radius:4px;background:rgba(255,255,255,0.08);overflow:hidden;">
+                                    <div style="height:100%;width:97%;background:linear-gradient(90deg,#3b82f6,#6366f1);border-radius:4px;"></div>
+                                </div>
+                                <div style="font-size:0.7rem;color:#60a5fa;text-align:right;margin-top:2px;">97%</div>
+                            </div>
+                            <div>
+                                <div style="font-size:0.7rem;color:#94a3b8;margin-bottom:4px;">Detecção de Anomalias</div>
+                                <div style="height:8px;border-radius:4px;background:rgba(255,255,255,0.08);overflow:hidden;">
+                                    <div style="height:100%;width:92%;background:linear-gradient(90deg,#8b5cf6,#6366f1);border-radius:4px;"></div>
+                                </div>
+                                <div style="font-size:0.7rem;color:#a78bfa;text-align:right;margin-top:2px;">92%</div>
+                            </div>
+                            <div>
+                                <div style="font-size:0.7rem;color:#94a3b8;margin-bottom:4px;">Segmentação Inteligente</div>
+                                <div style="height:8px;border-radius:4px;background:rgba(255,255,255,0.08);overflow:hidden;">
+                                    <div style="height:100%;width:88%;background:linear-gradient(90deg,#06b6d4,#3b82f6);border-radius:4px;"></div>
+                                </div>
+                                <div style="font-size:0.7rem;color:#67e8f9;text-align:right;margin-top:2px;">88%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats reveal" id="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number counter" data-target="1800" data-suffix="+">0+</div>
+                <div class="stat-label">Empresas Clientes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number counter" data-target="98" data-suffix="%">0%</div>
+                <div class="stat-label">Taxa de Satisfação</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number counter" data-target="42" data-suffix="B">0B</div>
+                <div class="stat-label">Dados Processados / Mês</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number counter" data-target="3" data-suffix="x">0x</div>
+                <div class="stat-label">ROI Médio dos Clientes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <div class="section-pill">⚡ Plataforma Completa</div>
+            <h2>Tudo que sua empresa precisa para <span style="color:var(--blue-light);">tomar decisões melhores</span></h2>
+            <p>Combine dados de múltiplas fontes, aplique inteligência artificial e visualize insights em dashboards interativos de classe mundial.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon icon-blue">📊</div>
+                <h3>Dashboards em Tempo Real</h3>
+                <p>Visualize KPIs críticos do negócio em tempo real com dashboards personalizáveis e drag-and-drop, sem necessidade de código.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon icon-indigo">🤖</div>
+                <h3>IA Preditiva Avançada</h3>
+                <p>Modelos de machine learning que identificam tendências, preveem comportamentos e alertam sobre riscos antes que aconteçam.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon icon-purple">🔗</div>
+                <h3>Integração Universal</h3>
+                <p>Conecte-se a +200 fontes de dados: ERPs, CRMs, bancos SQL, APIs REST, planilhas e muito mais — em minutos.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon icon-cyan">💬</div>
+                <h3>BI Conversacional</h3>
+                <p>Faça perguntas ao seus dados em linguagem natural. Nossa IA responde com gráficos, tabelas e análises instantâneas.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon icon-green">🛡️</div>
+                <h3>Segurança Empresarial</h3>
+                <p>Conformidade com LGPD, criptografia AES-256, controle granular de acesso por perfil e auditoria completa de ações.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon icon-amber">⚡</div>
+                <h3>Motor de Alta Performance</h3>
+                <p>Consultas em bilhões de registros respondidas em milissegundos. Escala automaticamente conforme a demanda cresce.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+        <div class="section-header reveal">
+            <div class="section-pill">🚀 Simples de Usar</div>
+            <h2>Do dado bruto ao insight estratégico <span style="color:var(--blue-light);">em 4 etapas</span></h2>
+            <p>Implantação em horas, não meses. Nossa equipe cuidará de tudo para você.</p>
+        </div>
+
+        <div class="steps reveal">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Conecte</h3>
+                <p>Ligue suas fontes de dados com um clique utilizando nossos conectores nativos.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Modele</h3>
+                <p>A IA estrutura e limpa automaticamente seus dados, criando um modelo analítico otimizado.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Visualize</h3>
+                <p>Crie dashboards impactantes com nosso editor visual intuitivo e biblioteca de +80 gráficos.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Decida</h3>
+                <p>Receba alertas inteligentes e recomendações da IA para agir antes da concorrência.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="social-proof" id="clientes">
+        <div class="section-header reveal">
+            <div class="section-pill">🏆 Quem Confia no ControlPro AI</div>
+            <h2>As melhores empresas já transformaram <span style="color:var(--blue-light);">sua gestão</span></h2>
+            <p>Mais de 1.800 empresas em 12 países utilizam o ControlPro AI para crescer com inteligência.</p>
+        </div>
+
+        <div class="logos-bar reveal">
+            <span>TechGroup</span>
+            <span>Varejo+</span>
+            <span>FinServe</span>
+            <span>LogisBR</span>
+            <span>Saúde360</span>
+            <span>EduMax</span>
+            <span>AgriPro</span>
+        </div>
+
+        <div class="testimonials">
+            <div class="testimonial reveal">
+                <div class="stars">★★★★★</div>
+                <p>"O ControlPro AI reduziu o tempo de geração de relatórios gerenciais de 3 dias para 15 minutos. Nossa tomada de decisão nunca foi tão ágil."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">MR</div>
+                    <div class="author-info">
+                        <strong>Marcelo Rodrigues</strong>
+                        <small>CFO — TechGroup Holding</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial reveal">
+                <div class="stars">★★★★★</div>
+                <p>"As previsões de demanda da IA nos permitiram reduzir 40% do estoque parado. O ROI foi positivo já no segundo mês de uso."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);">AP</div>
+                    <div class="author-info">
+                        <strong>Ana Paula Ferreira</strong>
+                        <small>COO — Varejo+ Nacional</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial reveal">
+                <div class="stars">★★★★★</div>
+                <p>"Integrar os dados de 14 filiais era um pesadelo. O ControlPro AI fez em 2 horas o que nossa TI tentava fazer há 8 meses."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);">CS</div>
+                    <div class="author-info">
+                        <strong>Carlos Souza</strong>
+                        <small>Director de TI — LogisBR</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="section-header reveal">
+            <div class="section-pill">💰 Planos Flexíveis</div>
+            <h2>Invista em inteligência, <span style="color:var(--blue-light);">colha resultados</span></h2>
+            <p>Planos para empresas de todos os portes. Sem contratos longos, sem surpresas.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card reveal">
+                <div class="pricing-name">Starter</div>
+                <div class="pricing-price">R$ 890<span>/mês</span></div>
+                <div class="pricing-desc">Ideal para pequenas empresas iniciando com BI.</div>
+                <ul class="pricing-features">
+                    <li>5 usuários</li>
+                    <li>10 conexões de dados</li>
+                    <li>20 dashboards</li>
+                    <li>Relatórios automatizados</li>
+                    <li>Suporte por email</li>
+                </ul>
+                <button class="btn-plan btn-plan-outline">Começar Agora</button>
+            </div>
+
+            <div class="pricing-card featured reveal">
+                <div class="featured-badge">🔥 Mais Popular</div>
+                <div class="pricing-name">Business</div>
+                <div class="pricing-price">R$ 2.490<span>/mês</span></div>
+                <div class="pricing-desc">Para equipes em crescimento acelerado.</div>
+                <ul class="pricing-features">
+                    <li>25 usuários</li>
+                    <li>Conexões ilimitadas</li>
+                    <li>Dashboards ilimitados</li>
+                    <li>IA Preditiva inclusa</li>
+                    <li>API & Webhooks</li>
+                    <li>Suporte prioritário 24/7</li>
+                </ul>
+                <button class="btn-plan btn-plan-primary">Solicitar Demo</button>
+            </div>
+
+            <div class="pricing-card reveal">
+                <div class="pricing-name">Enterprise</div>
+                <div class="pricing-price">Sob<span> consulta</span></div>
+                <div class="pricing-desc">Para grandes corporações com necessidades específicas.</div>
+                <ul class="pricing-features">
+                    <li>Usuários ilimitados</li>
+                    <li>Deploy on-premise</li>
+                    <li>IA customizada</li>
+                    <li>SLA garantido</li>
+                    <li>Gerente de conta dedicado</li>
+                    <li>Treinamento presencial</li>
+                </ul>
+                <button class="btn-plan btn-plan-outline">Falar com Especialista</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="demo">
+        <div class="cta-box reveal">
+            <h2>Pronto para transformar<br>seus dados em vantagem competitiva?</h2>
+            <p>Junte-se a mais de 1.800 empresas que já tomam decisões mais inteligentes com o ControlPro AI.</p>
+            <a href="#" class="btn-primary" style="display:inline-flex; font-size:1.1rem; padding:18px 44px;">
+                🚀 Começar Trial de 14 Dias — Grátis
+            </a>
+            <p style="margin-top:16px; font-size:0.82rem; color:var(--text-muted);">Sem cartão de crédito. Sem compromisso. Cancele quando quiser.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="nav-logo">
+            <img src="logo.png" alt="ControlPro AI" style="width:30px;height:30px;">
+            <span style="font-weight:700; color:#fff;">Control<span style="background:linear-gradient(90deg,#3b82f6,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Pro AI</span></span>
+        </div>
+        <p>© 2026 ControlPro AI. Todos os direitos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Privacidade</a>
+            <a href="#">Termos</a>
+            <a href="#">LGPD</a>
+            <a href="#">Contato</a>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Counter animation
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1800;
+            const start = performance.now();
+            function step(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(eased * target);
+                el.textContent = current.toLocaleString('pt-BR') + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.counter').forEach(animateCounter);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.getElementById('stats');
+        if (statsSection) counterObserver.observe(statsSection);
+
+        // Navbar scroll effect
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(6,13,26,0.97)';
+            } else {
+                nav.style.background = 'rgba(6,13,26,0.85)';
+            }
+        });
+    </script>
+</body>
+</html>

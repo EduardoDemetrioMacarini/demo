@@ -1,0 +1,49 @@
+# Plano de Correção: Vale Alimentação (Dados Zerados)
+
+Este plano visa corrigir o problema onde os campos de Base, Vlr. Diário, Extras e Ausências estão aparecendo como zero para os colaboradores.
+
+## Problemas e Descobertas Atuais
+
+1.  **Dados Senior (Base/Valor)**: Para o colaborador Valdeir (6000253), os dados estão ausentes na tabela oficial de agrupamento. 
+    *   **Solução Proposta**: Buscar no cadastro de benefícios fixos (`R034BEN`) ou tabelas de histórico de benefícios (`R040...`).
+2.  **Dados Nexti (Extras/Faltas)**: Os endpoints `/v1/occurrences` e `/v1/absences` retornaram **404**.
+    *   **Solução Proposta**: Investigar endpoints alternativos como `/api/v1/point-records`, `/v1/employees/occurrences` ou similar. Utilizaremos um script de "spray" de endpoints comuns para descobrir o correto na instância do cliente.
+3.  **Recent Admittance**: O colaborador Valdeir foi admitido em 27/03/2026. Se a competência anterior terminar em 25/03, ele naturalmente terá 0 extras/faltas. Precisamos confirmar se o cálculo para admissões recentes deve considerar o mês atual.
+
+## Pesquisa Técnica Necessária
+
+> [!IMPORTANT]
+> **Investigação Senior**: Identificar onde estão os "15 dias" e "R$ 47,50" citados pelo usuário (tabelas `R040PRE`, `R040PER`, etc).
+> **Investigação Nexti**: Tentar realizar chamadas de "descoberta" para entender a estrutura real do JSON retornado pelos endpoints de ocorrências e ausências.
+
+## Proposta de Mudanças
+
+### 1. Backend: Descoberta e Diagnóstico
+*   **Script de Descoberta**: Criar uma rota temporária `/api/debug/nexti-discovery` que tenta listar as rotas disponíveis ou testar variações de URL para encontrar os dados de ocorrências.
+*   **Fallback Senior**: Atualizar a query SQL para, caso não encontre na `vbs_valcol_agrupado`, buscar o valor no cadastro de benefícios (`R034BEN`) com o código do Vale Alimentação.
+
+### 2. Sincronização (ETL)
+*   Melhorar o tratamento de erros: Se o Nexti falhar, registrar o erro específico no `JobLogs` para facilitar o ajuste fino.
+*   Adicionar log da URL total que está sendo chamada para o Nexti.
+
+### 2. Frontend
+
+*   **Tratamento de Dados**: Garantir que o frontend não oculte dados ou mostre zero caso o backend retorne nulo por algum erro de integração, fornecendo avisos mais claros.
+
+## Perguntas em Aberto
+
+> [!IMPORTANT]
+> **Onde exatamente no Senior estão cadastrados esses valores de R$ 47,50?**
+> Se não estão na tabela `vbs_valcol`, pode ser que estejam no cadastro de Benefícios por Colaborador (`R034BEN`) ou no fechamento mensal (`R040...`).
+
+> [!NOTE]
+> **O Nexti utiliza o campo `registration` ou `matricula` no JSON?** 
+> Preciso confirmar o nome exato do campo no JSON retornado pela API para fazer o `TryGetProperty` corretamente.
+
+---
+
+## Verificação
+
+1.  Rodar um script de teste para validar a query SQL da Senior e as chamadas HTTP do Nexti.
+2.  Executar a sincronização manual.
+3.  Validar se o Valdeir (6000253) e a Eliane agora exibem os números corretos.

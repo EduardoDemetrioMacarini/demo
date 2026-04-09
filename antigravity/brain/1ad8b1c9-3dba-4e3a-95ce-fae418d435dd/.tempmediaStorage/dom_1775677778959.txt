@@ -1,0 +1,29 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (915,38)<a aria-label='Google Apps' class='gb_B' href='https://www.google.com.br/intl/pt-BR/about/products' role='button' />
+[1] (963,38)<a aria-label='Fazer login' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=pt-BR&passive=true&continue=https://www.google.com/&ec=futura_exp_og_so_72776762_e' />
+	[2] (963,37)<span >Fazer login />
+[3] (439,385)<textarea aria-label='Pesquisar' class='gLFyf' id='APjFqb' role='combobox' title='Pesquisar' />
+[4] (584,385)<div aria-label='Ferramentas de inserção de texto' class='Umvnrc' role='button' />
+	[5] (584,385)<span  />
+[6] (610,385)<div aria-label='Pesquisar por voz' class='XDyW0e' role='button' />
+[7] (636,385)<div aria-label='Pesquisa por imagem' class='nDcEnd' role='button' />
+[8] (686,385)<button class='plR5qb Y5MKCd' role='link' />
+	[9] (686,385)<div  />
+		[10] (666,385)<span  />
+		[11] (693,385)<span >Modo IA />
+[12] (451,485)<input aria-label='Pesquisa Google' class='gNO89b' role='button' />
+[13] (550,485)<input aria-label='Estou com sorte' class='RNmpXc' />
+Brasil
+[14] (35,967)<a class='pHiOh' href='https://about.google/?utm_source=google-BR&utm_medium=referral&utm_campaign=hp-footer&fg=1'>Sobre />
+[15] (90,967)<a class='pHiOh' href='https://www.google.com/intl/pt-BR_br/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1'>Publicidade />
+[16] (152,967)<a class='pHiOh' href='https://www.google.com/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1'>Negócios />
+[17] (245,967)<a class='pHiOh' href='https://google.com/search/howsearchworks/?fg=1'>Como funciona a Pesquisa />
+[18] (826,967)<a class='pHiOh' href='https://policies.google.com/privacy?hl=pt-BR&fg=1'>Privacidade />
+[19] (884,967)<a class='pHiOh' href='https://policies.google.com/terms?hl=pt-BR&fg=1'>Termos />
+[20] (948,967)<div class='CcNe6e' role='button' />
+	[21] (948,967)<div >Configurações />
+
+</current_dom>

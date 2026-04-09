@@ -1,0 +1,22 @@
+# Implementação da Tela de Vale Alimentação
+
+## Backend (C#)
+- [ ] Atualizar o script de `GroupScreens` para dar permissão a `vale_alimentacao.html` no `Program.cs`
+- [ ] Criar endpoint `GET /api/dp/vale_alimentacao` no `Program.cs` para buscar do `VETORH` os dados de Todos os Colaboradores (incluindo Demos/Afastados)
+- [ ] Adicionar lógica em C# no endpoint para devolver o "Valor do VA" e "Dias previstos" já calculados
+
+## Frontend (HTML/JS)
+- [ ] Criar a tela `frontend/vale_alimentacao.html` com a tabela padronizada e design consistente
+- [ ] Adicionar na tela `vale_alimentacao.html` um script/botão de exportação para Excel (.xlsx) usando `SheetJS`
+- [ ] Modificar o menu lateral `submenu-dp` inserindo o link do Vale Alimentação nos seguintes arquivos:
+  - `home.html`
+  - `dp.html`
+  - `rh.html`
+  - `precificacao.html`
+  - `rotinas.html`
+  - `usuarios.html`
+  - `grupos.html`
+  - `conexoes.html`
+
+## Finalização
+- [ ] Reiniciar o backend `dotnet run` e gerar walkthrough

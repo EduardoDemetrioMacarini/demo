@@ -1,0 +1,12 @@
+# Tasks
+
+- [/] Research current state of project <!-- id: 0 -->
+    - [/] Analyze [backend/Program.cs](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/backend/Program.cs) for static file serving <!-- id: 1 -->
+    - [ ] Analyze `frontend/rh.html` for "Vagas em Aberto" implementation <!-- id: 2 -->
+- [ ] Verify static file serving functionality <!-- id: 3 -->
+- [ ] Complete "Recursos Humanos" (HR) "Vagas em Aberto" module <!-- id: 4 -->
+    - [ ] Implement backend endpoints for job vacancies <!-- id: 5 -->
+    - [ ] Implement frontend drawer in `rh.html` <!-- id: 6 -->
+- [ ] Implement recruiter insights dashboard <!-- id: 7 -->
+- [ ] Finalize alignment between frontend and backend for public access <!-- id: 8 -->
+- [ ] Verify and document implementation <!-- id: 9 -->

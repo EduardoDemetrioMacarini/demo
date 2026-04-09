@@ -1,0 +1,23 @@
+Gestão de Pessoas (hcm)
+vacancymanagement
+7.88.0
+[ Base URL:
+api.senior.com.br
+/hcm/vacancymanagement
+]
+[0] (353,591)<a class='link' href='https://s3.amazonaws.com/br-com-senior-ecossistema-public-api/swagger/hcm_vacancymanagement.public.swagger.yaml' />
+	[1] (353,591)<span >https://s3.amazonaws.com/br-com-senior-ecossistema-public-api/swagger/hcm_vacancymanagement.public.swagger.yaml />
+Serviço de gerenciamento de vagas do recrutamento
+[2] (254,692)<a class='link' href='https://dev.senior.com.br'>Senior X Platform
+- Website />
+[3] (270,719)<a class='link' href='mailto:seniorx-dev@senior.com.br'>Send email to Senior X Platform />
+[4] (758,841)<button class='btn authorize unlocked' />
+	[5] (748,839)<span >Authorize />
+[6] (500,954)<h4  />
+	[7] (204,953)<a class='nostyle' />
+		[8] (204,953)<span >Events />
+	[9] (794,953)<button class='expand-operation' title='Collapse operation' />
+[10] (47,952)<div  />
+permite mostrar notificações
+[11] (665,139)<button class='align-right primary slidedown-button' id='onesignal-slidedown-allow-button'>CONTINUAR />
+[12] (464,139)<button class='align-right secondary slidedown-button' id='onesignal-slidedown-cancel-button'>NÃO OBRIGADO (A) />

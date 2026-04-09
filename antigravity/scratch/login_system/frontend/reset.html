@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinir Senha - ControlPro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div style="text-align: center; margin-bottom: 25px;">
+            <svg viewBox="0 0 100 100" width="65" height="65" style="vertical-align: middle;">
+               <path d="M 50 15 Q 90 15 90 45 Q 90 60 50 60 Q 15 60 15 75 Q 15 95 50 95 Q 90 95 90 75" fill="none" stroke="#3b82f6" stroke-width="12" stroke-linecap="round"/>
+            </svg>
+            <div style="font-weight: 600; font-size: 1.8rem; color: white; margin-top: 10px;">Control<span style="font-weight: 300;">Pro</span></div>
+        </div>
+        <p class="subtitle">Confirme sua identidade para cadastrar nova senha.</p>
+        
+        <div id="alertBox" class="alert"></div>
+
+        <form onsubmit="handleReset(event)">
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Nome de Usuário" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="E-mail Cadastrado" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Nova Senha" required autocomplete="new-password">
+            </div>
+            
+            <button type="submit" class="btn-primary">Redefinir Senha</button>
+            
+            <div class="links">
+                <a href="index.html" style="margin: 0 auto;">Voltar para o Login</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

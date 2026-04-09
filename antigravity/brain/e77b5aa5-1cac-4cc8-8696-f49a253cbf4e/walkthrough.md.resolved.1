@@ -1,0 +1,38 @@
+# Implementação: Vale Alimentação Manual por Cargo
+
+A tela de Vale Alimentação foi atualizada para permitir que você insira e edite manualmente o **Valor Diário** por cargo, integrando esses dados ao cálculo automático que cruzamos com o **Senior** e o **Nexti**.
+
+## 🛠️ O que foi feito?
+
+### 1. Banco de Dados Local
+- **Nova Tabela**: Criada a tabela `ValeAlimentacaoSettings` para armazenar o valor diário customizado para cada função.
+- **Carga Inicial**: Realizei um scan completo de todos os cargos do Senior e carreguei-os na tabela com o valor base de **R$ 47,50** (conforme sua orientação).
+
+### 2. Backend API
+- **Endpoint de Configurações**: Implementada a funcionalidade para o frontend ler e salvar os valores por cargo.
+- **Refatoração do Cálculo (Sync)**:
+    - O job de sincronização agora busca os colaboradores diretamente do cadastro do Senior (`R034FUN`).
+    - O valor diário é buscado na sua tabela local de configurações.
+    - O cálculo agora é: `Total VA = (Dias Previstos + Extras Nexti - Ausências Nexti) * Valor Diário Local`.
+    - Integrados **Extras > 4h** e **Ausências** da competência anterior via API Nexti.
+
+### 3. Frontend (Interface)
+- **Botão Configurar**: Nova opção "Configurar Valores" que abre uma janela de edição.
+- **Busca e Edição**: Você pode pesquisar por qualquer cargo e alterar o valor diário.
+- **Feedback de Erro**: Caso um cargo novo apareça e não tenha valor definido (estiver 0), um ícone de alerta ⚠️ aparecerá na tabela principal.
+
+---
+
+## 🚀 Como usar agora?
+
+1.  Aceda a tela de **Vale Alimentação**.
+2.  Clique em **Configurar Valores** para conferir/ajustar os preços por cargo.
+3.  Clique em **Atualizar/Sincronizar**. O sistema processará todos os 3.966 colaboradores usando as novas regras.
+4.  O resultado final refletirá as **Extras (Nexti)**, **Ausências (Nexti)** e o seu **Valor Diário** customizado.
+
+## ✅ Validação Realizada
+- Executei a sincronização manualmente e obtive sucesso: **3966 colaboradores processados**.
+- A competência detectada foi **26/03 a 25/04**, com referência retroativa no Nexti de **26/02 a 25/03**.
+
+---
+**Dica:** Se um colaborador estiver com o valor total zerado, verifique na janela de configurações se o cargo dele possui um Valor Diário maior que zero.

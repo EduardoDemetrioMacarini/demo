@@ -1,0 +1,35 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (135,41)<a class='link' />
+[1] (700,41)<input class='download-url-input' id='download-url-input' />
+[2] (895,41)<button class='download-url-button button'>Explore />
+[3] (954,41)<div  />
+	[4] (954,41)<button  />
+Nexti public API
+0.0.1
+OAS
+3.1
+[5] (59,221)<a class='link' href='/v3/api-docs' />
+	[6] (59,221)<span >/v3/api-docs />
+Português
+A Nexti API foi desenvolvida para clientes que tenham necessidade de integrar seus sistemas operacionais, ERP e de RH com o Nexti, automatizando o consumo e manutenção de dados da plataforma. Para tanto, são listados abaixo serviços (endpoints) baseados em RESTful JSON, para cada tipo de entidade a ser manipulada.
+Este conteúdo é direcionado para desenvolvedores e profissionais da área de sistemas de informação.
+Segurança e Autenticação
+Por razões de segurança, para ter êxito ao realizar uma requisição para a Nexti API, a autenticação é necessária.
+A autenticação segue o padrão de segurança OAuth2, necessitando dois parâmetros: Client-ID e Client-Secret.
+Estes parâmetros devem ser obtidos por um usuário administrador a partir da plataforma Nexti, acessando Configurações > API de Integração.
+A partir da obtenção destes parâmetros, deve-se utilizar a URL abaixo para obtenção do Token de autenticação a ser enviado no HEADER de cada requisição à API.
+https://api.nexti.com/security/oauth/token?grant_type=client_credentials&client_id=&client_secret=
+Leia mais sobre OAuth 2.0: https://oauth.net/2/
+English
+Nexti API offers to customers a simple way to integrate their data from legacy systems, as HR, ERP, etc to Nexti Cloud Platform. Developers can interact in a programmatic way with the Nexti application.
+This document is the official reference for that functionality.
+Security and Authentication
+For security reason, Nexti API endpoints require an access token.
+The authentication protocol is OAuth 2 and need Client-ID and Client-Secret parameters, available for admin users, on Nexti System Config > Integration API.
+Requests with OAuth tokens must be made over SSL to https://api.nexti.com/security/oauth/token?grant_type=client_credentials&client_id=&client_secret=
+More about OAuth 2.0: https://oauth.net/2/
+
+</current_dom>

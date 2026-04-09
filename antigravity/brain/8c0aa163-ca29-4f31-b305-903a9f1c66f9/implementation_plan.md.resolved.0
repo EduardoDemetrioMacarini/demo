@@ -1,0 +1,32 @@
+# Plano de Implementação: Acesso Público via Ngrok
+
+O objetivo é disponibilizar o sistema local para acesso externo temporário via Ngrok, permitindo que outros usuários acessem o portal através de um link público.
+
+## User Review Required
+
+> [!IMPORTANT]
+> O Ngrok gera um link temporário (a menos que seja usada uma conta paga com domínio estático).
+> O usuário precisará fornecer o `authtoken` do Ngrok (obtido no painel do ngrok dashboard) para configurar o acesso seguro.
+
+## Mudanças Propostas
+
+### Backend (.NET Minimal API)
+
+#### [MODIFY] [Program.cs](file:///C:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+- Ajustar a política de CORS para permitir qualquer origem (`AllowAnyOrigin`) ou adicionar a URL específica do Ngrok assim que gerada.
+
+---
+
+### Frontend (HTML/JS)
+
+#### [MODIFY] [Todos os arquivos HTML/JS]
+- Substituir URLs fixas de `http://localhost:5000` por uma variável global ou ler a URL do backend de um arquivo de configuração/parâmetro, para que aponte para o túnel do Ngrok.
+
+---
+
+## Plano de Verificação
+
+### Testes Manuais
+1. Iniciar o Ngrok: `ngrok http 5000`.
+2. Acessar a URL fornecida pelo Ngrok em um navegador externo (ex: celular 4G).
+3. Verificar se as requisições de login e busca de dados funcionam.

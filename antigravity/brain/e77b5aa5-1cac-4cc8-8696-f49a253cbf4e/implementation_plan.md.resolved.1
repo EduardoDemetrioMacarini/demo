@@ -1,0 +1,64 @@
+# Plano de Implementação: Cálculo Avançado de Vale Alimentação
+
+Este plano descreve as alterações necessárias para evoluir o módulo de Vale Alimentação, integrando dados de horas extras do Senior e ausências do Nexti para um cálculo mais preciso.
+
+## Regras de Negócio Propostas
+
+1.  **Base (Dias Previstos)**: Mantém a busca atual da tabela `vbs_valcol_agrupado` (Senior).
+2.  **Horas Extras (Senior)**: 
+    *   **Período**: Competência anterior (26 do mês retrasado a 25 do mês passado).
+    *   **Regra**: Adicionar +1 dia de VA para cada dia em que o colaborador teve mais de 4 horas (240 min) de extra.
+    *   **Fonte**: Tabela `R066SIT` (CODSITs 301, 302, 906).
+3.  **Ausências (Nexti)**:
+    *   **Período**: Competência anterior.
+    *   **Regra**: Subtrair 1 dia de VA para cada falta/ausência registrada.
+    *   **Fonte**: API Rest do Nexti.
+4.  **Cálculo Final**: `(Dias Previstos + Dias Extras - Ausências) * Valor Diário`.
+
+## Alterações Propostas
+
+### 1. Backend (.NET Core)
+
+#### [MODIFY] [Program.cs](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+
+*   **Helper de Período**: Criar `GetCompetenciaAnterior()` para calcular o intervalo de datas do mês anterior.
+*   **Init Database**: Atualizar a criação da tabela `ValeAlimentacaoCache` para incluir:
+    *   `DiasExtras` (decimal)
+    *   `Ausencias` (decimal)
+*   **Endpoint de Sync (`/api/jobs/sync-vale-alimentacao`)**:
+    1.  **Senior (Extras)**: Adicionar uma subquery ou consulta separada para contar dias com `QTDHOR > 240` nas situações de extra.
+    2.  **Nexti (Ausências)**: 
+        *   Obter token OAuth2 (já implementado no health check).
+        *   Fazer requisição para buscar ocorrências/ausências do período.
+        *   Mapear por CPF ou Matrícula para subtrair do cache.
+    3.  **Persistência**: Gravar os novos campos no banco local.
+
+### 2. Frontend (HTML/JS)
+
+#### [MODIFY] [vale_alimentacao.html](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/vale_alimentacao.html)
+
+*   **Tabela**: Adicionar colunas visuais para:
+    *   `Base (Dias)`
+    *   `Ext. (>4h)`
+    *   `Ausências`
+*   **JavaScript**: Atualizar a renderização para mostrar o detalhamento e o novo cálculo total.
+
+---
+
+## Perguntas em Aberto
+
+> [!IMPORTANT]
+> **Qual o endpoint específico do Nexti para ausências?**
+> Atualmente temos apenas o de autenticação. Preciso confirmar se é `/v1/occurrences`, `/v1/absences` ou outro similar.
+
+> [!NOTE]
+> **O identificador entre Senior e Nexti será o CPF ou a Matrícula?**
+> Para garantir a correta associação dos dados, preciso saber qual campo é comum e confiável em ambos os sistemas.
+
+## Plano de Verificação
+
+### Testes Manuais
+1.  Executar a sincronização via tela de **Rotinas**.
+2.  Verificar no log se os dados do Nexti foram lidos com sucesso.
+3.  Validar na tela de **Vale Alimentação** se o cálculo `(Previstos + Extras - Ausências)` confere para um colaborador de teste.
+4.  Exportar para Excel e validar as colunas.

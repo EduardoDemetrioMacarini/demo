@@ -1,0 +1,45 @@
+# Walkthrough: Precificação Inteligente com Senior
+
+Finalizei as melhorias na tela de precificação. Agora o sistema está muito mais automatizado, buscando dados reais da Senior (VETORH) e armazenando em um cache local no SQL Server para performance e estabilidade.
+
+## 🚀 O que mudou?
+
+### 1. Automação de Cargos e Salários
+Antes o usuário escrevia o cargo e o salário manualmente. Agora:
+- O campo **Cargo** é um menu de seleção que lista todos os cargos de Facilities da Senior.
+- Ao selecionar um cargo, o **Salário Base** é preenchido automaticamente com o valor mais atualizado da Senior.
+
+### 2. Cache Local (Performance)
+Implementei a tabela [FacilitiesJobs](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/frontend/rotinas.html#140-160) no seu banco de dados local. 
+- O sistema consulta a Senior através de um "Job de Sincronização".
+- O frontend consome apenas o banco local, garantindo que a tela carregue instantaneamente mesmo se o servidor da Senior estiver lento.
+
+### 3. Interface de Precificação Reformulada
+- **Breakdown de Custos**: Agora você vê linha por linha como o Custo/Homem/Mês é formado (Remuneração + Encargos + Benefícios + Insumos).
+- **Badges Visuais**: Campos carregados da Senior recebem uma etiqueta "🔗 Senior" para dar segurança ao usuário.
+- **Resultado em Tempo Real**: O cálculo do preço de venda final atualiza instantaneamente conforme você muda qualquer valor.
+
+---
+
+## 🛠️ Verificação Realizada
+
+1. **Sincronização**: Executei o sync backend e **38 cargos** foram capturados da Senior com sucesso.
+2. **API**: O endpoint `GET /api/facilities-jobs` está servindo os dados do cache local perfeitamente.
+3. **Rotinas**: Adicionei o botão de sincronização manual na tela de **Rotinas TI**, permitindo atualizar os salários sempre que houver dissídio ou mudanças na Senior.
+
+---
+
+## 📸 Demonstração do Fluxo
+
+### Nova Tela de Precificação
+```mermaid
+graph LR
+    A[Selecionar Cargo Senior] --> B[Autopreencher Salário]
+    B --> C[Informar Postos/Pessoas]
+    C --> D[Cálculo Automático]
+    D --> E[Salvar Histórico]
+</div>
+```
+
+> [!TIP]
+> Você pode abrir a tela de **Rotinas TI** para ver o log da última sincronização bem sucedida com o banco da Senior.

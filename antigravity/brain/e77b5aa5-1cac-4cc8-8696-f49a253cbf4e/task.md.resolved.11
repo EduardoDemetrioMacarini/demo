@@ -1,0 +1,4 @@
+- `[ ]` Criar método `ObterDicionarioEscalas` no backend para ler `R006CES` e `R004HOR`.
+- `[ ]` Atualizar o Job `sync-vale-alimentacao` para usar as escalas individuais no cálculo da base (Dias Previstos).
+- `[ ]` Garantir o desconto de feriados apenas nos dias efetivos de escala.
+- `[ ]` Validar Adilson (20 dias) e escalas diferenciadas.

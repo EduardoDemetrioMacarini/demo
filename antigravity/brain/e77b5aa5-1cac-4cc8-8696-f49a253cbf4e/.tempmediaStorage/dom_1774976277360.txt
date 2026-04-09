@@ -1,0 +1,132 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+DELETE
+/paycheckperiods
+/externalid
+/{externalId}
+Excluir / Delete
+[0] (500,74)<div  />
+	[1] (480,74)<button class='opblock-summary-control' />
+		[2] (68,74)<span >PUT />
+		[3] (506,74)<div  />
+			[4] (215,74)<span  />
+				[5] (215,74)<a class='nostyle' href='#/Competência%20de%20Contracheques%20/%20Paycheck%20Periods/updateByExternalId_14' />
+					[6] (215,74)<span >/paycheckperiods
+/externalId
+/{externalId} />
+			[7] (369,74)<div >Atualizar / Update />
+	[8] (928,74)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[9] (948,74)<button aria-label='put ​/paycheckperiods​/externalId​/{externalId}' class='opblock-control-arrow' />
+[10] (500,167)<h3  />
+	[11] (112,167)<a class='nostyle' href='#/Contato%20do%20cliente' />
+		[12] (112,166)<span >Contato do cliente />
+	[13] (554,167)<small  />
+		[14] (554,167)<div  />
+			[15] (554,167)<p >Contato do cliente/ Client contact />
+	[16] (939,167)<button class='expand-operation' title='Collapse operation' />
+[17] (500,247)<div  />
+	[18] (480,247)<button class='opblock-summary-control' />
+		[19] (68,247)<span >POST />
+		[20] (506,247)<div  />
+			[21] (143,247)<span  />
+				[22] (143,247)<a class='nostyle' href='#/Contato%20do%20cliente/create_33' />
+					[23] (143,247)<span >/clientcontacts />
+			[24] (210,247)<div >Cadastro />
+	[25] (928,247)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[26] (948,247)<button aria-label='post ​/clientcontacts' class='opblock-control-arrow' />
+[27] (500,323)<div  />
+	[28] (480,323)<button class='opblock-summary-control' />
+		[29] (68,323)<span >GET />
+		[30] (506,323)<div  />
+			[31] (157,323)<span  />
+				[32] (157,323)<a class='nostyle' href='#/Contato%20do%20cliente/findServiceType_2' />
+					[33] (157,323)<span >/clientcontacts
+/{id} />
+			[34] (334,323)<div >[PT] Buscar por um contato. [EN] Get a single contact client. />
+	[35] (928,323)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[36] (948,323)<button aria-label='get ​/clientcontacts​/{id}' class='opblock-control-arrow' />
+[37] (500,398)<div  />
+	[38] (480,398)<button class='opblock-summary-control' />
+		[39] (68,398)<span >PUT />
+		[40] (506,398)<div  />
+			[41] (157,398)<span  />
+				[42] (157,398)<a class='nostyle' href='#/Contato%20do%20cliente/update_29' />
+					[43] (157,398)<span >/clientcontacts
+/{id} />
+			[44] (255,398)<div >Atualizar / Update />
+	[45] (928,398)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[46] (948,398)<button aria-label='put ​/clientcontacts​/{id}' class='opblock-control-arrow' />
+[47] (500,474)<div  />
+	[48] (480,474)<button class='opblock-summary-control' />
+		[49] (68,474)<span >DELETE />
+		[50] (506,474)<div  />
+			[51] (157,474)<span  />
+				[52] (157,474)<a class='nostyle' href='#/Contato%20do%20cliente/delete_21' />
+					[53] (157,474)<span >/clientcontacts
+/{id} />
+			[54] (250,474)<div >Excluir / Delete />
+	[55] (928,474)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[56] (948,474)<button aria-label='delete ​/clientcontacts​/{id}' class='opblock-control-arrow' />
+[57] (500,550)<div  />
+	[58] (480,550)<button class='opblock-summary-control' />
+		[59] (68,550)<span >GET />
+		[60] (506,550)<div  />
+			[61] (155,550)<span  />
+				[62] (155,550)<a class='nostyle' href='#/Contato%20do%20cliente/findByValue_5' />
+					[63] (155,550)<span >/clientcontacts
+/all />
+			[64] (315,550)<div >Lista os contatos existentes / List of contacts existing />
+	[65] (928,550)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[66] (948,550)<button aria-label='get ​/clientcontacts​/all' class='opblock-control-arrow' />
+[67] (500,665)<h3  />
+	[68] (148,664)<a class='nostyle' href='#/Contracheques%20/%20Paychecks' />
+		[69] (148,663)<span >Contracheques / Paychecks />
+	[70] (590,664)<small  />
+		[71] (590,664)<div  />
+			[72] (590,643)<p >[PT] Cadastro de contracheques na plataforma Nexti. />
+			[73] (590,685)<p >[EN] Registration of paychecks on the Nexti platform. />
+	[74] (939,664)<button class='expand-operation' title='Collapse operation' />
+[75] (500,765)<div  />
+	[76] (480,765)<button class='opblock-summary-control' />
+		[77] (68,765)<span >POST />
+		[78] (506,765)<div  />
+			[79] (129,765)<span  />
+				[80] (129,765)<a class='nostyle' href='#/Contracheques%20/%20Paychecks/createPaycheckPeriod' />
+					[81] (129,765)<span >/paychecks />
+			[82] (244,765)<div >Cadastro de contracheque / Add paycheck />
+	[83] (928,765)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[84] (948,765)<button aria-label='post ​/paychecks' class='opblock-control-arrow' />
+[85] (500,841)<div  />
+	[86] (480,841)<button class='opblock-summary-control' />
+		[87] (68,841)<span >GET />
+		[88] (506,841)<div  />
+			[89] (143,841)<span  />
+				[90] (143,841)<a class='nostyle' href='#/Contracheques%20/%20Paychecks/findPaycheckById' />
+					[91] (143,841)<span >/paychecks
+/{id} />
+			[92] (309,841)<div >[PT] Consultar um Contracheque. [EN] Get a single paycheck. />
+	[93] (928,841)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[94] (948,841)<button aria-label='get ​/paychecks​/{id}' class='opblock-control-arrow' />
+[95] (500,917)<div  />
+	[96] (480,917)<button class='opblock-summary-control' />
+		[97] (68,917)<span >PUT />
+		[98] (506,917)<div  />
+			[99] (143,917)<span  />
+				[100] (143,917)<a class='nostyle' href='#/Contracheques%20/%20Paychecks/update_19' />
+					[101] (143,917)<span >/paychecks
+/{id} />
+			[102] (226,917)<div >Atualizar / Update />
+	[103] (928,917)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[104] (948,917)<button aria-label='put ​/paychecks​/{id}' class='opblock-control-arrow' />
+[105] (68,993)<span >DELETE />
+[106] (143,993)<span  />
+	[107] (143,993)<a class='nostyle' href='#/Contracheques%20/%20Paychecks/delete_15' />
+		[108] (143,993)<span >/paychecks
+/{id} />
+[109] (221,993)<div >Excluir / Delete />
+[110] (928,993)<button aria-label='authorization button unlocked' class='authorization__btn' />
+[111] (948,993)<button aria-label='delete ​/paychecks​/{id}' class='opblock-control-arrow' />
+
+</current_dom>

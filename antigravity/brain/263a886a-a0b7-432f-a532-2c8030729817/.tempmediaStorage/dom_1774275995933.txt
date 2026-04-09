@@ -1,0 +1,169 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Links de acessibilidade
+Ir para o conteúdo principal
+Ajuda sobre acessibilidade
+Feedback de acessibilidade
+[0] (114,56)<a class='FgNLaf' href='https://www.google.com/webhp?hl=pt-BR&ictx=0&sa=X&ved=0ahUKEwjnoeuLnbaTAxVRrpUCHfoJMqIQpYkNCAs' />
+[1] (322,56)<textarea aria-label='Pesquisar' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (532,56)<div  />
+	[3] (529,56)<div aria-label='Limpar' class='M2vV3 vOY7J' role='button' />
+		[4] (529,56)<span  />
+	[5] (556,56)<span  />
+[6] (582,56)<div aria-label='Ferramentas de inserção de texto' class='Umvnrc' role='button' />
+	[7] (582,56)<span  />
+[8] (625,56)<div aria-label='Pesquisar por voz' class='XDyW0e' role='button' />
+[9] (668,56)<div aria-label='Pesquisa por imagem' class='nDcEnd' role='button' />
+[10] (718,56)<button aria-label='Pesquisar' class='HZVG1b Tg7LZd' />
+	[11] (711,56)<div  />
+		[12] (711,56)<span  />
+[13] (803,56)<div aria-label='Configurações' class='fLciMb' id='og-te' role='button' />
+	[14] (803,58)<div  />
+		[15] (803,56)<span  />
+[16] (852,56)<a aria-label='Google Apps' class='gb_B' href='https://www.google.com.br/intl/pt-BR/about/products?tab=wh' role='button' />
+[17] (928,56)<a aria-label='Fazer login' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=pt-BR&passive=true&continue=https://www.google.com/search%3Fq%3DSenior%2BX%2Brecruitment%2BAPI%2BvacancyStages%2BlistCandidates%2Bbody%2Bparameters&ec=futura_srp_og_si_72236_p'>Fazer login />
+	Fazer login
+Filtros e temas
+[18] (118,123)<a class='XVMlrc C6AK7c' href='/search?q=Senior+X+recruitment+API+vacancyStages+listCandidates+body+parameters&sca_esv=e2250487dc351849&udm=50&fbs=ADc_l-acAb_3MMOAUx0zmbUpgBqRhoh-GdRq1TXwdBZi-jK_e7MLtGyZplNOanr4pJI6fcRWRflfvA46P24vuvlR5LA4UeDj6cNhVO26hWyYZeoAIkzZwISnjp0_538HOF4re5KgMKn_ls-g6tGJO_Q_huQZyxy6xwyUeDyrisA7g7qehFUm7wThG8eTMSvj48dGXUKTnePMNOat0oUJe4u_im8RzJIBvg&aep=1&ntc=1&sa=X&ved=2ahUKEwjnoeuLnbaTAxVRrpUCHfoJMqIQ2J8OegQIEBAE' />
+	[19] (118,123)<div  />
+		[20] (118,132)<div  />
+			[21] (118,126)<span >Modo IA />
+[22] (191,123)<a class='C6AK7c' role='link' />
+	Tudo
+[23] (283,123)<a class='C6AK7c' href='/search?sca_esv=e2250487dc351849&udm=39&fbs=ADc_l-acAb_3MMOAUx0zmbUpgBqRhoh-GdRq1TXwdBZi-jK_e7MLtGyZplNOanr4pJI6fcRWRflfvA46P24vuvlR5LA4UeDj6cNhVO26hWyYZeoAIkzZwISnjp0_538HOF4re5KgMKn_ls-g6tGJO_Q_huQZyxy6xwyUeDyrisA7g7qehFUm7wThG8eTMSvj48dGXUKTnePMNOat0oUJe4u_im8RzJIBvg&q=Senior+X+recruitment+API+vacancyStages+listCandidates+body+parameters&sa=X&ved=2ahUKEwjnoeuLnbaTAxVRrpUCHfoJMqIQs6gLegQIFRAB' />
+	[24] (283,123)<div  />
+		[25] (283,132)<span >Vídeos curtos />
+[26] (387,123)<a class='C6AK7c' href='/search?sca_esv=e2250487dc351849&udm=2&fbs=ADc_l-acAb_3MMOAUx0zmbUpgBqRhoh-GdRq1TXwdBZi-jK_e7MLtGyZplNOanr4pJI6fcRWRflfvA46P24vuvlR5LA4UeDj6cNhVO26hWyYZeoAIkzZwISnjp0_538HOF4re5KgMKn_ls-g6tGJO_Q_huQZyxy6xwyUeDyrisA7g7qehFUm7wThG8eTMSvj48dGXUKTnePMNOat0oUJe4u_im8RzJIBvg&q=Senior+X+recruitment+API+vacancyStages+listCandidates+body+parameters&sa=X&ved=2ahUKEwjnoeuLnbaTAxVRrpUCHfoJMqIQtKgLegQIFhAB' />
+	[27] (387,123)<div  />
+		[28] (387,132)<span >Imagens />
+[29] (467,123)<a class='C6AK7c' href='/search?sca_esv=e2250487dc351849&udm=7&fbs=ADc_l-acAb_3MMOAUx0zmbUpgBqRhoh-GdRq1TXwdBZi-jK_e7MLtGyZplNOanr4pJI6fcRWRflfvA46P24vuvlR5LA4UeDj6cNhVO26hWyYZeoAIkzZwISnjp0_538HOF4re5KgMKn_ls-g6tGJO_Q_huQZyxy6xwyUeDyrisA7g7qehFUm7wThG8eTMSvj48dGXUKTnePMNOat0oUJe4u_im8RzJIBvg&q=Senior+X+recruitment+API+vacancyStages+listCandidates+body+parameters&sa=X&ved=2ahUKEwjnoeuLnbaTAxVRrpUCHfoJMqIQtKgLegQIEhAB' />
+	[30] (467,123)<div  />
+		[31] (467,132)<span >Vídeos />
+[32] (550,123)<a class='C6AK7c' href='/search?sca_esv=e2250487dc351849&udm=28&fbs=ADc_l-acAb_3MMOAUx0zmbUpgBqRhoh-GdRq1TXwdBZi-jK_e7MLtGyZplNOanr4pJI6fcRWRflfvA46P24vuvlR5LA4UeDj6cNhVO26hWyYZeoAIkzZwISnjp0_538HOF4re5KgMKn_ls-g6tGJO_Q_huQZyxy6xwyUeDyrisA7g7qehFUm7wThG8eTMSvj48dGXUKTnePMNOat0oUJe4u_im8RzJIBvg&q=Senior+X+recruitment+API+vacancyStages+listCandidates+body+parameters&ved=1t:220175&ictx=111' />
+	[33] (550,123)<div  />
+		[34] (550,132)<span >Shopping />
+[35] (639,123)<a class='C6AK7c' href='/search?sca_esv=e2250487dc351849&q=Senior+X+recruitment+API+vacancyStages+listCandidates+body+parameters&tbm=nws&source=lnms&fbs=ADc_l-acAb_3MMOAUx0zmbUpgBqRhoh-GdRq1TXwdBZi-jK_e7MLtGyZplNOanr4pJI6fcRWRflfvA46P24vuvlR5LA4UeDj6cNhVO26hWyYZeoAIkzZwISnjp0_538HOF4re5KgMKn_ls-g6tGJO_Q_huQZyxy6xwyUeDyrisA7g7qehFUm7wThG8eTMSvj48dGXUKTnePMNOat0oUJe4u_im8RzJIBvg&sa=X&ved=2ahUKEwjnoeuLnbaTAxVRrpUCHfoJMqIQ0pQJegQIExAB' />
+	[36] (639,123)<div  />
+		[37] (639,132)<span >Notícias />
+[38] (719,123)<div class='mTpL7c' role='button' />
+	[39] (719,123)<div  />
+		[40] (719,132)<div  />
+			[41] (710,126)<span >Mais />
+			[42] (736,126)<span  />
+[43] (826,123)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[44] (826,123)<div  />
+		[45] (826,132)<div  />
+			[46] (816,126)<span >Ferramentas />
+			[47] (870,126)<span  />
+Resultados da pesquisa
+[48] (274,220)<a class='zReHs' href='https://dev.senior.com.br/api_privada/hcm_recruitment/' />
+	[49] (274,239)<h3 >Recrutamento e Seleção (recruitment) />
+	[50] (270,202)<div  />
+		[51] (270,202)<div  />
+			[52] (104,202)<span  />
+				[53] (104,202)<div  />
+					[54] (104,202)<img  />
+			[55] (291,202)<div  />
+				[56] (291,192)<div  />
+					[57] (291,192)<span >Senior Sistemas />
+				[58] (291,213)<div  />
+					[59] (291,213)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://dev.senior.com.br />
+						[60] (361,213)<span class='ylgVCe ob9lvb' role='text'>› api_privada › hcm_recruitm... />
+[61] (472,212)<div aria-label='Sobre este resultado' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[62] (472,212)<span  />
+		[63] (472,213)<span  />
+22 de out. de 2018
+—
+Recrutamento e Seleção (
+recruitment
+). 3319 views 0 22/10/2018 Atualizado em 13/03/2026 integrador. Explore ...
+Visão geral criada por IA
+Visão geral criada por IA
+[64] (325,352)<div aria-label='Listen' class='uGSWAc' role='button' />
+	[65] (324,352)<div  />
+		[66] (324,352)<div  />
+			[67] (324,352)<span  />
+[68] (728,352)<div aria-label='Ver 3 links de corroboração' class='QUUgY' role='button' />
+	[69] (728,352)<div  />
+		[70] (710,352)<div  />
+			[71] (710,352)<img  />
+		[72] (725,352)<div  />
+			[73] (725,352)<img  />
+		[74] (740,352)<div  />
+			[75] (740,352)<img  />
+		[76] (753,352)<span  />
+[77] (781,356)<div aria-label='Sobre este resultado' class='Mtffrd' role='button' />
+recruitment
+(private) and
+vacancymanagement
+(public/private) services to handle vacancy stages and candidate lists.
+The following information details the body parameters typically used for listing candidates within a vacancy stage, based on the
+recruitment
+domain structure.
+Senior Sistemas
+API Endpoint: listCandidates (Query/Filter)
+Service:
+hcm_recruitment
+Visibility:
+PRIVATE
+Method:
+POST (commonly used for complex queries)
+Body Parameters (
+input
+object):
+The API requires a body (input) to filter candidates by vacancy stages or situations.
+Parameter
+Type
+Required
+Description
+vacancyId
+String
+Yes (Context)
+The identifier of the specific vacancy.
+stageId
+String
+Yes (Context)
+The identifier of the stage within the vacancy.
+[78] (440,722)<div aria-label='Mostrar mais Visões Gerais Criadas por IA' class='Jzkafd' role='button' />
+	[79] (429,722)<div  />
+		[80] (429,722)<div >Mostrar mais />
+			Mostrar mais
+			[81] (478,722)<span  />
+[82] (228,858)<a class='zReHs' href='https://dev.senior.com.br/api_publica/hcm_vacancymanagement/' />
+	[83] (193,877)<h3 >vacancymanagement />
+	[84] (228,840)<div  />
+		[85] (228,840)<div  />
+			[86] (104,840)<span  />
+				[87] (104,840)<div  />
+					[88] (104,840)<img  />
+			[89] (249,840)<div  />
+				[90] (249,830)<div  />
+					[91] (249,830)<span >Senior Sistemas />
+				[92] (249,851)<div  />
+					[93] (249,851)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://dev.senior.com.br />
+						[94] (299,851)<span class='ylgVCe ob9lvb' role='text'>› hcm_... />
+·
+[95] (400,851)<a class='dEEN8c' href='https://dev.senior.com.br/api_publica/hcm_vacancymanagement/' />
+	[96] (400,851)<span >Traduzir esta página />
+[97] (482,850)<div aria-label='Sobre este resultado' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[98] (482,850)<span  />
+		[99] (482,851)<span  />
+Serviço de gerenciamento de vagas do recrutamento.
+Senior X
+Platform - Website Send email to
+Senior X
+Platform Authorize Events
+[100] (228,1015)<a class='zReHs' href='https://dev.senior.com.br/api_privada/hcm_vacancymanagement/' />
+	[101] (228,998)<div  />
+		[102] (228,998)<div  />
+			[103] (104,998)<span  />
+				[104] (104,998)<div  />
+					[105] (104,998)<img  />
+			[106] (249,998)<div  />
+				[107] (249,988)<div  />
+					[108] (249,988)<span >Senior Sistemas />
+·
+
+</current_dom>

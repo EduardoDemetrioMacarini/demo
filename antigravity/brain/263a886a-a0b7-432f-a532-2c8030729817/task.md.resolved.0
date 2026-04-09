@@ -1,0 +1,12 @@
+# Tarefa: Implementar Menu Recursos Humanos e Integração Senior HCM
+
+- [ ] Pesquisar endpoints da API Senior HCM para Vagas e Candidatos (Recrutamento e Seleção) 
+- [ ] Implementar autenticação e busca de dados no Backend 
+    - [ ] Criar rotas para listar vagas abertas e candidatos
+    - [ ] Calcular dias em aberto e métricas de recrutadores
+- [ ] Desenvolver a Interface no Frontend 
+    - [ ] Adicionar novo menu "Recursos Humanos" no layout principal
+    - [ ] Criar a gaveta (drawer) "Vagas em Aberto"
+    - [ ] Exibir a lista de vagas com status, dias em aberto e candidatos
+    - [ ] Implementar seção de insights (dashboard de recrutadores)
+- [ ] Validar e Testar a Integração 

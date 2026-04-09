@@ -1,0 +1,6 @@
+- `[x]` Atualizar estrutura da tabela `ValeAlimentacaoSettings` (NumEmp, CodFil, NomeFilial, CodSin, NomeSindicato)
+- `[x]` Modificar a query de Seed inicial para usar `R038HSI` e `R014SIN`. (Gerados cerca de 61 pares exclusivos de Contrato e Sindicato)
+- `[x]` Atualizar endpoints GET/POST `/api/dp/vale_alimentacao/settings` para a nova Chave (Empresa + Filial + Sindicato).
+- `[x]` Refatorar Job de Sincronização (`sync-vale-alimentacao`) para cruzar dados usando a tripla Empresa-Filial-Sindicato com a MAX(datalt).
+- `[x]` Atualizar a Interface do Usuário (Modal de Configurações renomeado para "Sindicato" e com a nova lógica de envio/busca).
+- `[x]` Executar banco local e validar a Sincronização. (3966 colabs linkados).

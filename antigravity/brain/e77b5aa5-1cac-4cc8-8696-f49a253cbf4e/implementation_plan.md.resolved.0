@@ -1,0 +1,52 @@
+# Tela de Cálculo do Vale Alimentação (Módulo DP)
+
+A requisição solicita a criação de uma tela totalmente nova no módulo de Departamento Pessoal ("Vale Alimentação") dedicada a extrair colaboradores do sistema Senior, apresentar seus dados cadastrais conforme a planilha de anexo (Matrícula, Nome, Nascimento, CPF, Situação, Admissão, Função, Centro de Custo, Escala) e realizar os cálculos correspondentes do benefício (considerando Dias Previstos e Valor Diário).
+
+## User Review Required
+
+> [!IMPORTANT]
+> A lógica para o cálculo em si possui duas variáveis que precisam da sua confirmação: **"Valor do VA"** e **"Dias previstos de Abril"**.
+> Como não existe uma tabela global fixa no banco Senior para dias específicos de "Abril" ou "Valor de VA" (saber se o colaborador teve faltas, etc.), a minha sugestão de arquitetura é:
+> 
+> 1. Puxamos todos os **dados cadastrais listados** usando o banco da Senior (`VETORH`).
+> 2. Puxamos o campo de "Escala" (`CODESA`) do colaborador.
+> 3. Na tela de "Vale Alimentação", colocamos um painel geral de **"Configuração da Competência"** (onde você digita: Qual o Mês, Qual a quantidade padrão de Dias Úteis, e o Valor Diário do VA).
+> 4. Uma vez inseridos os parâmetros na tela, o sistema cruza isso com a escala do funcionário e gera o cálculo automático de quanto ele deve receber.
+> 
+> Gostaria que você me confirmasse se essa linha de raciocínio atende ao seu processo (gerar campos na tela para preenchimento dos Dias e Valor) ou se essas informações já constam de forma fixa em alguma rubrica específica do próprio banco da Senior que eu deva consultar via SQL.
+
+## Proposed Changes
+
+---
+
+### Banco de Dados / Inicialização (Backend)
+
+#### [MODIFY] [Program.cs](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+- Adicionar no script de inicialização do banco (`INSERT INTO GroupScreens`) a página `vale_alimentacao.html` na lista de acessos.
+- Criar o novo endpoint da API `GET /api/dp/vale_alimentacao/sync` para fazer um `JOIN` nas tabelas `R034FUN` (Colaboradores), `R033PES` (Pessoas), `R024CAR` (Cargos), `R018CCU` (Centro de Custo) e `R010SIT` (Situação) do ERP Senior.
+
+---
+
+### Automação de Menus e Interface (Frontend)
+
+O link do Vale Alimentação entrará no menu lateral ("DP") de **todas as telas**.
+
+#### [NEW] [vale_alimentacao.html](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/vale_alimentacao.html)
+- Arquivo base para a tela.
+- Tabela de listagem dinâmica populada via JS no padrão Visual do Sistema (Glassmorphism e Boxicons).
+- Topbar com card de configurações para preenchimento de variáveis globais do cálculo.
+
+#### [MODIFY] [Múltiplas Telas]
+A adição de `<li><a href="vale_alimentacao.html"><i class='bx bx-restaurant'></i> Vale Alimentação</a></li>` ao longo do `<ul id="submenu-dp">` nos arquivos para fazer o link funcionar.
+
+## Open Questions
+
+> [!WARNING]
+> Além da dúvida sobre obter o Valor/Dias da tela ou do Banco Senior, uma pergunta adicional:
+> Deseja que a busca liste apenas *Colaboradores Ativos* (Situação 1/2) ou deverá listar também Afastados/Demitidos para efeito de desconto?
+
+## Verification Plan
+
+### Manual Verification
+- O usuário avaliará a interface visual acessando o menu "DP -> Vale Alimentação".
+- Serão avaliadas a validade das queries SQL de Matrícula, Função e Escala batendo de frente com a extração bruta do próprio sistema da Senior na versão instalada do usuário.

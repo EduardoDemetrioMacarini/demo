@@ -1,0 +1,7 @@
+# Task: Investigate error at http://localhost:5000/api/dp/vale_alimentacao
+
+## Plan
+1. [ ] Open http://localhost:5000/api/dp/vale_alimentacao
+2. [ ] Check for error messages or stack traces in the page body
+3. [ ] Check browser console logs for clues
+4. [ ] Report the exact error message

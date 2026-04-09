@@ -1,0 +1,94 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,45)<div  />
+	[1] (200,45)<span >POST />
+	[2] (435,45)<span  />
+		[3] (435,45)<a class='nostyle' />
+			[4] (435,45)<span >​/recruitment​/queries​/listCandidatures />
+	[5] (747,45)<div >PRIVATE />
+	[6] (822,45)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[7] (500,117)<div  />
+	[8] (200,117)<span >POST />
+	[9] (440,117)<span  />
+		[10] (440,117)<a class='nostyle' />
+			[11] (440,117)<span >​/recruitment​/queries​/countCandidatures />
+	[12] (747,117)<div >PRIVATE />
+	[13] (822,117)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[14] (500,197)<div  />
+	[15] (200,197)<span >POST />
+	[16] (469,197)<span  />
+		[17] (469,197)<a class='nostyle' />
+			[18] (376,197)<span >​/recruitment​/queries​/getPersonActiveEmployees />
+	[19] (747,197)<div >PRIVATE />
+	[20] (822,197)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[21] (500,285)<div  />
+	[22] (200,285)<span >GET />
+	[23] (469,285)<span  />
+		[24] (469,285)<a class='nostyle' />
+			[25] (376,285)<span >​/recruitment​/queries​/getPersonActiveEmployees />
+	[26] (747,285)<div >PRIVATE />
+	[27] (822,285)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[28] (500,373)<div  />
+	[29] (200,373)<span >POST />
+	[30] (471,373)<span  />
+		[31] (471,373)<a class='nostyle' />
+			[32] (395,373)<span >​/recruitment​/queries​/candidatePortalConfiguration />
+	[33] (750,373)<div >PRIVATE />
+	[34] (822,373)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[35] (500,461)<div  />
+	[36] (200,461)<span >GET />
+	[37] (471,461)<span  />
+		[38] (471,461)<a class='nostyle' />
+			[39] (395,461)<span >​/recruitment​/queries​/candidatePortalConfiguration />
+	[40] (750,461)<div >PRIVATE />
+	[41] (822,461)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[42] (500,541)<div  />
+	[43] (200,541)<span >POST />
+	[44] (430,541)<span  />
+		[45] (430,541)<a class='nostyle' />
+			[46] (430,541)<span >​/recruitment​/queries​/findVacancyById />
+	[47] (747,541)<div >PRIVATE />
+	[48] (822,541)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[49] (500,614)<div  />
+	[50] (200,614)<span >GET />
+	[51] (430,614)<span  />
+		[52] (430,614)<a class='nostyle' />
+			[53] (430,614)<span >​/recruitment​/queries​/findVacancyById />
+	[54] (747,614)<div >PRIVATE />
+	[55] (822,614)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[56] (500,694)<div  />
+	[57] (200,694)<span >POST />
+	[58] (475,694)<span  />
+		[59] (475,694)<a class='nostyle' />
+			[60] (435,694)<span >​/recruitment​/queries​/vacancyWorkstationReferencesDisabled />
+	[61] (754,694)<div >PRIVATE />
+	[62] (822,694)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[63] (500,782)<div  />
+	[64] (200,782)<span >GET />
+	[65] (475,782)<span  />
+		[66] (475,782)<a class='nostyle' />
+			[67] (435,782)<span >​/recruitment​/queries​/vacancyWorkstationReferencesDisabled />
+	[68] (754,782)<div >PRIVATE />
+	[69] (822,782)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[70] (500,870)<div  />
+	[71] (200,870)<span >POST />
+	[72] (478,870)<span  />
+		[73] (478,870)<a class='nostyle' />
+			[74] (469,870)<span >​/recruitment​/queries​/hasOpenVacanciesOrStaffRequisitionInProcess />
+	[75] (757,870)<div >PRIVATE />
+	[76] (822,870)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[77] (500,958)<div  />
+	[78] (200,958)<span >GET />
+	[79] (478,958)<span  />
+		[80] (478,958)<a class='nostyle'>​/recruitment​/queries​/hasOpenVacanciesOrStaffRequisitionInProcess />
+			​/recruitment​/queries​/hasOpenVacanciesOrStaffRequisitionInProcess
+	[81] (757,958)<div >PRIVATE />
+	[82] (822,958)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[83] (947,941)<a href='#top' />
+	[84] (947,941)<span  />
+		[85] (947,937)<i  />
+[86] (47,952)<div  />
+
+</current_dom>

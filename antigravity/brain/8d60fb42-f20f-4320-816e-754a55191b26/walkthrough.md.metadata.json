@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary": "Demonstração da funcionalidade Dossiê do Colaborador (DP).\n- Busca de colaboradores por nome ou matrícula.\n- Visualização detalhada em Drawer lateral.\n- Integração em tempo real com a base Senior (VETORH).\n- Cards de informações Pessoais, Contratuais, Financeiras e Históricas.\n- Sidebar unificada em todo o sistema.",
+  "updatedAt": "2026-03-20T18:19:25.511966100Z",
+  "version": "1"
+}

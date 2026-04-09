@@ -1,0 +1,44 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (868,48)<i  />
+[1] (174,48)<a class='navbar-brand' href='https://dev.senior.com.br/' />
+	[2] (169,45)<img  />
+[3] (189,198)<a href='https://dev.senior.com.br'>home />
+/
+[4] (284,198)<a href='https://dev.senior.com.br/apis_privadas/'>APIs Privadas />
+/
+[5] (447,198)<a href='https://dev.senior.com.br/apis_privadas/hcm/'>Gestão de Pessoas (hcm) />
+/
+Recrutamento e Seleção (recruitment)
+[6] (500,274)<input class='form-control header-search  ' id='s' placeholder='Pesquisar' />
+[7] (645,274)<select class='search-expand-types' id='search_post_type' />
+[8] (773,275)<input class=' button button-custom' />
+Mais pesquisados:
+[9] (320,334)<a class='trending-search-popular-keyword'>Customização />
+,
+[10] (408,334)<a class='trending-search-popular-keyword'>Tutorial />
+,
+[11] (501,334)<a class='trending-search-popular-keyword'>Documentação />
+Recrutamento e Seleção (recruitment)
+3325 views
+0
+22/10/2018
+Atualizado em 19/03/2026
+integrador
+[12] (821,575)<span  />
+Recrutamento e Seleção
+17.1.1
+[ Base URL:
+platform.senior.com.br
+/t/senior.com.br/bridge/1.0/rest/hcm
+]
+[13] (446,813)<a class='link' href='https://s3.amazonaws.com/br-com-senior-ecossistema-api/hcm_recruitment.swagger.yaml' />
+	[14] (446,813)<span >https://s3.amazonaws.com/br-com-senior-ecossistema-api/hcm_recruitment.swagger.yaml />
+Serviço do Gestão de Recrutamento e Seleção.
+[15] (254,902)<a class='link' href='https://dev.senior.com.br'>Senior X Platform
+- Website />
+[16] (270,928)<a class='link' href='mailto:seniorx-dev@senior.com.br'>Send email to Senior X Platform />
+
+</current_dom>

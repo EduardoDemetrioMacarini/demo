@@ -1,0 +1,5 @@
+[0] (500,536)<input id='username' placeholder='Nome de Usuário ou E-mail' />
+[1] (500,614)<input id='password' placeholder='Sua Senha' />
+[2] (500,709)<button class='btn-primary' />
+[3] (452,769)<a href='register.html' />
+[4] (548,769)<a href='reset.html' />

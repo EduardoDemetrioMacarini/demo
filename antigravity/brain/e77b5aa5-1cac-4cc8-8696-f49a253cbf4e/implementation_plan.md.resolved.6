@@ -1,0 +1,43 @@
+# Diferenciação de Vale Alimentação por Filial e Cargo
+
+O usuário necessita que o valor do Vale Alimentação possa ser configurado de forma distinta para o mesmo cargo, dependendo da filial (ex: Almoxarife na Filial 1 pode ter valor diferente de Almoxarife na Filial 2).
+
+## User Review Required
+
+> [!IMPORTANT]
+> Esta alteração mudará a chave primária da tabela de configurações. Todos os valores já configurados manualmente serão resetados para o padrão de R$ 47,50 durante a migração, pois a granularidade passará de "Cargo" para "Filial + Cargo".
+
+## Proposed Changes
+
+### [Component Name] Backend
+
+#### [MODIFY] [Program.cs](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+- Atualizar a criação da tabela `ValeAlimentacaoSettings` para incluir as colunas `NumEmp`, `CodFil` e `NomeFilial`.
+- A Chave Primária passará a ser `(NumEmp, CodFil, Cargo)`.
+- Refatorar o endpoint `GET /api/dp/vale_alimentacao/settings` para retornar a filial.
+- Refatorar o endpoint `POST /api/dp/vale_alimentacao/settings` para receber e salvar os novos campos de identificação.
+- Ajustar o Job de Sincronização (`sync-vale-alimentacao`) para cruzar os dados usando a tripla Empresa-Filial-Cargo.
+
+---
+
+### [Component Name] Frontend
+
+#### [MODIFY] [vale_alimentacao.html](file:///C:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/vale_alimentacao.html)
+- Atualizar a tabela de configurações no modal para incluir uma coluna "Filial".
+- Ajustar o script de salvamento para enviar o `NumEmp` e `CodFil` correspondentes à linha editada.
+- Adicionar filtro por filial na busca do modal.
+
+## Open Questions
+
+- Existe algum cargo que não deva ser diferenciado por filial (regra global)? (Assumiremos que todos seguem a regra Filial+Cargo).
+
+## Verification Plan
+
+### Automated Tests
+1. Rodar carga inicial e verificar se cargos duplicados aparecem com filiais diferentes.
+2. Alterar o valor de "Almoxarife" na Filial A e verificar se o valor de "Almoxarife" na Filial B permanece inalterado.
+3. Executar o Job de Sync e conferir no cache se o cálculo bate com o valor da filial específica.
+
+### Manual Verification
+1. Abrir o modal de configurações e verificar a nova coluna "Filial".
+2. Testar a busca por filial.

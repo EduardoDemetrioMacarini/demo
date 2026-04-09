@@ -1,0 +1,139 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,53)<div  />
+	[1] (480,53)<button class='opblock-summary-control' />
+		[2] (68,53)<span >GET />
+		[3] (506,53)<div  />
+			[4] (137,53)<span  />
+				[5] (137,53)<a class='nostyle' href='#/Feriados%20/%20Holidays/findByValuePaged_14' />
+					[6] (137,53)<span >/holidays
+/all />
+			[7] (255,53)<div >Lista feriados existentes / Lists holidays />
+	[8] (928,53)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[9] (948,53)<button aria-label='get ​/holidays​/all' class='opblock-control-arrow' />
+[10] (500,129)<div  />
+	[11] (480,129)<button class='opblock-summary-control' />
+		[12] (68,129)<span >DELETE />
+		[13] (506,129)<div  />
+			[14] (166,129)<span  />
+				[15] (166,129)<a class='nostyle' href='#/Feriados%20/%20Holidays/deleteCity' />
+					[16] (166,129)<span >/holidays
+/city
+/{cityId} />
+			[17] (318,129)<div >Excluir por ID da cidade / Delete by city ID />
+	[18] (928,129)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[19] (948,129)<button aria-label='delete ​/holidays​/city​/{cityId}' class='opblock-control-arrow' />
+[20] (500,205)<div  />
+	[21] (480,205)<button class='opblock-summary-control' />
+		[22] (68,205)<span >DELETE />
+		[23] (506,205)<div  />
+			[24] (215,205)<span  />
+				[25] (215,205)<a class='nostyle' href='#/Feriados%20/%20Holidays/deleteCityExternal' />
+					[26] (215,205)<span >/holidays
+/city
+/external
+/{cityExternalId} />
+			[27] (447,205)<div >Excluir por ID externo da cidade / Delete by city external ID />
+	[28] (928,205)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[29] (948,205)<button aria-label='delete ​/holidays​/city​/external​/{cityExternalId}' class='opblock-control-arrow' />
+[30] (500,281)<div  />
+	[31] (480,281)<button class='opblock-summary-control' />
+		[32] (68,281)<span >GET />
+		[33] (506,281)<div  />
+			[34] (195,281)<span  />
+				[35] (195,281)<a class='nostyle' href='#/Feriados%20/%20Holidays/findByExternalId' />
+					[36] (195,281)<span >/holidays
+/externalid
+/{externalId} />
+			[37] (394,281)<div >[PT] Consultar um feriado. [EN] Get a single holiday. />
+	[38] (928,281)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[39] (948,281)<button aria-label='get ​/holidays​/externalid​/{externalId}' class='opblock-control-arrow' />
+[40] (500,357)<div  />
+	[41] (480,357)<button class='opblock-summary-control' />
+		[42] (68,357)<span >DELETE />
+		[43] (506,357)<div  />
+			[44] (195,357)<span  />
+				[45] (195,357)<a class='nostyle' href='#/Feriados%20/%20Holidays/deleteByExternalId_4' />
+					[46] (195,357)<span >/holidays
+/externalid
+/{externalId} />
+			[47] (324,357)<div >Excluir / Delete />
+	[48] (928,357)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[49] (948,357)<button aria-label='delete ​/holidays​/externalid​/{externalId}' class='opblock-control-arrow' />
+[50] (500,433)<div  />
+	[51] (480,433)<button class='opblock-summary-control' />
+		[52] (68,433)<span >DELETE />
+		[53] (506,433)<div  />
+			[54] (195,433)<span  />
+				[55] (195,433)<a class='nostyle' href='#/Feriados%20/%20Holidays/deleteWorkplace' />
+					[56] (195,433)<span >/holidays
+/workplace
+/{workplaceId} />
+			[57] (385,433)<div >Excluir por ID de posto / Delete by workplace ID />
+	[58] (928,433)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[59] (948,433)<button aria-label='delete ​/holidays​/workplace​/{workplaceId}' class='opblock-control-arrow' />
+[60] (500,509)<div  />
+	[61] (480,509)<button class='opblock-summary-control' />
+		[62] (68,509)<span >DELETE />
+		[63] (506,509)<div  />
+			[64] (243,509)<span  />
+				[65] (243,509)<a class='nostyle' href='#/Feriados%20/%20Holidays/deleteWorkplaceExternal' />
+					[66] (243,509)<span >/holidays
+/workplace
+/external
+/{workplaceExternalId} />
+			[67] (514,509)<div >Excluir por ID externo de posto / Delete by workplace external ID />
+	[68] (928,509)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[69] (948,509)<button aria-label='delete ​/holidays​/workplace​/external​/{workplaceExternalId}' class='opblock-control-arrow' />
+[70] (500,623)<h3  />
+	[71] (175,622)<a class='nostyle' href='#/Grupo%20de%20escalas%20/%20Schedule%20group' />
+		[72] (175,622)<span >Grupo de escalas / Schedule group />
+	[73] (617,622)<small  />
+		[74] (617,622)<div  />
+			[75] (617,601)<p >[PT] Cadastro dos grupos de escala. />
+			[76] (617,643)<p >[EN] ScheduleGroup register. />
+	[77] (939,622)<button class='expand-operation' title='Collapse operation' />
+[78] (500,723)<div  />
+	[79] (480,723)<button class='opblock-summary-control' />
+		[80] (68,723)<span >POST />
+		[81] (506,723)<div  />
+			[82] (143,723)<span  />
+				[83] (143,723)<a class='nostyle' href='#/Grupo%20de%20escalas%20/%20Schedule%20group/create_15' />
+					[84] (143,723)<span >/schedulegroups />
+			[85] (221,723)<div >Cadastro / Add />
+	[86] (928,723)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[87] (948,723)<button aria-label='post ​/schedulegroups' class='opblock-control-arrow' />
+[88] (500,799)<div  />
+	[89] (480,799)<button class='opblock-summary-control' />
+		[90] (68,799)<span >GET />
+		[91] (506,799)<div  />
+			[92] (157,799)<span  />
+				[93] (157,799)<a class='nostyle' href='#/Grupo%20de%20escalas%20/%20Schedule%20group/findScheduleGroupById' />
+					[94] (157,799)<span >/schedulegroups
+/{id} />
+			[95] (352,799)<div >[PT] Consultar um grupo de escala. [EN] Get a single schedule group. />
+	[96] (928,799)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[97] (948,799)<button aria-label='get ​/schedulegroups​/{id}' class='opblock-control-arrow' />
+[98] (500,875)<div  />
+	[99] (480,875)<button class='opblock-summary-control' />
+		[100] (68,875)<span >PUT />
+		[101] (506,875)<div  />
+			[102] (157,875)<span  />
+				[103] (157,875)<a class='nostyle' href='#/Grupo%20de%20escalas%20/%20Schedule%20group/update_12' />
+					[104] (157,875)<span >/schedulegroups
+/{id} />
+			[105] (255,875)<div >Atualizar / Update />
+	[106] (928,875)<button aria-label='authorization button unlocked' class='authorization__btn' />
+	[107] (948,875)<button aria-label='put ​/schedulegroups​/{id}' class='opblock-control-arrow' />
+[108] (68,951)<span >DELETE />
+[109] (157,951)<span  />
+	[110] (157,951)<a class='nostyle' href='#/Grupo%20de%20escalas%20/%20Schedule%20group/delete_10' />
+		[111] (157,951)<span >/schedulegroups
+/{id} />
+[112] (250,951)<div >Excluir / Delete />
+[113] (928,951)<button aria-label='authorization button unlocked' class='authorization__btn' />
+[114] (948,951)<button aria-label='delete ​/schedulegroups​/{id}' class='opblock-control-arrow' />
+
+</current_dom>

@@ -1,0 +1,22 @@
+# Tarefas: Vale Alimentação Avançado (Senior + Nexti)
+
+- [ ] **Configuração de Banco de Dados**
+    - [ ] Adicionar colunas `DiasExtras` e `Ausencias` na tabela `ValeAlimentacaoCache`.
+- [ ] **Lógica de Período**
+    - [ ] Implementar helper `GetCompetenciaAnterior()`.
+- [ ] **Integração Nexti (Estratégia de Descoberta)**
+    - [ ] Implementar cliente OAuth2 para o Nexti.
+    - [ ] Descobrir/Confirmar endpoints de Ocorrências e Ausências.
+    - [ ] Buscar dados da competência anterior (26 a 25).
+- [ ] **Sincronização (Sync Task)**
+    - [ ] Atualizar endpoint `POST /api/jobs/sync-vale-alimentacao`.
+    - [ ] Cruzar dados da Senior com dados do Nexti via Matrícula.
+    - [ ] Agregar dados diários: Extra > 4h e Faltas.
+    - [ ] Persistir no cache local.
+- [ ] **Interface (Frontend)**
+    - [ ] Atualizar colunas na tabela de Vale Alimentação.
+    - [ ] Mostrar breakdown: Base + Extras - Ausências.
+    - [ ] Atualizar exportação para Excel.
+- [ ] **Validação**
+    - [ ] Testar sincronização completa.
+    - [ ] Verificar logs de execução.

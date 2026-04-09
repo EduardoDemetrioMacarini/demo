@@ -1,0 +1,5 @@
+# Resolvendo o erro de conexão do Banco de Dados
+
+- [x] Identificar a causa do erro `Failed to fetch`.
+- [ ] Criar um script `.bat` para inicializar o backend sem precisar do Antigravity.
+- [ ] Explicar ao usuário como utilizar o script.

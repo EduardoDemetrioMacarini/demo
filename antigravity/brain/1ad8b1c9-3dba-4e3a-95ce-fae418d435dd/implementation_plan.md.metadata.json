@@ -1,0 +1,7 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary":  "Updated plan to restore services, noting the Ngrok authentication blocker.",
+  "updatedAt":  "2026-04-08T19:00:30.623519300Z",
+  "version":  "2",
+  "requestFeedback":  true
+}

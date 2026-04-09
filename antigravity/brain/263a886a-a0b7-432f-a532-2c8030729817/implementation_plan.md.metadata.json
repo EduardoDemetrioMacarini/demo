@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan for adding a 'Recursos Humanos' menu to the portal, integrating with Senior HCM REST API to show open vacancies, candidates, and recruitment insights.",
+  "updatedAt": "2026-03-23T14:30:29.185942500Z"
+}

@@ -1,0 +1,18 @@
+- [ ] Rebrand to ControlPro
+    - [ ] Update all HTML titles and text references
+    - [ ] Update SVG logos in all kept HTML files
+- [ ] Update Visual Identity (Blue Theme)
+    - [ ] Modify `styles.css` with the new blue palette
+    - [ ] Update inline styles and hover effects in HTML files
+- [ ] Streamline Project
+    - [ ] Delete `precificacao.html`
+    - [ ] Delete `rh.html`
+    - [ ] Delete `conexoes.html`
+- [ ] Link Maintenance
+    - [ ] Update sidebar navigation in `home.html`, `dp.html`, `vale_alimentacao.html`, etc.
+    - [ ] Remove submenus that are no longer needed
+- [ ] Backend Updates
+    - [ ] Update `Program.cs` seed data for `GroupScreens`
+- [ ] Verification
+    - [ ] Check login screen
+    - [ ] Check dashboard and navigation

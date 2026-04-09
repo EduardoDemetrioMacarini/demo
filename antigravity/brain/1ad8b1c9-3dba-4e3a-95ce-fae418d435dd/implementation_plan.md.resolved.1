@@ -1,0 +1,23 @@
+# Restaurar Serviços do ControlPro
+
+O usuário relatou que não consegue acessar o sistema. Identificamos que tanto o servidor backend (.NET) quanto o túnel Ngrok (necessário para acesso externo) não estão em execução.
+
+## Mudanças Propostas
+
+### Backend (.NET)
+- Iniciar o servidor backend na porta 5000 (conforme configurado em `launchSettings.json`).
+- Verificar se o banco de dados SQL Server está acessível (o log inicial do backend indicará se a carga de dados ocorreu com sucesso).
+
+### Ngrok (Túnel de Acesso)
+- Iniciar o Ngrok apontando para a porta 5000.
+- Tentar utilizar o domínio estático identificado (`hilaria-nonleguminous-chester.ngrok-free.dev`) para manter a consistência do link de acesso.
+
+## Plano de Verificação
+
+### Testes Manuais
+- Verificar a saída do comando do backend.
+- Consultar a API local do Ngrok (`http://localhost:4040/api/tunnels`) para obter a URL pública ativa.
+- Tentar acessar a página de login através da URL pública.
+
+## Perguntas em Aberto
+- Nenhuma no momento.

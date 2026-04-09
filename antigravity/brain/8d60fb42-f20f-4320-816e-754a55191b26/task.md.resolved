@@ -1,0 +1,24 @@
+# Tarefa: Dossiê do Colaborador (DP)
+
+## Backend (Program.cs)
+- [x] Backend: Criar endpoints `/api/employees/search` e `/api/employees/{numcad}/dossier` no [Program.cs](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+    - [x] Dados Pessoais (CPF, RG, PIS, CNH, Endereço, Contato)
+    - [x] Dados Contratuais (Admissão, Demissão, Salário, Cargo, CC)
+    - [x] Histórico de 6 meses de Holerite (R044MOV/R046VER ou similar)
+    - [x] Histórico de Afastamentos
+    - [x] Histórico de Promoções e Centro de Custo
+    - [x] Situação de Férias e Estabilidades
+
+## Frontend (dp.html)
+- [x] Criar nova página [dp.html](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/frontend/dp.html) com layout de Dashboard Premium
+- [x] Implementar caixa de busca com autocomplete ou lista de resultados
+- [x] Desenvolver visualização do Dossiê organizada por abas ou cards (Perfil, Financeiro, Histórico, Férias)
+- [x] Integrar com CSS existente para manter padrão visual do Grupo Setup
+
+## Navegação
+- [ ] Atualizar sidebar em todas as páginas ([home.html](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/frontend/home.html), [precificacao.html](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/frontend/precificacao.html), [rotinas.html](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/frontend/rotinas.html), [usuarios.html](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/frontend/usuarios.html), [dp.html](file:///c:/Users/RPA_COMERCIAL/.gemini/antigravity/scratch/login_system/frontend/dp.html)) para incluir o link para DP
+
+## Verificação
+- [ ] Testar busca de funcionário
+- [ ] Validar carregamento de todos os dados do dossiê
+- [ ] Verificar layout responsivo e estética visual

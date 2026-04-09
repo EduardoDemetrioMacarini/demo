@@ -1,0 +1,85 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+POST
+​/candidateDeleted
+POST
+​/candidateMerged
+POST
+​/candidateUpdated
+[0] (500,233)<div  />
+	[1] (200,233)<span >POST />
+	[2] (386,233)<span  />
+		[3] (386,233)<a class='nostyle' />
+			[4] (386,233)<span >​/candidateindicationCreated />
+	[5] (822,233)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[6] (500,306)<div  />
+	[7] (200,306)<span >POST />
+	[8] (386,306)<span  />
+		[9] (386,306)<a class='nostyle' />
+			[10] (386,306)<span >​/candidateindicationDeleted />
+	[11] (822,306)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[12] (500,378)<div  />
+	[13] (200,378)<span >POST />
+	[14] (381,378)<span  />
+		[15] (381,378)<a class='nostyle' />
+			[16] (381,378)<span >​/candidateindicationMerged />
+	[17] (822,378)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[18] (500,451)<div  />
+	[19] (200,450)<span >POST />
+	[20] (386,451)<span  />
+		[21] (386,451)<a class='nostyle' />
+			[22] (386,450)<span >​/candidateindicationUpdated />
+	[23] (822,451)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[24] (500,523)<div  />
+	[25] (200,523)<span >POST />
+	[26] (444,523)<span  />
+		[27] (444,523)<a class='nostyle' />
+			[28] (444,523)<span >​/candidateprofessionalexperienceCreated />
+	[29] (822,523)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[30] (500,595)<div  />
+	[31] (200,595)<span >POST />
+	[32] (444,595)<span  />
+		[33] (444,595)<a class='nostyle' />
+			[34] (444,595)<span >​/candidateprofessionalexperienceDeleted />
+	[35] (822,595)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[36] (500,668)<div  />
+	[37] (200,668)<span >POST />
+	[38] (440,668)<span  />
+		[39] (440,668)<a class='nostyle' />
+			[40] (440,668)<span >​/candidateprofessionalexperienceMerged />
+	[41] (822,668)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[42] (500,740)<div  />
+	[43] (200,740)<span >POST />
+	[44] (444,740)<span  />
+		[45] (444,740)<a class='nostyle' />
+			[46] (444,740)<span >​/candidateprofessionalexperienceUpdated />
+	[47] (822,740)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[48] (500,813)<div  />
+	[49] (200,813)<span >POST />
+	[50] (381,813)<span  />
+		[51] (381,813)<a class='nostyle' />
+			[52] (381,813)<span >​/candidateeducationCreated />
+	[53] (822,813)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[54] (500,885)<div  />
+	[55] (200,885)<span >POST />
+	[56] (381,885)<span  />
+		[57] (381,885)<a class='nostyle' />
+			[58] (381,885)<span >​/candidateeducationDeleted />
+	[59] (822,885)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[60] (500,958)<div  />
+	[61] (200,958)<span >POST />
+	[62] (376,958)<span  />
+		[63] (376,958)<a class='nostyle' />
+			[64] (376,957)<span >​/candidateeducationMerged />
+	[65] (822,958)<button aria-label='authorization button unlocked' class='authorization__btn unlocked' />
+[66] (947,941)<a href='#top' />
+	[67] (947,941)<span  />
+		[68] (947,937)<i  />
+[69] (47,952)<div  />
+permite mostrar notificações
+[70] (665,139)<button class='align-right primary slidedown-button' id='onesignal-slidedown-allow-button'>CONTINUAR />
+[71] (464,139)<button class='align-right secondary slidedown-button' id='onesignal-slidedown-cancel-button'>NÃO OBRIGADO (A) />
+
+</current_dom>

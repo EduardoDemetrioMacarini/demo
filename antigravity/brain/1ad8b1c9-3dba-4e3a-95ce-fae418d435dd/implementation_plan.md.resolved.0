@@ -1,0 +1,56 @@
+# Project Rebranding and Streamlining: ControlPro
+
+This plan outlines the steps to rename the "Grupo Setup" project to "ControlPro", update the visual identity to a modern blue palette, and remove non-essential screens as requested.
+
+## User Review Required
+
+> [!IMPORTANT]
+> I have selected a core set of screens to keep. Please confirm if these are the correct ones or if any others should be included/excluded:
+> - **Keeping:** Home, DP (Dossier), Vale Alimentação, Rotinas, Usuários, Grupos.
+> - **Removing:** Precificacao, RH, Conexões.
+
+> [!IMPORTANT]
+> The visual identity will transition from **Green** to **Blue**. The new palette will use a Slate/Navy background with Vibrant Blue highlights.
+
+## Proposed Changes
+
+### Visual Identity (CSS)
+
+#### [MODIFY] [styles.css](file:///c:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/styles.css)
+- Replace all instances of setup green (`#05d58d`, `#008a5e`) with the new ControlPro blue palette (`#3b82f6`, `#2563eb`).
+- Update backgrounds to a deeper navy/slate gradient for a more premium look.
+- Update box-shadows and hover states to use blue tints.
+
+### Branding & Content
+
+#### [MODIFY] All HTML Files
+- Replace "GRUPO setup" or "Setup" with "ControlPro".
+- Update page titles where applicable.
+- Update the SVG logo (colors and potentially the path if needed, though a color change usually suffices for "identical but different branding").
+
+#### [MODIFY] [app.js](file:///c:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/app.js)
+- Update any hardcoded references or alerts that mention the old name.
+
+### Streamlining (File Management)
+
+#### [DELETE] [precificacao.html](file:///c:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/precificacao.html)
+#### [DELETE] [rh.html](file:///c:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/rh.html)
+#### [DELETE] [conexoes.html](file:///c:/Users/SETUP/.gemini/antigravity/scratch/login_system/frontend/conexoes.html)
+
+### Backend Adjustment
+
+#### [MODIFY] [Program.cs](file:///c:/Users/SETUP/.gemini/antigravity/scratch/login_system/backend/Program.cs)
+- Update the `GroupScreens` seed data to remove references to the deleted files.
+
+## Open Questions
+
+- Should I keep the "Jurídico" and "Financeiro" placeholders in the sidebar, or remove them entirely since their main screens (like Precificação) are being removed?
+- Would you like a specific shade of blue (e.g., Navy, Sky Blue, Royal Blue)? I'm proposing a "Premium Modern Blue" (`#3b82f6`).
+
+## Verification Plan
+
+### Manual Verification
+- Verify the login screen shows the new "ControlPro" name and blue theme.
+- Log in and verify the sidebar content matches the streamlined list.
+- Check that all buttons, icons, and gradients are correctly showing the blue theme.
+- Verify that navigation works correctly and no 404s occur for removed screens.

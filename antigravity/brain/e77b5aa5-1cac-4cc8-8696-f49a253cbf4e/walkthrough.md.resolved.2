@@ -1,0 +1,32 @@
+# Walkthrough: Diferenciação de VA por Filial e Cargo
+
+Agora o módulo de Vale Alimentação permite que você configure valores diários específicos para cada **Filial**, resolvendo o problema de cargos iguais com benefícios diferentes.
+
+## O Que Foi Implementado
+
+### 1. Granularidade por Filial
+A tabela de configurações agora utiliza a combinação **Empresa + Filial + Cargo** como chave. Isso significa que você pode ter:
+- **Almoxarife** na *Filial A*: R$ 47,50
+- **Almoxarife** na *Filial B*: R$ 52,00
+
+### 2. Interface Atualizada
+O modal de configurações ganhou uma nova coluna **"Filial"**.
+- O campo de busca agora filtra tanto pelo nome do cargo quanto pelo nome da filial.
+- Ao salvar um valor, o sistema identifica automaticamente a qual unidade administrativa aquele cargo pertence.
+
+### 3. Sincronização Inteligente
+O Job de sincronismo foi refatorado para:
+1. Identificar a filial do colaborador no Senior.
+2. Buscar na tabela local o valor configurado para aquela **Filial + Cargo**.
+3. Calcular o Total de VA usando o valor específico da unidade.
+
+## Como Usar
+1. Acesse a tela de **Vale Alimentação**.
+2. Clique no botão azul **Configurar Valores por Cargo**.
+3. Utilize a busca para encontrar o cargo na filial desejada.
+4. Altere o valor e clique em **Salvar**.
+5. Clique em **Sincronizar** na tela principal para aplicar os novos valores a todos os colaboradores daquelas filiais.
+
+## Verificação Técnica
+- **Carga Inicial**: 453 combinações únicas de Filial e Cargo foram importadas do Senior.
+- **Sincronismo**: 3.966 colaboradores processados com sucesso usando a nova lógica de cruzamento.

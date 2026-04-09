@@ -1,0 +1,6189 @@
+swagger: '2.0'
+
+info:
+  version: 7.88.0
+  title: vacancymanagement
+  description: 'Serviço de gerenciamento de vagas do recrutamento'
+  x-senior-domain: hcm
+  x-senior-domain-path: hcm
+  x-senior-service-path: vacancymanagement
+  contact:
+    name: Senior X Platform
+    url: https://dev.senior.com.br
+    email: seniorx-dev@senior.com.br
+
+host: api.senior.com.br
+
+basePath: /hcm/vacancymanagement
+
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    in: header
+    name: Authorization
+
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  clientId:
+    name: client_id
+    type: string
+    in: header
+    required: true
+    description: 'Identificação da aplicação cadastrada no portal do desenvolvedor (api.xplatform.com.br)'
+
+paths:
+  /candidateCreated:
+    post:
+      description: 'Event of candidate create'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateDeleted:
+    post:
+      description: 'Event of candidate delete'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateMerged:
+    post:
+      description: 'Event of candidate merge'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateUpdated:
+    post:
+      description: 'Event of candidate update'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateindicationCreated:
+    post:
+      description: 'Event of candidateIndication create'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateindicationDeleted:
+    post:
+      description: 'Event of candidateIndication delete'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateindicationMerged:
+    post:
+      description: 'Event of candidateIndication merge'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateindicationUpdated:
+    post:
+      description: 'Event of candidateIndication update'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateprofessionalexperienceCreated:
+    post:
+      description: 'Event of candidateProfessionalExperience create'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateprofessionalexperienceDeleted:
+    post:
+      description: 'Event of candidateProfessionalExperience delete'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateprofessionalexperienceMerged:
+    post:
+      description: 'Event of candidateProfessionalExperience merge'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateprofessionalexperienceUpdated:
+    post:
+      description: 'Event of candidateProfessionalExperience update'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateeducationCreated:
+    post:
+      description: 'Event of candidateEducation create'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateeducationDeleted:
+    post:
+      description: 'Event of candidateEducation delete'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateeducationMerged:
+    post:
+      description: 'Event of candidateEducation merge'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /candidateeducationUpdated:
+    post:
+      description: 'Event of candidateEducation update'
+      x-senior-event: true
+      deprecated: false
+      tags:
+        - Events
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: input
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: 'Ok'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/candidate:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidate'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidate'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidate'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/candidate/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidate'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidate'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidate'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidate/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidate'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/statusReport:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/statusReport'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/statusReport'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/statusReport'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/statusReport'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/statusReport'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/statusReport/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/statusReport'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/statusReport'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/statusReport'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/statusReport'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/statusReport'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/statusReport/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/statusReport'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/recruitmentProcess:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/recruitmentProcess'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/recruitmentProcess/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/recruitmentProcess'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/recruitmentProcess/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/recruitmentProcess'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/vacancy:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/vacancy'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/vacancy'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/vacancy'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/vacancy'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/vacancy'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/vacancy/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/vacancy'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/vacancy'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/vacancy'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/vacancy'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/vacancy'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/vacancy/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/vacancy'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/settingsStage:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/settingsStage'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/settingsStage'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/settingsStage'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/settingsStage'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/settingsStage'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/settingsStage/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/settingsStage'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/settingsStage'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/settingsStage'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/settingsStage'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/settingsStage'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/settingsStage/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/settingsStage'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidateEducation:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidateEducation'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidateEducation'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidateEducation'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/candidateEducation/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateEducation'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateEducation'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateEducation'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidateEducation/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidateEducation'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidateProfessionalExperience:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidateProfessionalExperience'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/candidateProfessionalExperience/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateProfessionalExperience'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidateProfessionalExperience/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidateProfessionalExperience'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidatePhoneContact:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidatePhoneContact'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/candidatePhoneContact/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidatePhoneContact'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidatePhoneContact/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidatePhoneContact'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidateIndication:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidateIndication'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            $ref: '#/definitions/candidateIndication'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: offset
+          in: query
+          type: number
+        - name: size
+          in: query
+          type: number
+      responses:
+        200:
+          description: 'The created resource'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidateIndication'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+  /entities/candidateIndication/{id}:
+    put:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateIndication'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    patch:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: entity
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateIndication'
+        default:
+            description: Error response
+            schema:
+              $ref: '#/definitions/genericError'
+    get:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/candidateIndication'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    delete:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  /entities/candidateIndication/bulk:
+    post:
+      description: "This entity is customizable."
+      tags:
+        - Entities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/parameters/clientId'
+        - name: entities
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/candidateIndication'
+      responses:
+        200:
+          description: 'The bulk creation has created resources'
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+
+
+definitions:
+
+  stageType:
+    type: string
+    enum:
+      - "SORTED"
+      - "CUSTOM"
+      - "APPROVATION"
+
+  situationType:
+    type: string
+    enum:
+      - "IN_PROGRESS"
+      - "SUSPENDED"
+      - "CANCELED"
+      - "FINALIZED"
+
+  reasonType:
+    type: string
+    enum:
+      - "STAFF_INCREASE"
+      - "REPLACEMENT"
+
+  employmentContractType:
+    type: string
+    enum:
+      - "EMPLOYEE"
+      - "DIRECTOR"
+      - "RURAL_WORKER"
+      - "RETIRED"
+      - "TRAINEE"
+      - "APPRENTICE"
+      - "SPECIFIED_PERIOD"
+      - "DIRECTOR_RETIRED"
+      - "PUBLIC_OFFICER"
+      - "TEACHER"
+      - "COOPERATIVE_MEMBER"
+      - "DOMESTIC_WORKER"
+      - "TEACHER_SPECIFIED_PERIOD"
+      - "THIRD_PARTY"
+      - "COL_TERMINO_INDEFINIDO"
+      - "COL_TERMINO_FIJO"
+      - "COL_TERMINO_FIJO_1_ANO"
+      - "COL_APRENDIZ_ETAPA_LECTIVA"
+      - "COL_TERMINO_INDEFINIDO_SIN_TRANSP"
+      - "COL_PRESTACION_DE_SERVICIOS"
+      - "COL_NO_APLICA"
+      - "COL_CONTRATO_MANZAROVAR"
+      - "COL_CONTRATO_OCCIDENTAL"
+      - "COL_CONTRATO_LEGAL_ECOPETROL"
+      - "COL_CONTRATO_PACIFIC_RUBIALES"
+      - "COL_CONTRATO_CONVENCIONAL_ECOPETROL"
+      - "COL_CONTRATISTAS"
+      - "COL_CONTRATO_PRODUCTIVIDAD_INDEFINIDO"
+      - "COL_CONTRATO_PRODUCTIVIDAD_FIJO"
+      - "COL_APRENDIZ_ETAPA_PRODUCTIVA"
+      - "COL_APRENDIZ_SENA_PRODUCTIVO"
+      - "COL_OBRA_O_LABOR"
+      - "COL_INCAPACIDAD_MAYOR_180_DIAS"
+      - "COL_TERMINO_INDEFINIDO_POR_PRODUCTIVIDAD"
+      - "COL_TERMINO_INDEFINIDO_INTEGRAL"
+      - "COL_CONTRATO_SALARIO_FIJO_Y_PRODUCTIVIDAD_INDEFINIDO"
+      - "COL_TERMINO_INDEFINIDO_VARIABLE"
+      - "COL_TERMINO_FIJO_VARIABLE"
+
+  genderType:
+    type: string
+    enum:
+      - "MALE"
+      - "FEMALE"
+      - "LGPD_EXCLUSION"
+
+  maritalStatus:
+    type: string
+    enum:
+      - "MARRIED"
+      - "DIVORCED"
+      - "SINGLE"
+      - "WIDOW"
+      - "CONCUBINAGE"
+      - "SEPARATED"
+      - "STABLE_UNION"
+      - "OTHER"
+
+  locale:
+    type: string
+    enum:
+      - "PT_BR"
+      - "EN_US"
+      - "ES_ES"
+      - "ES_CO"
+
+  candidateAnnotationType:
+    type: string
+    enum:
+      - "POSITIVE"
+      - "NEGATIVE"
+      - "NEUTRAL"
+
+  raceType:
+    type: string
+    enum:
+      - "NOT_INFORMED"
+      - "WHITE"
+      - "BLACK"
+      - "BROWN"
+      - "YELLOW"
+      - "INDIAN"
+
+  colombiaAddressAreaType:
+    type: string
+    enum:
+      - "AC"
+      - "AD"
+      - "ADL"
+      - "AER"
+      - "AG"
+      - "AGP"
+      - "AK"
+      - "AL"
+      - "ALD"
+      - "ALM"
+      - "AP"
+      - "APTDO"
+      - "ATR"
+      - "AUT"
+      - "AV"
+      - "AVIAL"
+      - "BG"
+      - "BL"
+      - "BLV"
+      - "BRR"
+      - "C"
+      - "CA"
+      - "CAS"
+      - "CC"
+      - "CD"
+      - "CEL"
+      - "CEN"
+      - "CIR"
+      - "CL"
+      - "CLJ"
+      - "CN"
+      - "CON"
+      - "CONJ"
+      - "CR"
+      - "CRT"
+      - "CRV"
+      - "CS"
+      - "DG"
+      - "DP"
+      - "DPTO"
+      - "DS"
+      - "ED"
+      - "EN"
+      - "ES"
+      - "ESQ"
+      - "ESTE"
+      - "ET"
+      - "EX"
+      - "FCA"
+      - "GJ"
+      - "GS"
+      - "GT"
+      - "HC"
+      - "HG"
+      - "IN"
+      - "IP"
+      - "IPD"
+      - "IPM"
+      - "KM"
+      - "LC"
+      - "LM"
+      - "LT"
+      - "MD"
+      - "MJ"
+      - "MLL"
+      - "MN"
+      - "MZ"
+      - "NOMBRE_VIA"
+      - "NORTE"
+      - "O"
+      - "OCC"
+      - "OESTE"
+      - "OF"
+      - "P"
+      - "PA"
+      - "PAR"
+      - "PD"
+      - "PH"
+      - "PJ"
+      - "PL"
+      - "PN"
+      - "POR"
+      - "POS"
+      - "PQ"
+      - "PRJ"
+      - "PS"
+      - "PT"
+      - "PW"
+      - "RP"
+      - "SA"
+      - "SC"
+      - "SD"
+      - "SEC"
+      - "SL"
+      - "SM"
+      - "SS"
+      - "ST"
+      - "SUITE"
+      - "SUR"
+      - "TER"
+      - "TERPLN"
+      - "TO"
+      - "TV"
+      - "TZ"
+      - "UN"
+      - "UR"
+      - "URB"
+      - "VRD"
+      - "VTE"
+      - "ZF"
+      - "ZN"
+
+  disabilityType:
+    type: string
+    enum:
+      - "PHYSICAL"
+      - "HEARING"
+      - "VISUAL"
+      - "MENTAL"
+      - "INTELLECTUAL"
+      - "OTHER"
+
+  socialNetworkType:
+    type: string
+    enum:
+      - "LINKEDIN"
+      - "FACEBOOK"
+      - "GOOGLEPLUS"
+      - "SKYPE"
+      - "TWITTER"
+      - "X"
+      - "INSTAGRAM"
+      - "TIKTOK"
+
+  educationLevel:
+    type: string
+    enum:
+      - "ELEMENTARY_SCHOOL_REGULAR"
+      - "ELEMENTARY_SCHOOL_SUPPLEMENTARY"
+      - "HIGH_SCHOOL_REGULAR"
+      - "HIGH_SCHOOL_SUPPLEMENTARY"
+      - "HIGH_SCHOOL_TECHNICAL"
+      - "HIGHER_EDUCATION"
+      - "POST_GRADUATE_SPECIALIZATION"
+      - "MASTERS_DEGREE"
+      - "PHD_DEGREE"
+      - "POST_DOCTORATE"
+      - "FREE_DOCENCY"
+      - "ASSISTANT"
+      - "TITULAR"
+      - "MBA"
+      - "LGPD_EXCLUSION"
+      - "COL_PREESCOLAR"
+      - "COL_BASICA_PRIMARIA"
+      - "COL_BASICA_SECUNDARIA"
+      - "COL_MEDIA_ACADEMICA_O_CLASICA"
+      - "COL_MEDIA_TECNICA"
+      - "COL_NORMALISTA"
+      - "COL_TECNICA_PROFESIONAL"
+      - "COL_TECNOLOGICA"
+      - "COL_PROFESIONAL"
+      - "COL_ESPECIALIZACION"
+      - "COL_MAESTRIA"
+      - "COL_DOCTORADO"
+      - "COL_POST_DOCTORADO"
+      - "COL_NINGUNO"
+      - "TECHNOLOGIST"
+      - "TECHNICAL_EDUCATION"
+
+  knowledgeLevel:
+    type: string
+    enum:
+      - "BASIC"
+      - "INTERMEDIATE"
+      - "ADVANCED"
+
+  proficiencyType:
+    type: string
+    enum:
+      - "BASIC"
+      - "INTERMEDIATE"
+      - "ADVANCED"
+      - "FLUENT"
+      - "NATIVE"
+
+  phoneType:
+    type: string
+    enum:
+      - "PERSONAL"
+      - "PROFESSIONAL"
+      - "MOBILE"
+      - "BUSINESS_FAX"
+      - "PERSONAL_FAX"
+      - "ADDITIONAL"
+      - "OTHER"
+
+  candidateType:
+    type: string
+    enum:
+      - "INTERNAL"
+      - "EXTERNAL"
+      - "BOTH"
+
+  brazilianState:
+    type: string
+    enum:
+      - "AC"
+      - "AL"
+      - "AM"
+      - "AP"
+      - "BA"
+      - "CE"
+      - "DF"
+      - "ES"
+      - "GO"
+      - "MA"
+      - "MG"
+      - "MT"
+      - "MS"
+      - "PA"
+      - "PB"
+      - "PE"
+      - "PI"
+      - "PR"
+      - "RJ"
+      - "RN"
+      - "RO"
+      - "RR"
+      - "RS"
+      - "SC"
+      - "SE"
+      - "SP"
+      - "TO"
+
+  statusMessageType:
+    type: string
+    enum:
+      - "ACTIVE"
+      - "INACTIVE"
+
+  typeSent:
+    type: string
+    enum:
+      - "ASSESSMENTS"
+      - "MESSAGE"
+
+  notificationType:
+    type: string
+    enum:
+      - "EMAIL"
+      - "PLATFORM"
+
+  colombianIdentificationDocumentType:
+    type: string
+    enum:
+      - "TARJETA_IDENTIDAD"
+      - "CEDULA_CIUDADANIA"
+
+  preferredWorkModel:
+    type: string
+    enum:
+      - "IN_PERSON"
+      - "REMOTE"
+      - "HYBRID"
+
+  attachmentType:
+    type: string
+    enum:
+      - "CURRICULUM"
+      - "PHOTO"
+      - "VIDEO"
+      - "PORTFOLIO"
+      - "MEDICAL_REPORT"
+      - "ACCESSIBILITY_CERTIFICATE"
+
+  degreeKinship:
+    type: string
+    enum:
+      - "FATHER"
+      - "MOTHER"
+
+  rneClassification:
+    type: string
+    enum:
+      - "TEMPORARY"
+      - "PERMANENT"
+
+  workRecordClass:
+    type: string
+    enum:
+      - "CAU"
+      - "CFBIO"
+      - "CFBM"
+      - "CFC"
+      - "CFESS"
+      - "CFF"
+      - "CFFA"
+      - "CFM"
+      - "CFMV"
+      - "CFN"
+      - "CFO"
+      - "CFP"
+      - "CFQ"
+      - "COFEN"
+      - "COFFITO"
+      - "CONFEA"
+      - "CONTER"
+      - "COREN"
+      - "CRBIO"
+      - "CRBM"
+      - "CRC"
+      - "CREA"
+      - "CREFITO"
+      - "CREFONO"
+      - "CRESS"
+      - "CRF"
+      - "CRM"
+      - "CRMV"
+      - "CRN"
+      - "CRO"
+      - "CRP"
+      - "CRQ"
+      - "CRTR"
+      - "OAB"
+
+  colombianMilitaryClassType:
+    type: string
+    enum:
+      - "FIRST_CLASS"
+      - "SECOND_CLASS"
+
+  pronounType:
+    type: string
+    enum:
+      - "SHE_HER"
+      - "HE_HIM"
+      - "NOT_ANSWER"
+
+  genderIdentity:
+    type: string
+    enum:
+      - "CISGENDER"
+      - "TRANSGENDER"
+      - "NON_BINARY"
+      - "NOT_ANSWER"
+
+  sexualOrientation:
+    type: string
+    enum:
+      - "ASEXUAL"
+      - "BISEXUAL"
+      - "HETEROSEXUAL"
+      - "HOMOSEXUAL"
+      - "PANSEXUAL"
+      - "NOT_ANSWER"
+
+  achievementsType:
+    type: string
+    enum:
+      - "CERTIFICATE"
+      - "COURSE"
+      - "AWARD"
+
+  nameType:
+    type: string
+    enum:
+      - "CIVIL"
+      - "SOCIAL"
+
+  candidatureSubscription:
+    type: string
+    enum:
+      - "SUBSCRIBED"
+      - "SELECTED"
+
+  medicalExamStatus:
+    type: string
+    enum:
+      - "NONE"
+      - "ABLE"
+      - "UNABLE"
+      - "WAITING_RETURN"
+      - "ABLE_RESTRICTIONS"
+      - "ERROR"
+      - "PENDING_MANUAL_SUBMISSION"
+
+  recruitmentProcessStatus:
+    type: string
+    enum:
+      - "ACTIVE"
+      - "INACTIVE"
+      - "MOVED"
+      - "REMOVED"
+      - "GIVENUP"
+      - "SUBSCRIBED"
+      - "ELIMINATED"
+      - "CANDIDATURE_WITHDRAWAL"
+
+  attendantType:
+    type: string
+    enum:
+      - "INTERNAL"
+      - "EXTERNAL"
+
+  typeQuestion:
+    type: string
+    enum:
+      - "TECHNICAL"
+      - "BEHAVIORAL"
+
+  jobBoardType:
+    type: string
+    enum:
+      - "LINKEDIN"
+      - "INDEED"
+      - "X"
+      - "FACEBOOK"
+      - "JOOBLE"
+      - "TALENT"
+      - "NETVAGAS"
+      - "VAGAS_TECH"
+      - "PESQUISA_VAGAS"
+      - "RECRUTA_SIMPLES"
+      - "BEBEE"
+      - "VAGAS"
+
+  templateType:
+    type: string
+    enum:
+      - "DEFAULT"
+      - "CUSTOM"
+      - "TEMPLATE"
+
+  hiringRegimeType:
+    type: string
+    enum:
+      - "CLT"
+      - "PJ"
+      - "COOPERATED"
+      - "TRAINEE"
+
+  jobModelType:
+    type: string
+    enum:
+      - "HYBRID"
+      - "IN_PERSON"
+      - "REMOTE"
+
+  experienceType:
+    type: string
+    enum:
+      - "ENTRY_LEVEL"
+      - "MID_LEVEL"
+      - "SENIOR_LEVEL"
+      - "LEARNER"
+      - "TRAINEE"
+      - "SPECIALIST"
+      - "COORDINATION"
+      - "MANAGEMENT"
+      - "DIRECTORSHIP"
+      - "INTERNSHIP"
+
+  settingsStage:
+    type: object
+    required:
+      - name
+      - sequence
+      - typeStage
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        name:
+          type: string
+          description: 'Nome'
+        sequence:
+          type: integer
+          description: 'Sequência.'
+        typeStage:
+          $ref: '#/definitions/stageType'
+        settingsStageModel:
+          $ref: '#/definitions/settingsStageModel'
+        blockStep:
+          type: boolean
+          description: 'Etapa de bloqueio'
+        visibleToCandidate:
+          type: boolean
+          description: 'Etapa visível para o candidato'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  settingsStageModel:
+    type: object
+    required:
+      - name
+      - startDate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        name:
+          type: string
+          description: 'Nome.'
+        startDate:
+          type: string
+          description: 'Data de início.'
+          format: "date"
+        isReadOnly:
+          type: boolean
+          description: 'Somente leitura'
+        isActive:
+          type: boolean
+          description: 'É o modelo ativo'
+        isDefault:
+          type: boolean
+          description: 'Modelo padrão'
+        settingsStages:
+          type: array
+          items:
+            $ref: '#/definitions/settingsStage'
+          description: 'Etapas.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancy:
+    type: object
+    required:
+      - title
+      - typeSituation
+      - typeReason
+      - requesterWorkstation
+      - jobPosition
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        title:
+          type: string
+          description: 'Título.'
+        location:
+          type: string
+          description: 'Local.'
+        typeSituation:
+          $ref: '#/definitions/situationType'
+        code:
+          type: integer
+          description: 'Código.'
+        typeReason:
+          $ref: '#/definitions/reasonType'
+        justification:
+          type: string
+          description: 'Justificativa.'
+        startSalaryRange:
+          type: number
+          description: 'Início da faixa salarial.'
+          format: "double"
+        endSalaryRange:
+          type: number
+          description: 'Fim da faixa salarial.'
+          format: "double"
+        admissionDate:
+          type: string
+          description: 'Data prevista de admissão.'
+          format: "date"
+        finalizationDate:
+          type: string
+          description: 'Data de finalização.'
+          format: "date-time"
+        finalizationComment:
+          type: string
+          description: 'Comentário da finalização.'
+        limitDays:
+          type: integer
+          description: 'Limite em dias para finalizar a vaga.'
+        positions:
+          type: integer
+          description: 'Quantidade de postos a serem preenchidos.'
+        filledPositions:
+          type: integer
+          description: 'Quantidade de vagas preenchidas.'
+        typeContract:
+          $ref: '#/definitions/employmentContractType'
+        subscribes:
+          type: array
+          items:
+            $ref: '#/definitions/recruitmentProcess'
+          description: 'Candidatos inscritos na vaga.'
+        finalizer:
+          $ref: '#/definitions/employee'
+        requesterWorkstation:
+          $ref: '#/definitions/workstation'
+        jobPosition:
+          $ref: '#/definitions/jobPosition'
+        workstationGroup:
+          $ref: '#/definitions/workstationGroup'
+        headOffice:
+          $ref: '#/definitions/company'
+        branchOffice:
+          $ref: '#/definitions/company'
+        costCenter:
+          $ref: '#/definitions/costCenter'
+        department:
+          $ref: '#/definitions/department'
+        workshift:
+          $ref: '#/definitions/workshift'
+        employeeToReplace:
+          $ref: '#/definitions/employee'
+        recruiter:
+          $ref: '#/definitions/employee'
+        employmentRelationship:
+          $ref: '#/definitions/employmentRelationship'
+        vacancyKeywordConfiguration:
+          $ref: '#/definitions/vacancyKeywordConfiguration'
+        vacancyPublication:
+          $ref: '#/definitions/vacancyPublication'
+        vacancyKeywords:
+          type: array
+          items:
+            $ref: '#/definitions/vacancyKeyword'
+          description: 'Lista de palavras-chave.'
+        questionnaire:
+          type: string
+          description: 'Identificador do questionário.'
+        staffRequisition:
+          type: string
+          description: 'Identificado da requisição de pessoal.'
+        suspendedDays:
+          type: integer
+          description: 'Quantidade de dias que a vaga ficou suspensa'
+        settingsStageModel:
+          $ref: '#/definitions/settingsStageModel'
+        unreadMessages:
+          type: integer
+          description: 'Quantidade de mensagens não lidas'
+        candidateMessage:
+          type: array
+          items:
+            $ref: '#/definitions/candidateMessage'
+          description: 'Mensagens para candidatos da vaga'
+        sendTests:
+          type: boolean
+          description: 'Descrição da função.'
+        function:
+          $ref: '#/definitions/function'
+        description:
+          type: string
+          description: 'Descrição da Vaga - Permitido descrições de até 10mb.'
+        tests:
+          type: array
+          items:
+            type: string
+          description: 'Lista de tipos de teste.'
+        vacancySettingsTest:
+          $ref: '#/definitions/vacancySettingsTest'
+        suggestedInternalVacancyDate:
+          type: string
+          description: 'Identifica se a vaga já foi considerada para o envio de sugestão de vagas pelo match'
+          format: "date-time"
+        useDefaultStatusReport:
+          type: boolean
+          description: 'Identificador que valida se a vaga utiliza o status report padrão do sistema'
+        locationCity:
+          type: string
+          description: 'Cidade'
+        locationFederativeUnit:
+          type: string
+          description: 'Unidade Federativa'
+        locationCountry:
+          type: string
+          description: 'Pais'
+        urlNewPortal:
+          type: string
+          description: 'URL da publicação da vaga no Novo Porta'
+        hiringRegime:
+          $ref: '#/definitions/hiringRegimeType'
+        jobModel:
+          $ref: '#/definitions/jobModelType'
+        experience:
+          $ref: '#/definitions/experienceType'
+        pcd:
+          type: boolean
+          description: 'Vaga afirmativa para PCD'
+        vacancyRequirements:
+          $ref: '#/definitions/vacancyRequirements'
+        talentPool:
+          type: boolean
+          description: 'Vaga é de banco de talentos'
+        requesterWorkstationGroup:
+          $ref: '#/definitions/workstationGroup'
+        vacancyPreInterviews:
+          type: array
+          items:
+            $ref: '#/definitions/vacancyPreInterview'
+          description: 'Perguntas da pré-entrevista da vaga'
+        stageModelGroupSettings:
+          $ref: '#/definitions/stageModelGroupSettings'
+        stageModelHistory:
+          type: array
+          items:
+            $ref: '#/definitions/vacancyStageModelHistory'
+          description: 'Histórico de atribuição de modelo de etapas.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+        version:
+          type: integer
+          description: 'Entity version for optimistic concurrency control.'
+
+  recruitmentProcess:
+    type: object
+    required:
+      - vacancy
+      - candidate
+      - subscriptionType
+      - medicalExamStatus
+      - initialCandidateType
+      - status
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        candidate:
+          $ref: '#/definitions/candidate'
+        subscriptionType:
+          $ref: '#/definitions/candidatureSubscription'
+        medicalExamStatus:
+          $ref: '#/definitions/medicalExamStatus'
+        medicalExamMessage:
+          type: string
+          description: 'Mensagem de retorno do exame médico'
+        statusIntegration:
+          type: boolean
+          description: 'Status da integração para g5'
+        initialCandidateType:
+          $ref: '#/definitions/candidateType'
+        answerId:
+          type: string
+          description: 'Identificador da resposta do questionário'
+        stage:
+          $ref: '#/definitions/settingsStage'
+        status:
+          $ref: '#/definitions/recruitmentProcessStatus'
+        salary:
+          type: number
+          description: 'Salário'
+          format: "double"
+        admissionDate:
+          type: string
+          description: 'Data de admissão'
+          format: "date"
+        attendant:
+          $ref: '#/definitions/attendant'
+        colabbePreAdmission:
+          type: string
+          description: ''
+          format: "uuid"
+        attendanceDateTime:
+          type: string
+          description: 'Data/Hora do atendimento'
+          format: "date-time"
+        adherenceRequestId:
+          type: string
+          description: 'Identificador da solicitação da aderência'
+        adherenceScore:
+          type: number
+          description: 'Nota da aderência'
+          format: "double"
+        newPortalId:
+          type: string
+          description: ''
+          format: "uuid"
+        processBlocked:
+          type: boolean
+          description: 'Indica que o processo está bloqueado'
+        recruitmentProcessRequirementsMet:
+          $ref: '#/definitions/recruitmentProcessRequirementsMet'
+        isAutoSelected:
+          type: boolean
+          description: 'Registro foi triado automaticamente?'
+        externalAtsId:
+          type: string
+          description: 'Identificador da vaga/candidatura do ATS Externo'
+        recruitmentProcessSource:
+          type: string
+          description: 'Orígem da candidatura'
+        otherSourceDescription:
+          type: string
+          description: 'Observações da orígem da candidatura'
+        hiredByHumanResourcesSystem:
+          type: boolean
+          description: 'Indica se o candidato foi efetivado pelo sistema de recursos humanos'
+        previousStage:
+          $ref: '#/definitions/settingsStage'
+        preInterviewAnswers:
+          type: array
+          items:
+            $ref: '#/definitions/recruitmentProcessPreInterviewAnswer'
+          description: 'Respostas da pré-entrevista'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidate:
+    type: object
+    required:
+      - name
+      - typeGender
+      - candidateType
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        surname:
+          type: string
+          description: 'Sobrenome.'
+        aboutYou:
+          type: string
+          description: 'Apresentação candidato - Sobre você.'
+        email:
+          type: string
+          description: 'E-mail.'
+        typeGender:
+          $ref: '#/definitions/genderType'
+        typeMaritalStatus:
+          $ref: '#/definitions/maritalStatus'
+        numberOfChildren:
+          type: integer
+          description: 'Quantidade de filhos.'
+        birthday:
+          type: string
+          description: 'Data de nascimento.'
+          format: "date"
+        cpf:
+          type: string
+          description: 'CPF.'
+        travelPossibility:
+          type: boolean
+          description: 'Disponibilidade para viagens.'
+        realocationPossibility:
+          type: boolean
+          description: 'Disponibilidade de mudança.'
+        professionalSummary:
+          type: string
+          description: 'Resumo profissional.'
+        professionalGoal:
+          type: string
+          description: 'Objetivo profissional.'
+        salaryExpectation:
+          type: number
+          description: 'Salário desejado.'
+          format: "double"
+        locale:
+          $ref: '#/definitions/locale'
+        attachment:
+          $ref: '#/definitions/attachment'
+        photoAttachment:
+          $ref: '#/definitions/attachment'
+        photoThumbnailLink:
+          type: string
+          description: 'Url do thumbnail da foto do candidato.'
+        candidateAddress:
+          type: array
+          items:
+            $ref: '#/definitions/candidateAddress'
+          description: 'Endereço.'
+        candidateVoteRegistration:
+          type: array
+          items:
+            $ref: '#/definitions/candidateVoteRegistration'
+          description: 'Título eleitoral.'
+        candidateDisability:
+          type: array
+          items:
+            $ref: '#/definitions/candidateDisability'
+          description: 'Deficiências.'
+        candidateSocialNetwork:
+          type: array
+          items:
+            $ref: '#/definitions/candidateSocialNetwork'
+          description: 'Redes sociais.'
+        candidateAbility:
+          type: array
+          items:
+            $ref: '#/definitions/candidateAbility'
+          description: 'Habilidades do candidato.'
+        candidateEducation:
+          type: array
+          items:
+            $ref: '#/definitions/candidateEducation'
+          description: 'Formação acadêmica do candidato.'
+        candidateKnowledge:
+          type: array
+          items:
+            $ref: '#/definitions/candidateKnowledge'
+          description: 'Conhecimento do candidato.'
+        candidateLanguage:
+          type: array
+          items:
+            $ref: '#/definitions/candidateLanguage'
+          description: 'Idiomas do candidato.'
+        candidatePersonalInterest:
+          type: array
+          items:
+            $ref: '#/definitions/candidatePersonalInterest'
+          description: 'Interesses pessoais do candidato.'
+        candidatePositionSought:
+          type: array
+          items:
+            $ref: '#/definitions/candidatePositionSought'
+          description: 'Cargo desejado pelo candidato.'
+        candidateProfessionalExperience:
+          type: array
+          items:
+            $ref: '#/definitions/candidateProfessionalExperience'
+          description: 'Experiência profissional do candidato.'
+        candidatePhoneContact:
+          type: array
+          items:
+            $ref: '#/definitions/candidatePhoneContact'
+          description: 'Telefones de contato.'
+        employee:
+          $ref: '#/definitions/employee'
+        candidateType:
+          $ref: '#/definitions/candidateType'
+        candidateRg:
+          $ref: '#/definitions/candidateRg'
+        placeOfBirth:
+          type: string
+          description: 'Local de nascimento.'
+        nationality:
+          type: string
+          description: 'Nacionalidade.'
+        typeRace:
+          $ref: '#/definitions/raceType'
+        updatedAt:
+          type: string
+          description: 'Data da última alteração do currículo.'
+          format: "date-time"
+        candidateAnnotations:
+          type: array
+          items:
+            $ref: '#/definitions/candidateAnnotation'
+          description: 'Comentários.'
+        candidateMessage:
+          type: array
+          items:
+            $ref: '#/definitions/candidateMessage'
+          description: 'Mensagens.'
+        externalOrigin:
+          type: boolean
+          description: 'Indica se a fonte dos dados é externa, ou seja, considerado como sendo um currículo.&#10;Esta informação será utilizada para contabilizar a quantidade de currículos no Analytics do módulo,&#10;uma vez que, no Gestão de Recrutamento e Seleção 2019, os currículos cadastrados via Portal de Candidatos&#10;(candidatos externos) e os colaboradores (candidatos internos) são armazenados na mesma tabela.&#10;'
+        candidateNis:
+          $ref: '#/definitions/candidateNis'
+        grantedDataAccess:
+          type: boolean
+          description: 'Indica se o candidato concedeu acesso aos dados.&#10;Este campo irá armazenar a última ação efetuada pelo candidato no sentido de indicar se o acesso&#10;está liberado ou não. Caso o candidato faça o aceite e revogação várias vezes, o histórico ficará&#10;armazenado, porém, aqui, só estará a última ação.&#10;'
+        candidateIndication:
+          type: array
+          items:
+            $ref: '#/definitions/candidateIndication'
+          description: 'Indicações do candidato.'
+        genericDocumentType:
+          $ref: '#/definitions/colombianIdentificationDocumentType'
+        genericDocumentNumber:
+          type: string
+          description: 'Número do documento do candidato (para usuários colombianos).'
+        newPortalId:
+          type: string
+          description: ''
+          format: "uuid"
+        position:
+          type: string
+          description: 'Apresentação do candidato - Seu cargo.'
+        candidatePreferredWorkModel:
+          type: array
+          items:
+            $ref: '#/definitions/candidatePreferredWorkModel'
+          description: 'Modelos de trabalho preferenciais.'
+        candidateAttachment:
+          type: array
+          items:
+            $ref: '#/definitions/candidateAttachment'
+          description: 'Anexos do candidato.'
+        candidateAffiliation:
+          type: array
+          items:
+            $ref: '#/definitions/candidateAffiliation'
+          description: 'Filiação 1 do candidato.'
+        candidateRne:
+          $ref: '#/definitions/candidateRne'
+        candidateCtps:
+          $ref: '#/definitions/candidateCtps'
+        candidateProfessionalRegistration:
+          $ref: '#/definitions/candidateProfessionalRegistration'
+        candidateCnh:
+          $ref: '#/definitions/candidateCnh'
+        candidateMilitaryRegistration:
+          $ref: '#/definitions/candidateMilitaryRegistration'
+        candidatePassport:
+          $ref: '#/definitions/candidatePassport'
+        candidateAccessibility:
+          $ref: '#/definitions/candidateAccessibility'
+        candidateDiversity:
+          $ref: '#/definitions/candidateDiversity'
+        candidateInfoSharing:
+          $ref: '#/definitions/candidateInfoSharing'
+        candidateAchievements:
+          type: array
+          items:
+            $ref: '#/definitions/candidateAchievements'
+          description: 'Conquistas do candidato - Cursos, certificações e premiações.'
+        nameType:
+          $ref: '#/definitions/nameType'
+        resumeContents:
+          type: array
+          items:
+            $ref: '#/definitions/candidateResumeContent'
+          description: 'Informações curriculares do candidato em formato texto'
+        resumeEmbeddings:
+          type: array
+          items:
+            $ref: '#/definitions/candidateResumeEmbedding'
+          description: 'Informações curriculares do candidato vetorizada para pesquisa no banco de talentos'
+        resumeTokens:
+          type: array
+          items:
+            $ref: '#/definitions/candidateResumeToken'
+          description: 'Informações curriculares do candidato tokenizadas para pesquisa no banco de talentos'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  attachment:
+    type: object
+    required:
+      - name
+      - idBlobService
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome do anexo.'
+        idBlobService:
+          type: string
+          description: 'Identificador do arquivo no blob service.'
+        locationURI:
+          type: string
+          description: 'Localização do anexo'
+        candidateAnnotations:
+          type: array
+          items:
+            $ref: '#/definitions/candidateAnnotation'
+          description: 'Anotações de candidatos'
+        fileSize:
+          type: integer
+          description: 'Tamanho do arquivo'
+        version:
+          type: string
+          description: 'Versão do objeto no blobservice'
+        expiredAt:
+          type: string
+          description: 'Data e hora de expiração do anexo'
+          format: "date-time"
+        resourceURI:
+          type: string
+          description: 'URI do recurso do anexo'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateAnnotation:
+    type: object
+    required:
+      - candidate
+      - type
+      - reporter
+      - annotation
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        type:
+          $ref: '#/definitions/candidateAnnotationType'
+        reporter:
+          $ref: '#/definitions/employee'
+        annotation:
+          type: string
+          description: 'Comentário.'
+        attachments:
+          type: array
+          items:
+            $ref: '#/definitions/attachment'
+          description: 'Anexos'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  employee:
+    type: object
+    required:
+      - externalId
+      - jobPosition
+      - department
+      - employer
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        hiredate:
+          type: string
+          description: 'Data de contratação.'
+          format: "date"
+        dismissalDate:
+          type: string
+          description: 'Data de demissão.'
+          format: "date"
+        person:
+          $ref: '#/definitions/person'
+        jobPosition:
+          $ref: '#/definitions/jobPosition'
+        department:
+          $ref: '#/definitions/department'
+        employer:
+          $ref: '#/definitions/company'
+        registerNumber:
+          type: integer
+          description: 'Número do contrato do colaborador.'
+        workstation:
+          type: array
+          items:
+            $ref: '#/definitions/workstation'
+          description: 'Posto de trabalho.'
+        externalCandidateId:
+          type: string
+          description: ''
+          format: "uuid"
+        workshift:
+          $ref: '#/definitions/workshift'
+        costcenter:
+          $ref: '#/definitions/costCenter'
+        contracttype:
+          $ref: '#/definitions/employmentContractType'
+        excluded:
+          type: boolean
+          description: 'Colaborador Excluído'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  person:
+    type: object
+    required:
+      - externalId
+      - username
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        username:
+          type: string
+          description: 'Username (HCM)'
+        typeGender:
+          $ref: '#/definitions/genderType'
+        birthday:
+          type: string
+          description: 'Data de nascimento.'
+          format: "date"
+        cpf:
+          type: string
+          description: 'CPF.'
+        typeMaritalStatus:
+          $ref: '#/definitions/maritalStatus'
+        professionalSummary:
+          type: string
+          description: 'Resumo profissional.'
+        rg:
+          type: string
+          description: 'RG.'
+        placeOfBirth:
+          type: string
+          description: 'Local de nascimento.'
+        nationality:
+          type: string
+          description: 'Nacionalidade.'
+        typeRace:
+          $ref: '#/definitions/raceType'
+        voteRegistration:
+          $ref: '#/definitions/voteRegistration'
+        photoThumbnail:
+          type: string
+          description: 'Miniatura da foto do colaborador originária do HCM.'
+        userAccounts:
+          type: array
+          items:
+            $ref: '#/definitions/userAccount'
+          description: 'Usuários'
+        photoAttachment:
+          type: string
+          description: 'Armazena o externalId da tabela attachment do registro que contém a foto da pessoa. Essa coluna é usada exclusivamente na integração com o HRIS'
+        ethnicity:
+          $ref: '#/definitions/ethnicity'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  voteRegistration:
+    type: object
+    required:
+      - externalId
+      - number
+      - zone
+      - section
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        person:
+          $ref: '#/definitions/person'
+        number:
+          type: string
+          description: 'número'
+        zone:
+          type: string
+          description: 'Zona'
+        section:
+          type: string
+          description: 'Seção'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  userAccount:
+    type: object
+    required:
+      - externalId
+      - person
+      - username
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        person:
+          $ref: '#/definitions/person'
+        username:
+          type: string
+          description: 'Nome de usuário'
+        userDomain:
+          type: string
+          description: 'Dominio do usuário'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  ethnicity:
+    type: object
+    required:
+      - externalId
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        code:
+          type: integer
+          description: 'Código.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  jobPosition:
+    type: object
+    required:
+      - externalId
+      - name
+      - jobPositionStructure
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        jobPositionStructure:
+          type: string
+          description: 'Identificador da estrutura de cargos.'
+        code:
+          type: string
+          description: 'Código.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  department:
+    type: object
+    required:
+      - externalId
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        code:
+          type: string
+          description: 'Código.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  company:
+    type: object
+    required:
+      - externalId
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Razão social.'
+        tradingName:
+          type: string
+          description: 'Nome fantasia.'
+        headOffice:
+          $ref: '#/definitions/company'
+        code:
+          type: integer
+          description: 'Código.'
+        cnpj:
+          type: string
+          description: 'Cnpj da empresa'
+        subscriptionType:
+          type: string
+          description: 'Tipo de documento da empresa'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  workstation:
+    type: object
+    required:
+      - externalId
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        employee:
+          $ref: '#/definitions/employee'
+        workstationGroup:
+          $ref: '#/definitions/workstationGroup'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  workstationGroup:
+    type: object
+    required:
+      - externalId
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        code:
+          type: string
+          description: 'Código.'
+        workstationGroupStructure:
+          type: string
+          description: 'Identificador da estrutura de cargos.'
+        vacancyTemplate:
+          $ref: '#/definitions/vacancyTemplate'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyTemplate:
+    type: object
+    required:
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        name:
+          type: string
+          description: 'Nome.'
+        descriptionFileId:
+          type: string
+          description: 'FileId referente a descrição no blobService'
+        title:
+          type: string
+          description: 'Título.'
+        useDefaultStatusReport:
+          type: boolean
+          description: 'Identificador que valida se o template utiliza o status report padrão do sistema'
+        justification:
+          type: string
+          description: 'Justificativa.'
+        limitDays:
+          type: integer
+          description: 'Limite em dias para finalizar a vaga.'
+        hiringRegime:
+          type: string
+          description: 'Vínculo trabalhista.'
+        jobModel:
+          type: string
+          description: 'Modelo de trabalho.'
+        experience:
+          type: string
+          description: 'Nível de experiência.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  workshift:
+    type: object
+    required:
+      - externalId
+      - description
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        description:
+          type: string
+          description: 'Descrição.'
+        shift:
+          type: integer
+          description: 'Turno.'
+        code:
+          type: integer
+          description: 'Código.'
+        excluded:
+          type: boolean
+          description: 'Representa se a escala foi excluída na G5.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  costCenter:
+    type: object
+    required:
+      - externalId
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        code:
+          type: string
+          description: 'Código.'
+        company:
+          $ref: '#/definitions/company'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateAddress:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidates:
+          type: array
+          items:
+            $ref: '#/definitions/candidate'
+          description: 'Candidato'
+        country:
+          type: string
+          description: 'País.'
+        state:
+          type: string
+          description: 'Estado.'
+        stateAbbreviation:
+          type: string
+          description: 'Estado.'
+        city:
+          type: string
+          description: 'Cidade.'
+        neighborhood:
+          type: string
+          description: 'Bairro.'
+        address:
+          type: string
+          description: 'Endereço'
+        number:
+          type: string
+          description: 'Número.'
+        additional:
+          type: string
+          description: 'Complemento.'
+        postalCode:
+          type: string
+          description: 'Código postal.'
+        administrativeRegion:
+          type: string
+          description: 'Região administrativa.'
+        updateDate:
+          type: string
+          description: 'Data da alteração'
+          format: "date"
+        colombiaAddressAreaType:
+          $ref: '#/definitions/colombiaAddressAreaType'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateVoteRegistration:
+    type: object
+    required:
+      - candidate
+      - number
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        number:
+          type: string
+          description: 'Número.'
+        zone:
+          type: string
+          description: 'Zona.'
+        section:
+          type: string
+          description: 'Seção.'
+        city:
+          type: string
+          description: 'Cidade.'
+        state:
+          type: string
+          description: 'Estado.'
+        issueDate:
+          type: string
+          description: 'Data de Emissão.'
+          format: "date"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateDisability:
+    type: object
+    required:
+      - candidate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        typeDisability:
+          $ref: '#/definitions/disabilityType'
+        cid:
+          type: string
+          description: 'CID Correspondente.'
+        description:
+          type: string
+          description: 'Descrição da deficiência'
+        certifyingInstitution:
+          type: string
+          description: 'Institución certificadora'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateSocialNetwork:
+    type: object
+    required:
+      - candidate
+      - typeSocialNetwork
+      - profile
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        typeSocialNetwork:
+          $ref: '#/definitions/socialNetworkType'
+        profile:
+          type: string
+          description: 'Perfil.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateAbility:
+    type: object
+    required:
+      - candidate
+      - description
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        description:
+          type: string
+          description: 'Descrição.'
+        highlight:
+          type: boolean
+          description: 'Destacar habilidade no Banco de Talentos?'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateEducation:
+    type: object
+    required:
+      - candidate
+      - courseName
+      - typeSituation
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        courseName:
+          type: string
+          description: 'Nome do curso.'
+        institutionName:
+          type: string
+          description: 'Instituição.'
+        startDate:
+          type: string
+          description: 'Data de início.'
+          format: "date"
+        endDate:
+          type: string
+          description: 'Data de conclusão.'
+          format: "date"
+        conclusionYear:
+          type: integer
+          description: 'Ano de conclusão.'
+        typeSituation:
+          $ref: '#/definitions/situationType'
+        typeEducationLevel:
+          $ref: '#/definitions/educationLevel'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateKnowledge:
+    type: object
+    required:
+      - candidate
+      - description
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Id externo do objeto'
+        candidate:
+          $ref: '#/definitions/candidate'
+        description:
+          type: string
+          description: 'Descrição.'
+        knowledgeLevel:
+          $ref: '#/definitions/knowledgeLevel'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateLanguage:
+    type: object
+    required:
+      - candidate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Id externo do objeto'
+        candidate:
+          $ref: '#/definitions/candidate'
+        language:
+          type: string
+          description: 'Idioma'
+        typeLanguage:
+          type: string
+          description: 'Tipo do idioma (NPC)'
+        typeProficiency:
+          $ref: '#/definitions/proficiencyType'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatePersonalInterest:
+    type: object
+    required:
+      - candidate
+      - interest
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        interest:
+          type: string
+          description: 'Interesse.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatePositionSought:
+    type: object
+    required:
+      - candidate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Id externo do objeto'
+        candidate:
+          $ref: '#/definitions/candidate'
+        intendedArea:
+          type: string
+          description: 'Área de interesse.'
+        intendedJob:
+          type: string
+          description: 'Cargo de interesse.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateProfessionalExperience:
+    type: object
+    required:
+      - candidate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        company:
+          $ref: '#/definitions/company'
+        companyName:
+          type: string
+          description: 'Nome da Empresa.'
+        jobPosition:
+          $ref: '#/definitions/jobPosition'
+        jobPositionName:
+          type: string
+          description: 'Nome do cargo.'
+        address:
+          type: string
+          description: 'Endereço da empresa.'
+        description:
+          type: string
+          description: 'Descrição.'
+        startDate:
+          type: string
+          description: 'Início.'
+          format: "date"
+        endDate:
+          type: string
+          description: 'Término.'
+          format: "date"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatePhoneContact:
+    type: object
+    required:
+      - candidate
+      - number
+      - type
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        candidate:
+          $ref: '#/definitions/candidate'
+        countryCode:
+          type: integer
+          description: 'Código do país.'
+        localCode:
+          type: integer
+          description: 'Código de área.'
+        number:
+          type: string
+          description: 'Número.'
+        extension:
+          type: string
+          description: 'Ramal.'
+        type:
+          $ref: '#/definitions/phoneType'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateRg:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        number:
+          type: string
+          description: 'Número do documento'
+        issuer:
+          type: string
+          description: 'Órgão emissor'
+        issuerState:
+          $ref: '#/definitions/brazilianState'
+        issueDate:
+          type: string
+          description: 'Data de expedição'
+          format: "date"
+        externalId:
+          type: string
+          description: 'Identificador único na base do HCM'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateMessage:
+    type: object
+    required:
+      - candidate
+      - message
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        settingsMessages:
+          $ref: '#/definitions/settingsMessages'
+        message:
+          type: string
+          description: 'Mensagem.'
+        attachments:
+          type: array
+          items:
+            $ref: '#/definitions/attachment'
+          description: 'Anexos'
+        statusReport:
+          $ref: '#/definitions/statusReport'
+        notificationType:
+          $ref: '#/definitions/notificationType'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  settingsMessages:
+    type: object
+    required:
+      - name
+      - message
+      - statusMessage
+      - typeSent
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        name:
+          type: string
+          description: 'Nome'
+        message:
+          type: string
+          description: 'Mensagem'
+        statusMessage:
+          $ref: '#/definitions/statusMessageType'
+        candidateMessage:
+          type: array
+          items:
+            $ref: '#/definitions/candidateMessage'
+          description: 'Mensagens'
+        typeSent:
+          $ref: '#/definitions/typeSent'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  statusReport:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        settingsStage:
+          $ref: '#/definitions/settingsStage'
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        typeAction:
+          type: string
+          description: 'Tipo de ação vinculado ao cadastro do status report'
+        settingsMessages:
+          $ref: '#/definitions/settingsMessages'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateNis:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        number:
+          type: string
+          description: 'Número NIS'
+        issueDate:
+          type: string
+          description: 'Data de registro'
+          format: "date"
+        externalId:
+          type: string
+          description: 'Identificador no HCM'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateIndication:
+    type: object
+    required:
+      - candidate
+      - indication
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        indication:
+          type: string
+          description: 'Nome da pessoa que realizou a indicação.'
+        comment:
+          type: string
+          description: 'Comentários sobre a indicação.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatePreferredWorkModel:
+    type: object
+    required:
+      - candidate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        preferredWorkModel:
+          $ref: '#/definitions/preferredWorkModel'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateAttachment:
+    type: object
+    required:
+      - candidate
+      - attachment
+      - type
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        attachment:
+          $ref: '#/definitions/attachment'
+        type:
+          $ref: '#/definitions/attachmentType'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateAffiliation:
+    type: object
+    required:
+      - candidate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        degreeKinship:
+          $ref: '#/definitions/degreeKinship'
+        name:
+          type: string
+          description: 'Nome.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateRne:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        number:
+          type: string
+          description: 'Número.'
+        classification:
+          $ref: '#/definitions/rneClassification'
+        nacionality:
+          type: string
+          description: 'Nacionalidade'
+        issuer:
+          type: string
+          description: 'Orgão Emissor'
+        entryDate:
+          type: string
+          description: 'Data de entrada'
+          format: "date"
+        expirationDate:
+          type: string
+          description: 'Data de expiração'
+          format: "date"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateCtps:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        serialNumber:
+          type: string
+          description: 'Número de série.'
+        series:
+          type: string
+          description: 'Série.'
+        pisPasep:
+          type: string
+          description: 'PIS/PASEP'
+        federativeUnity:
+          $ref: '#/definitions/brazilianState'
+        issueDate:
+          type: string
+          description: 'Data de emissão'
+          format: "date"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateProfessionalRegistration:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        workRecordClass:
+          $ref: '#/definitions/workRecordClass'
+        number:
+          type: string
+          description: 'Número registro.'
+        state:
+          $ref: '#/definitions/brazilianState'
+        issueDate:
+          type: string
+          description: 'Data de emissão'
+          format: "date"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateCnh:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        number:
+          type: string
+          description: 'Número registro.'
+        category:
+          type: string
+          description: 'Categoria'
+        firstCnhDate:
+          type: string
+          description: 'Data da 1ª habilitação'
+          format: "date"
+        expirationDate:
+          type: string
+          description: 'Data de expiração'
+          format: "date"
+        issuer:
+          type: string
+          description: 'Emisor'
+        driverRestrictions:
+          type: string
+          description: 'Restricciones del conductor'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateMilitaryRegistration:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        reservistCertificateNumber:
+          type: string
+          description: 'Número certificado de reservista.'
+        dischargeDate:
+          type: string
+          description: 'Data dispensa'
+          format: "date"
+        colombianMilitaryClass:
+          $ref: '#/definitions/colombianMilitaryClassType'
+        district:
+          type: string
+          description: 'Distrito'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatePassport:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        number:
+          type: string
+          description: 'Número'
+        country:
+          type: string
+          description: 'País'
+        expirationDate:
+          type: string
+          description: 'Data de validade'
+          format: "date"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateAccessibility:
+    type: object
+    required:
+      - rehabilitated
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        cid:
+          type: string
+          description: 'CID Correspondente.'
+        description:
+          type: string
+          description: 'Descrição da necessidade'
+        rehabilitated:
+          type: boolean
+          description: 'Reabilitado (INSS)'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateDiversity:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        preferredPronoun:
+          $ref: '#/definitions/pronounType'
+        genderIdentity:
+          $ref: '#/definitions/genderIdentity'
+        sexualOrientation:
+          $ref: '#/definitions/sexualOrientation'
+        race:
+          $ref: '#/definitions/raceType'
+        birthplace:
+          $ref: '#/definitions/birthplace'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  birthplace:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        city:
+          type: string
+          description: 'Cidade de nascimento'
+        province:
+          type: string
+          description: 'Estado de nascimento'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateInfoSharing:
+    type: object
+    required:
+      - sharingInfoAccessibility
+      - sharingInfoDiversity
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        sharingInfoAccessibility:
+          type: boolean
+          description: 'Compartilhar acessibilidade'
+        sharingInfoDiversity:
+          type: boolean
+          description: 'Compartilhar diversidade'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateAchievements:
+    type: object
+    required:
+      - candidate
+      - title
+      - description
+      - achievementsType
+      - startDate
+      - endDate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        title:
+          type: string
+          description: 'Título'
+        description:
+          type: string
+          description: 'Descrição'
+        achievementsType:
+          $ref: '#/definitions/achievementsType'
+        startDate:
+          type: string
+          description: 'Data de início'
+          format: "date"
+        endDate:
+          type: string
+          description: 'Data final'
+          format: "date"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateResumeContent:
+    type: object
+    required:
+      - candidate
+      - version
+      - content
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        version:
+          type: string
+          description: 'Controle de versão das informações curriculares'
+        content:
+          type: string
+          description: 'Informações curriculares do candidato em formato texto'
+        tokens:
+          type: array
+          items:
+            $ref: '#/definitions/candidateResumeToken'
+          description: 'Informações curriculares do candidato tokenizada'
+        embeddings:
+          type: array
+          items:
+            $ref: '#/definitions/candidateResumeEmbedding'
+          description: 'Informações curriculares do candidato vetorizada'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateResumeToken:
+    type: object
+    required:
+      - candidate
+      - resume
+      - version
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        resume:
+          $ref: '#/definitions/candidateResumeContent'
+        version:
+          type: string
+          description: 'Controle de versão das informações curriculares'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidateResumeEmbedding:
+    type: object
+    required:
+      - candidate
+      - resume
+      - version
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        candidate:
+          $ref: '#/definitions/candidate'
+        resume:
+          $ref: '#/definitions/candidateResumeContent'
+        version:
+          type: string
+          description: 'Controle de versão das informações curriculares'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  attendant:
+    type: object
+    required:
+      - externalId
+      - name
+      - code
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        code:
+          type: string
+          description: 'Código.'
+        attendantType:
+          $ref: '#/definitions/attendantType'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  recruitmentProcessRequirementsMet:
+    type: object
+    required:
+      - fulfilledSelectedRequirements
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        fulfilledSelectedRequirements:
+          type: array
+          items:
+            type: string
+          description: 'Requisitos selecionados cumpridos.'
+        recruitmentProcess:
+          $ref: '#/definitions/recruitmentProcess'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  recruitmentProcessPreInterviewAnswer:
+    type: object
+    required:
+      - question
+      - answer
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        question:
+          $ref: '#/definitions/vacancyPreInterview'
+        recruitmentProcess:
+          $ref: '#/definitions/recruitmentProcess'
+        answer:
+          type: string
+          description: 'Resposta'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyPreInterview:
+    type: object
+    required:
+      - questionType
+      - question
+      - sequence
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        questionType:
+          $ref: '#/definitions/typeQuestion'
+        question:
+          type: string
+          description: 'Pergunta'
+        required:
+          type: boolean
+          description: 'Obrigatória'
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        sequence:
+          type: integer
+          description: 'Sequência da pergunta'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  employmentRelationship:
+    type: object
+    required:
+      - externalId
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Identificador único externo.'
+        name:
+          type: string
+          description: 'Nome.'
+        code:
+          type: integer
+          description: 'Código.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyKeywordConfiguration:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        trajectorySession:
+          type: boolean
+          description: 'Seção de trajetória profissional.'
+        professionalExperienceSession:
+          type: boolean
+          description: 'Seção de histórico profissional.'
+        educationSession:
+          type: boolean
+          description: 'Seção de formação acadêmica.'
+        languageSession:
+          type: boolean
+          description: 'Seção de idiomas.'
+        competencySession:
+          type: boolean
+          description: 'Seção de conhecimentos e habilidades.'
+        positionSoughtSession:
+          type: boolean
+          description: 'Seção de cargos e áreas desejadas.'
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyPublication:
+    type: object
+    required:
+      - publication
+      - gmt
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        publication:
+          type: string
+          description: 'Texto da publicação.'
+        internalPublish:
+          type: boolean
+          description: 'Publica internamente.'
+        highlight:
+          type: boolean
+          description: 'Indicador de destaque.'
+        internalStartDate:
+          type: string
+          description: 'Data de início da publicação interna.'
+          format: "date"
+        internalEndDate:
+          type: string
+          description: 'Data final da publicação interna.'
+          format: "date"
+        externalPublish:
+          type: boolean
+          description: 'Publica externamente.'
+        externalStartDate:
+          type: string
+          description: 'Data de início da publicação externa'
+          format: "date"
+        externalEndDate:
+          type: string
+          description: 'Data final da publicação externa.'
+          format: "date"
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        fileId:
+          type: string
+          description: 'Identificador do arquivo com o texto da publicação no BlobService.'
+        version:
+          type: string
+          description: 'Versão do identificador do arquivo com o texto da publicação no BlobService.'
+        locationURI:
+          type: string
+          description: 'URL com o link do arquivo que contém o texto da publicação no BlobService.'
+        policyCriterion:
+          type: string
+          description: 'Critérios da política'
+        additionalInfo:
+          type: string
+          description: 'Informações adicionais apresentadas na publicação das vagas internas/externas'
+        gmt:
+          type: string
+          description: 'Fuso horário em que a vaga será publicada, aceita os seguintes valores: America/Sao_Paulo, America/Noronha, America/Manaus, America/Rio_Branco'
+        vacancyPublicationJobboards:
+          type: array
+          items:
+            $ref: '#/definitions/vacancyPublicationJobboards'
+          description: 'Plataformas de emprego que estão integradas na publicação'
+        originalNpcPublicationDate:
+          type: string
+          description: 'Data da publicação orignal da Vaga no NPC'
+          format: "date"
+        candidatureSettingsGroups:
+          type: array
+          items:
+            $ref: '#/definitions/candidatureSettingsGroup'
+          description: 'Grupos das configurações da candidatura da vaga'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyPublicationJobboards:
+    type: object
+    required:
+      - jobBoardType
+      - startDate
+      - endDate
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        jobBoardType:
+          $ref: '#/definitions/jobBoardType'
+        startDate:
+          type: string
+          description: 'Data de inicio'
+          format: "date"
+        endDate:
+          type: string
+          description: 'Data de término'
+          format: "date"
+        description:
+          type: string
+          description: 'Descrição'
+        vacancyPublication:
+          $ref: '#/definitions/vacancyPublication'
+        status:
+          type: string
+          description: 'Status da publicação da vaga no jobboard'
+        errorMessage:
+          type: string
+          description: 'Mensagem de erro na publicação da vaga'
+        detail:
+          type: string
+          description: 'Detalhes da publicação nos Jobboards'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatureSettingsGroup:
+    type: object
+    required:
+      - enabled
+      - settingsSubgroups
+      - externalId
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        vacancyPublication:
+          $ref: '#/definitions/vacancyPublication'
+        name:
+          type: string
+          description: 'Nome do grupo'
+        enabled:
+          type: boolean
+          description: 'Habilitado'
+        settingsSubgroups:
+          type: array
+          items:
+            $ref: '#/definitions/candidatureSettingsSubgroup'
+          description: 'Lista de configurações dos subgrupos'
+        externalId:
+          type: string
+          description: ''
+          format: "uuid"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatureSettingsSubgroup:
+    type: object
+    required:
+      - enabled
+      - settingsFields
+      - externalId
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        settingsGroup:
+          $ref: '#/definitions/candidatureSettingsGroup'
+        name:
+          type: string
+          description: 'Nome do subgrupo'
+        enabled:
+          type: boolean
+          description: 'Habilitado'
+        settingsFields:
+          type: array
+          items:
+            $ref: '#/definitions/candidatureSettingsField'
+          description: 'Lista de configurações dos campos'
+        externalId:
+          type: string
+          description: ''
+          format: "uuid"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  candidatureSettingsField:
+    type: object
+    required:
+      - enabled
+      - required
+      - externalId
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        settingsSubgroup:
+          $ref: '#/definitions/candidatureSettingsSubgroup'
+        name:
+          type: string
+          description: 'Nome do campo'
+        enabled:
+          type: boolean
+          description: 'Habilitado'
+        required:
+          type: boolean
+          description: 'Obrigatório'
+        externalId:
+          type: string
+          description: ''
+          format: "uuid"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyKeyword:
+    type: object
+    required:
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        name:
+          type: string
+          description: 'Descrição do posto.'
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  function:
+    type: object
+    required:
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        internalId:
+          type: string
+          description: ''
+          format: "uuid"
+        externalId:
+          type: string
+          description: 'Id da função no serviço terceiro (externo).'
+        name:
+          type: string
+          description: 'Descrição da função.'
+        tests:
+          type: array
+          items:
+            $ref: '#/definitions/testDto'
+          description: 'Testes da função.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  testDto:
+    type: object
+    properties:
+        id:
+          type: string
+          description: 'Identificador único do teste.'
+        name:
+          type: string
+          description: 'Nome do teste.'
+        type:
+          type: string
+          description: 'Tipo do teste.'
+
+  vacancySettingsTest:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        templateType:
+          $ref: '#/definitions/templateType'
+        settingsMessages:
+          $ref: '#/definitions/settingsMessages'
+        message:
+          type: string
+          description: 'Mensagem a ser enviada.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyRequirements:
+    type: object
+    required:
+      - requirements
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        requirements:
+          type: string
+          description: 'Requisitos'
+          format: "byte"
+        autoScreeningThreshold:
+          type: integer
+          description: 'Limite de requisitos para triagem automática'
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  stageModelGroupSettings:
+    type: object
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        stageModelGroup:
+          $ref: '#/definitions/stageModelGroup'
+        settingsStageModel:
+          $ref: '#/definitions/settingsStageModel'
+        isDefaultInGroup:
+          type: boolean
+          description: 'Indica se é o modelo padrão do grupo.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  stageModelGroup:
+    type: object
+    required:
+      - name
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        name:
+          type: string
+          description: 'Nome do grupo (ex: TI - Desenvolvedores).'
+        description:
+          type: string
+          description: 'Descrição detalhada.'
+        isDefault:
+          type: boolean
+          description: 'Indica se é o grupo padrão (fallback).'
+        isActive:
+          type: boolean
+          description: 'Indica se o grupo está ativo.'
+        criteria:
+          type: array
+          items:
+            $ref: '#/definitions/stageModelGroupCriterion'
+          description: 'Critérios de atribuição do grupo.'
+        stageModelSettings:
+          type: array
+          items:
+            $ref: '#/definitions/stageModelGroupSettings'
+          description: 'Associações com modelos de etapas.'
+        groupHistory:
+          type: array
+          items:
+            $ref: '#/definitions/stageModelGroupHistory'
+          description: 'Histórico de alterações do grupo.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  stageModelGroupCriterion:
+    type: object
+    required:
+      - criterionType
+      - criterionOperator
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        stageModelGroup:
+          $ref: '#/definitions/stageModelGroup'
+        criterionType:
+          type: string
+          description: 'Tipo do critério.'
+        criterionOperator:
+          type: string
+          description: 'Operador do critério.'
+        values:
+          type: array
+          items:
+            $ref: '#/definitions/stageModelGroupCriterionValue'
+          description: 'Valores do critério.'
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  stageModelGroupCriterionValue:
+    type: object
+    required:
+      - valueType
+      - value
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        stageModelGroupCriterion:
+          $ref: '#/definitions/stageModelGroupCriterion'
+        valueType:
+          type: string
+          description: 'Tipo do valor.'
+        value:
+          type: string
+          description: 'Valor do critério (Ex: ID de uma entidade).'
+        metaData:
+          type: string
+          description: 'Metadados adicionais como nome, código, etc (JSON).'
+          format: "byte"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  stageModelGroupHistory:
+    type: object
+    required:
+      - actionType
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        stageModelGroup:
+          $ref: '#/definitions/stageModelGroup'
+        actionType:
+          type: string
+          description: 'Tipo da ação.'
+        oldValues:
+          type: string
+          description: 'Valores anteriores (JSON).'
+          format: "byte"
+        newValues:
+          type: string
+          description: 'Novos valores (JSON).'
+          format: "byte"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  vacancyStageModelHistory:
+    type: object
+    required:
+      - vacancy
+      - settingsStageModel
+      - assignmentReason
+      - assignmentCriteriaSnapshot
+    properties:
+        id:
+          type: string
+          description: ''
+          format: "uuid"
+        vacancy:
+          $ref: '#/definitions/vacancy'
+        settingsStageModel:
+          $ref: '#/definitions/settingsStageModel'
+        stageModelGroup:
+          $ref: '#/definitions/stageModelGroup'
+        assignmentReason:
+          type: string
+          description: 'Motivo da atribuição.'
+        assignmentCriteriaSnapshot:
+          type: string
+          description: 'Snapshot dos critérios avaliados (JSON).'
+          format: "byte"
+        createdBy:
+          type: string
+          description: ''
+        createdDate:
+          type: string
+          description: ''
+          format: "date-time"
+        lastModifiedBy:
+          type: string
+          description: ''
+        lastModifiedDate:
+          type: string
+          description: ''
+          format: "date-time"
+
+  genericError:
+    properties:
+      message:
+        type: string
+        description: Messaging describing the error.
+      reason:
+        type: string
+        description: A symbolic code identifying the category of the reason of the error.
+        enum:
+          - BAD_REQUEST
+          - UNAUTHORIZED
+          - PAYMENT_REQUIRED
+          - FORBIDDEN
+          - OBJECT_NOT_FOUND
+          - REQUEST_TIMEOUT
+          - GONE
+          - UNPROCESSABLE
+          - INTERNAL_ERROR
+          - NOT_IMPLEMENTED
+          - SERVICE_UNAVAILABLE
+          - INSUFFICIENT_STORAGE
