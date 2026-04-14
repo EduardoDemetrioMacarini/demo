@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas - ControlPro</title>
+    <!-- Boxicons for Modern Vector Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <!-- Chart.js for Demo Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <style>
+        .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .kpi-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 16px; 
+            padding: 1.5rem; 
+            transition: 0.3s;
+        }
+        .kpi-card:hover { transform: translateY(-5px); border-color: #0ea5e9; }
+        .kpi-title { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+        .kpi-val { font-size: 1.6rem; font-weight: 700; color: #fff; }
+        .kpi-sub { font-size: 0.8rem; color: #0ea5e9; margin-top: 5px; font-weight: 500; }
+
+        .dashboard-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 1.5rem; 
+            margin-bottom: 2rem; 
+        }
+        @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+        .chart-box { 
+            background: rgba(255, 255, 255, 0.03); 
+            border-radius: 16px; 
+            padding: 1.5rem; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+        .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .chart-title { font-size: 1.1rem; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .chart-title i { color: #0ea5e9; font-size: 1.4rem; }
+
+        .filter-badge {
+            background: rgba(14, 165, 233, 0.2);
+            color: #0ea5e9;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #resetFilters {
+            background: #ef444422;
+            color: #ef4444;
+            border: 1px solid #ef444444;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+        #resetFilters:hover { background: #ef4444; color: #fff; }
+
+        .canvas-container { height: 300px; position: relative; }
+    </style>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo.png" width="40" height="40" style="border-radius:6px; flex-shrink:0;">
+                <span class="logo-text">Control<span style="font-weight:300;">Pro</span></span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="home.html"><i class='bx bx-home-alt'></i><span class="menu-text">Página Inicial</span></a></li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-clv')"><i class='bx bx-diamond'></i><span class="menu-text">Visão Executiva</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-clv" style="display:none;">
+                        <li><a href="analytics_clevel.html"><i class='bx bx-pulse'></i>Analytics (Vendas)</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-vendas')"><i class='bx bx-cart'></i><span class="menu-text">Vendas</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-vendas" style="display:none;">
+                        <li><a href="vendas.html" class="active"><i class='bx bx-line-chart'></i>Painel de Vendas</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-fin')"><i class='bx bx-line-chart'></i><span class="menu-text">Financeiro</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-fin" style="display:none;">
+                        <li><a href="financeiro_dre.html"><i class='bx bx-file'></i>DRE e Resumo</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-rh')"><i class='bx bx-briefcase'></i><span class="menu-text">Recursos Humanos</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-rh" style="display:none;">
+                        <li><a href="rh_recrutamento.html"><i class='bx bx-user-plus'></i>Recrutamento</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-dp')"><i class='bx bx-group'></i><span class="menu-text">Departamento Pessoal</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-dp" style="display:none;">
+                        <li><a href="dp_quadro.html"><i class='bx bx-user-pin'></i>Quadro Ativo</a></li>
+                        <li><a href="dp.html"><i class='bx bx-folder'></i>Dossiê do Colaborador</a></li>
+                        <li><a href="vale_alimentacao.html"><i class='bx bx-restaurant'></i>Vale Alimentação</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-ti')"><i class='bx bx-laptop'></i><span class="menu-text">TI / Sistema</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-ti" style="display:none;">
+                        <li><a href="rotinas.html"><i class='bx bx-data'></i>Rotinas</a></li>
+                        <li><a href="conexoes.html"><i class='bx bx-plug'></i>Conexões</a></li>
+                        <li><a href="usuarios.html"><i class='bx bx-user-circle'></i>Usuários</a></li>
+                        <li><a href="grupos.html"><i class='bx bx-shield-alt-2'></i>Grupos</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="index.html" class="logout-btn" onclick="localStorage.removeItem('loggedUsername')">
+                    <i class='bx bx-log-out'></i>
+                    <span class="logout-text">Sair do Sistema</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div style="display: flex; flex-direction: column;">
+                    <h1>Painel Estratégico de Vendas</h1>
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Analise o desempenho comercial em tempo real</p>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <button id="resetFilters" onclick="resetAllFilters()">
+                        <i class='bx bx-undo'></i> Limpar Filtros
+                    </button>
+                    <div class="user-info">
+                        <span id="welcomeUser">Demo</span>
+                        <div class="avatar-circle">D</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- KPIs -->
+                <div class="grid-kpi">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Produto Mais Vendido (Qtd)</div>
+                        <div class="kpi-val" id="kpi-produto">Notebook</div>
+                        <div class="kpi-sub">142 Unidades</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Maior Margem de Lucro</div>
+                        <div class="kpi-val" id="kpi-margem">Serviços Cloud</div>
+                        <div class="kpi-sub" style="color: #4bff7d;">68% de Margem</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Ticket Médio</div>
+                        <div class="kpi-val" id="kpi-ticket">R$ 4.850</div>
+                        <div class="kpi-sub">+8% vs mês anterior</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Faturamento Total (Mês)</div>
+                        <div class="kpi-val" id="kpi-total">R$ 842.000</div>
+                        <div class="kpi-sub">Meta: R$ 900.000</div>
+                    </div>
+                </div>
+
+                <!-- Charts Grid -->
+                <div class="dashboard-grid">
+                    <!-- Comparativo Mensal -->
+                    <div class="chart-box" style="grid-column: span 2;">
+                        <div class="chart-header">
+                            <div class="chart-title"><i class='bx bx-bar-chart-alt-2'></i> Desempenho Mensal (Comparativo Mês a Mês)</div>
+                        </div>
+                        <div class="canvas-container" style="height: 350px;">
+                            <canvas id="chartMensal"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Ranking por Vendedor -->
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <div class="chart-title"><i class='bx bx-medal'></i> Top Vendedores (Ranking)</div>
+                            <div id="filter-vendedor" class="filter-badge" style="display:none;">Filtrado</div>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="chartVendedor"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Ranking por Cidade -->
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <div class="chart-title"><i class='bx bx-map-pin'></i> Distribuição por Cidade</div>
+                            <div id="filter-cidade" class="filter-badge" style="display:none;">Filtrado</div>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="chartCidade"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Grupo de Produtos -->
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <div class="chart-title"><i class='bx bx-package'></i> Vendas por Grupo de Produto</div>
+                            <div id="filter-grupo" class="filter-badge" style="display:none;">Filtrado</div>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="chartGrupo"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Margem por Produto -->
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <div class="chart-title"><i class='bx bx-trending-up'></i> Margem Média por Produto</div>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="chartMargem"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Dados de Demonstração
+        const rawData = [
+            { id: 1, vendedor: "Ana Silva", cidade: "Criciúma", grupo: "Informática", produto: "Notebook Pro", valor: 150000, margem: 0.25, mes: "Jan" },
+            { id: 2, vendedor: "Ana Silva", cidade: "Içara", grupo: "Serviços", produto: "Suporte Técnico", valor: 30000, margem: 0.75, mes: "Fev" },
+            { id: 3, vendedor: "Bruno Gomes", cidade: "Urussanga", grupo: "Informática", produto: "Notebook Gamer", valor: 220000, margem: 0.18, mes: "Jan" },
+            { id: 4, vendedor: "Bruno Gomes", cidade: "Nova Veneza", grupo: "Informática", produto: "Mouse Sem Fio", valor: 15000, margem: 0.45, mes: "Mar" },
+            { id: 5, vendedor: "Carla Souza", cidade: "Treviso", grupo: "Informática", produto: "Notebook Business", valor: 300000, margem: 0.22, mes: "Mar" },
+            { id: 6, vendedor: "Carla Souza", cidade: "Criciúma", grupo: "Serviços", produto: "Cloud Backup", valor: 120000, margem: 0.68, mes: "Fev" },
+            { id: 7, vendedor: "Diego Lima", cidade: "Içara", grupo: "Informática", produto: "Teclado Mecânico", valor: 45000, margem: 0.35, mes: "Jan" },
+            { id: 8, vendedor: "Diego Lima", cidade: "Urussanga", grupo: "Informática", produto: "Monitor 4K", valor: 180000, margem: 0.30, mes: "Mar" },
+            { id: 9, vendedor: "Ana Silva", cidade: "Nova Veneza", grupo: "Informática", produto: "Notebook Pro", valor: 125000, margem: 0.25, mes: "Jan" },
+            { id: 10, vendedor: "Bruno Gomes", cidade: "Treviso", grupo: "Serviços", produto: "Instalação Rede", valor: 110000, margem: 0.60, mes: "Fev" },
+            { id: 11, vendedor: "Carla Souza", cidade: "Criciúma", grupo: "Informática", produto: "Notebook Pro", valor: 210000, margem: 0.25, mes: "Jan" },
+            { id: 12, vendedor: "Diego Lima", cidade: "Criciúma", grupo: "Serviços", produto: "Cloud Backup", valor: 75000, margem: 0.68, mes: "Mar" }
+        ];
+
+        let activeFilters = {
+            vendedor: null,
+            cidade: null,
+            grupo: null
+        };
+
+        let charts = {};
+
+        function initCharts() {
+            Chart.defaults.color = 'rgba(255,255,255,0.7)';
+            Chart.defaults.font.family = 'Inter, sans-serif';
+
+            // Global DataLabels Config
+            Chart.register(ChartDataLabels);
+            Chart.defaults.set('plugins.datalabels', {
+                color: '#FFF',
+                font: { weight: '600', size: 10 },
+                anchor: 'end',
+                align: 'end',
+                offset: 5,
+                display: 'auto',
+                formatter: (value) => {
+                    if (value >= 1000) return 'R$ ' + (value/1000).toFixed(1) + 'k';
+                    return value;
+                }
+            });
+
+            updateDashboard();
+        }
+
+        function filterData() {
+            return rawData.filter(item => {
+                return (!activeFilters.vendedor || item.vendedor === activeFilters.vendedor) &&
+                       (!activeFilters.cidade || item.cidade === activeFilters.cidade) &&
+                       (!activeFilters.grupo || item.grupo === activeFilters.grupo);
+            });
+        }
+
+        function updateDashboard() {
+            const data = filterData();
+            
+            // Update KPIs
+            updateKPIs(data);
+
+            // Update Charts
+            renderChartMensal(data);
+            renderChartVendedor(data);
+            renderChartCidade(data);
+            renderChartGrupo(data);
+            renderChartMargem(rawData); // Margem fixa para comparação total
+
+            // Update UI
+            document.getElementById('resetFilters').style.display = 
+                (activeFilters.vendedor || activeFilters.cidade || activeFilters.grupo) ? 'flex' : 'none';
+            
+            document.getElementById('filter-vendedor').style.display = activeFilters.vendedor ? 'block' : 'none';
+            document.getElementById('filter-cidade').style.display = activeFilters.cidade ? 'block' : 'none';
+            document.getElementById('filter-grupo').style.display = activeFilters.grupo ? 'block' : 'none';
+        }
+
+        function updateKPIs(data) {
+            const totalFaturamento = data.reduce((acc, curr) => acc + curr.valor, 0);
+            const ticketMedio = data.length > 0 ? (totalFaturamento / data.length) : 0;
+            
+            // Produto mais vendido
+            const prodCount = {};
+            data.forEach(d => prodCount[d.produto] = (prodCount[d.produto] || 0) + 1);
+            let topProd = Object.keys(prodCount).reduce((a, b) => prodCount[a] > prodCount[b] ? a : b, "Sem Dados");
+            
+            document.getElementById('kpi-total').textContent = `R$ ${totalFaturamento.toLocaleString('pt-BR')}`;
+            document.getElementById('kpi-ticket').textContent = `R$ ${ticketMedio.toLocaleString('pt-BR', {maximumFractionDigits: 0})}`;
+            document.getElementById('kpi-produto').textContent = topProd;
+            
+            if (activeFilters.vendedor) {
+                document.getElementById('kpi-produto').nextElementSibling.textContent = `${prodCount[topProd] || 0} p/ este vendedor`;
+            } else {
+                document.getElementById('kpi-produto').nextElementSibling.textContent = `${prodCount[topProd] || 0} Unidades Total`;
+            }
+        }
+
+        function renderChartMensal(data) {
+            const meses = ["Jan", "Fev", "Mar"];
+            const faturamentoPorMes = meses.map(m => data.filter(d => d.mes === m).reduce((a, b) => a + b.valor, 0));
+            const projetado = faturamentoPorMes.map(v => v * 1.15); // Exemplo de projeção
+
+            if (charts.mensal) charts.mensal.destroy();
+            
+            charts.mensal = new Chart(document.getElementById('chartMensal'), {
+                type: 'line',
+                data: {
+                    labels: meses,
+                    datasets: [
+                        {
+                            label: 'Realizado (Valor)',
+                            data: faturamentoPorMes,
+                            borderColor: '#0ea5e9',
+                            backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#0ea5e9'
+                        },
+                        {
+                            label: 'Previsão / Meta',
+                            data: projetado,
+                            borderColor: 'rgba(255, 255, 255, 0.3)',
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } },
+                    scales: {
+                        y: { display: false },
+                        x: { grid: { display: false }, border: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderChartVendedor(data) {
+            const vendors = [...new Set(rawData.map(d => d.vendedor))];
+            const values = vendors.map(v => data.filter(d => d.vendedor === v).reduce((a, b) => a + b.valor, 0));
+
+            if (charts.vendedor) charts.vendedor.destroy();
+            
+            charts.vendedor = new Chart(document.getElementById('chartVendedor'), {
+                type: 'bar',
+                data: {
+                    labels: vendors,
+                    datasets: [{
+                        label: 'Vendas por Vendedor',
+                        data: values,
+                        backgroundColor: vendors.map(v => v === activeFilters.vendedor ? '#0ea5e9' : 'rgba(14, 165, 233, 0.4)'),
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (e, items) => {
+                        if (items.length > 0) {
+                            const index = items[0].index;
+                            activeFilters.vendedor = activeFilters.vendedor === vendors[index] ? null : vendors[index];
+                            updateDashboard();
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        x: { display: false },
+                        y: { display: true, border: { display: false }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderChartCidade(data) {
+            const cidades = [...new Set(rawData.map(d => d.cidade))];
+            const values = cidades.map(c => data.filter(d => d.cidade === c).reduce((a, b) => a + b.valor, 0)).filter(v => v > 0);
+            const filteredCidades = cidades.filter((c, i) => data.filter(d => d.cidade === c).reduce((a, b) => a + b.valor, 0) > 0);
+
+            if (charts.cidade) charts.cidade.destroy();
+            
+            charts.cidade = new Chart(document.getElementById('chartCidade'), {
+                type: 'doughnut',
+                data: {
+                    labels: filteredCidades,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['#0ea5e9', '#8b5cf6', '#4bff7d', '#eab308', '#f97316'],
+                        borderWidth: 0,
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (e, items) => {
+                        if (items.length > 0) {
+                            const index = items[0].index;
+                            activeFilters.cidade = activeFilters.cidade === filteredCidades[index] ? null : filteredCidades[index];
+                            updateDashboard();
+                        }
+                    },
+                    plugins: { 
+                        legend: { position: 'right' }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
+        function renderChartGrupo(data) {
+            const grupos = [...new Set(rawData.map(d => d.grupo))];
+            const values = grupos.map(g => data.filter(d => d.grupo === g).reduce((a, b) => a + b.valor, 0));
+
+            if (charts.grupo) charts.grupo.destroy();
+            
+            charts.grupo = new Chart(document.getElementById('chartGrupo'), {
+                type: 'polarArea',
+                data: {
+                    labels: grupos,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['rgba(14, 165, 233, 0.6)', 'rgba(139, 92, 246, 0.6)', 'rgba(75, 255, 125, 0.6)'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (e, items) => {
+                        if (items.length > 0) {
+                            const index = items[0].index;
+                            activeFilters.grupo = activeFilters.grupo === grupos[index] ? null : grupos[index];
+                            updateDashboard();
+                        }
+                    },
+                    scales: { r: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { display: false } } },
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        function renderChartMargem(fullData) {
+            const produtos = [...new Set(fullData.map(d => d.produto))];
+            const margens = produtos.map(p => {
+                const item = fullData.find(d => d.produto === p);
+                return item.margem * 100;
+            });
+
+            if (charts.margem) charts.margem.destroy();
+            
+            charts.margem = new Chart(document.getElementById('chartMargem'), {
+                type: 'bar',
+                data: {
+                    labels: produtos,
+                    datasets: [{
+                        label: '% Margem Média',
+                        data: margens,
+                        backgroundColor: 'rgba(75, 255, 125, 0.5)',
+                        borderColor: '#4bff7d',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        datalabels: {
+                            formatter: (value) => value.toFixed(1) + '%',
+                            anchor: 'center',
+                            align: 'center',
+                            color: '#000',
+                            font: { weight: '700' }
+                        }
+                    },
+                    scales: {
+                        y: { display: false },
+                        x: { ticks: { font: { size: 10 } }, border: { display: false }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function resetAllFilters() {
+            activeFilters = { vendedor: null, cidade: null, grupo: null };
+            updateDashboard();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loggedUser = localStorage.getItem('loggedUsername');
+            if(loggedUser) {
+                document.getElementById('welcomeUser').textContent = loggedUser;
+                document.querySelector('.avatar-circle').textContent = loggedUser.charAt(0).toUpperCase();
+            }
+            initCharts();
+        });
+    </script>
+</body>
+</html>

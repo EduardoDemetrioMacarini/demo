@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_TASK",
-  "summary": "This task list tracks the evaluation and completion of the \"Recursos Humanos\" module and the static file serving configuration. It includes steps to analyze the current state, verify the backend configuration for frontend files, and fulfill the 404 issue. It also includes steps for finishing the HR \"Vagas em Aberto\" drawer and finalized integration for public access.",
-  "updatedAt": "2026-03-24T14:57:59.467750Z"
-}

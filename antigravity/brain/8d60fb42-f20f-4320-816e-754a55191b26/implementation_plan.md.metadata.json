@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plano para integrar a tela de Precificação com o banco Senior (VETORH). Inclui novo endpoint backend GET /api/facilities-jobs que consulta cargos de Facilities e salário base, e refatoração do frontend para carregar o cargo via select e autopreencher o salário base e demais campos com valores padrão editáveis.",
-  "updatedAt": "2026-03-20T17:32:07.154775100Z"
-}

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexões - ControlPro</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .connections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .conn-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .conn-card:hover {
+            border-color: rgba(139,92,246,0.35);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+
+        .conn-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .conn-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .conn-logo.senior { background: linear-gradient(135deg, #1e3a8a, #2563eb); }
+        .conn-logo.totvs  { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+        .conn-logo.generic { background: linear-gradient(135deg, #065f46, #059669); }
+
+        .conn-title { font-size: 1.05rem; font-weight: 600; color: #fff; }
+        .conn-subtitle { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+        .conn-status {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .conn-status.ok      { background: rgba(16,185,129,0.15); color: #10b981; }
+        .conn-status.error   { background: rgba(239,68,68,0.15);  color: #ef4444; }
+        .conn-status.pending { background: rgba(251,191,36,0.15); color: #f59e0b; }
+        .conn-status.unknown { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.4); }
+
+        .conn-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .conn-status.ok .conn-dot { animation: pulse-ok 2s infinite; }
+        @keyframes pulse-ok {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .conn-body { padding: 1.5rem; }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .field-row.full { grid-template-columns: 1fr; }
+
+        .field-group label {
+            display: block;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .field-group input,
+        .field-group select {
+            width: 100%;
+            padding: 9px 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: 'Inter', monospace;
+        }
+
+        .field-group input:focus,
+        .field-group select:focus {
+            border-color: rgba(139,92,246,0.6);
+            box-shadow: 0 0 0 3px rgba(139,92,246,0.1);
+        }
+
+        .field-group input[type="password"] { letter-spacing: 2px; }
+        .field-group input::placeholder { color: rgba(255,255,255,0.25); letter-spacing: 0; }
+
+        .conn-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .btn-test {
+            flex: 1;
+            padding: 9px 16px;
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.4);
+            color: #a78bfa;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            transition: all 0.25s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-test:hover { background: rgba(139,92,246,0.25); border-color: #8b5cf6; color: #fff; }
+
+        .btn-save {
+            flex: 1;
+            padding: 9px 16px;
+            background: linear-gradient(90deg, #0ea5e9, #8b5cf6);
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            transition: opacity 0.25s, transform 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-save:hover { opacity: 0.85; transform: translateY(-1px); }
+
+        .test-log {
+            margin-top: 1rem;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-family: 'Courier New', monospace;
+            display: none;
+            line-height: 1.5;
+        }
+        .test-log.success { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #6ee7b7; display: block; }
+        .test-log.error   { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.2);  color: #fca5a5; display: block; }
+        .test-log.loading { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); color: #fcd34d; display: block; }
+
+        .add-conn-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            padding: 2.5rem;
+            border: 2px dashed rgba(255,255,255,0.1);
+            border-radius: 16px;
+            color: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.25s;
+            background: transparent;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+        .add-conn-btn:hover {
+            border-color: rgba(139,92,246,0.4);
+            color: #a78bfa;
+            background: rgba(139,92,246,0.05);
+        }
+        .add-conn-btn i { font-size: 2.5rem; }
+        .add-conn-btn span { font-size: 0.9rem; font-weight: 500; }
+    </style>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body class="dashboard-body">
+<div class="dashboard-container">
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/logo.png" width="40" height="40" style="border-radius:6px; flex-shrink:0;">
+            <span class="logo-text">Control<span style="font-weight:300;">Pro</span></span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="home.html"><i class='bx bx-home-alt'></i><span class="menu-text">Página Inicial</span></a></li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-clv')"><i class='bx bx-diamond'></i><span class="menu-text">Visão Executiva</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-clv" style="display:none;">
+                    <li><a href="analytics_clevel.html"><i class='bx bx-pulse'></i>Analytics (Vendas)</a></li>
+                </ul>
+            </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-vendas')"><i class='bx bx-cart'></i><span class="menu-text">Vendas</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-vendas" style="display:none;">
+                        <li><a href="vendas.html"><i class='bx bx-line-chart'></i>Painel de Vendas</a></li>
+                    </ul>
+                </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-fin')"><i class='bx bx-line-chart'></i><span class="menu-text">Financeiro</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-fin" style="display:none;">
+                    <li><a href="financeiro_dre.html"><i class='bx bx-file'></i>DRE e Resumo</a></li>
+                </ul>
+            </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-rh')"><i class='bx bx-briefcase'></i><span class="menu-text">Recursos Humanos</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-rh" style="display:none;">
+                    <li><a href="rh_recrutamento.html"><i class='bx bx-user-plus'></i>Recrutamento</a></li>
+                </ul>
+            </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-dp')"><i class='bx bx-group'></i><span class="menu-text">Departamento Pessoal</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-dp" style="display:none;">
+                    <li><a href="dp_quadro.html"><i class='bx bx-user-pin'></i>Quadro Ativo</a></li>
+                    <li><a href="dp.html"><i class='bx bx-folder'></i>Dossiê do Colaborador</a></li>
+                    <li><a href="vale_alimentacao.html"><i class='bx bx-restaurant'></i>Vale Alimentação</a></li>
+                </ul>
+            </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-ti')"><i class='bx bx-laptop'></i><span class="menu-text">TI / Sistema</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-ti" style="display:none;">
+                    <li><a href="rotinas.html"><i class='bx bx-data'></i>Rotinas</a></li>
+                    <li><a href="conexoes.html"><i class='bx bx-plug'></i>Conexões</a></li>
+                    <li><a href="usuarios.html"><i class='bx bx-user-circle'></i>Usuários</a></li>
+                    <li><a href="grupos.html"><i class='bx bx-shield-alt-2'></i>Grupos</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="index.html" class="logout-btn" onclick="localStorage.removeItem('loggedUsername')">
+                <i class='bx bx-log-out'></i>
+                <span class="logout-text">Sair do Sistema</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1>Gerenciamento de <span style="color:#8b5cf6;">Conexões</span></h1>
+            <div class="user-info">
+                <span id="welcomeUser">Carregando...</span>
+                <div class="avatar-circle"></div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <!-- Intro Card -->
+            <div class="glass-card full-width" style="margin-bottom:1.5rem; padding:1.2rem 1.8rem;">
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <i class='bx bx-plug' style="font-size:2rem; color:#8b5cf6;"></i>
+                    <div>
+                        <h3 style="margin:0; font-size:1.05rem;">Conexões de Integração</h3>
+                        <p style="margin:4px 0 0; color:rgba(255,255,255,0.5); font-size:0.85rem;">
+                            Configure aqui as strings de conexão dos sistemas integrados ao BI. Use o botão <b>Testar</b> para validar antes de salvar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connections-grid">
+
+                <!-- ===== SENIOR ===== -->
+                <div class="conn-card" id="card-senior">
+                    <div class="conn-card-header">
+                        <div class="conn-logo senior">
+                            <i class='bx bx-server' style="color:#60a5fa;"></i>
+                        </div>
+                        <div>
+                            <div class="conn-title">Senior Sistemas (VETORH)</div>
+                            <div class="conn-subtitle">SQL Server · ERP RH / Folha de Pagamento</div>
+                        </div>
+                        <div class="conn-status unknown" id="status-senior">
+                            <div class="conn-dot"></div>
+                            <span id="status-label-senior">Não testada</span>
+                        </div>
+                    </div>
+
+                    <div class="conn-body">
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label><i class='bx bx-server'></i> Servidor / Host</label>
+                                <input type="text" id="senior-server" placeholder="Ex: 192.168.1.10" value="">
+                            </div>
+                            <div class="field-group">
+                                <label><i class='bx bx-hash'></i> Porta</label>
+                                <input type="number" id="senior-port" placeholder="1433" value="1433">
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label><i class='bx bx-data'></i> Database</label>
+                                <input type="text" id="senior-db" placeholder="Ex: VETORH" value="">
+                            </div>
+                            <div class="field-group">
+                                <label><i class='bx bx-user-circle'></i> Usuário</label>
+                                <input type="text" id="senior-user" placeholder="Ex: upquery" value="">
+                            </div>
+                        </div>
+                        <div class="field-row full">
+                            <div class="field-group">
+                                <label><i class='bx bx-lock-alt'></i> Senha</label>
+                                <input type="password" id="senior-pass" placeholder="••••••••" value="">
+                            </div>
+                        </div>
+
+                        <div id="log-senior" class="test-log"></div>
+
+                        <div class="conn-actions">
+                            <button class="btn-test" id="btn-test-senior" onclick="testConnection('senior')">
+                                <i class='bx bx-wifi'></i> Testar Conexão
+                            </button>
+                            <button class="btn-save" onclick="saveConnection('senior')">
+                                <i class='bx bx-save'></i> Salvar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ADD NEW (placeholder) ===== -->
+                <button class="add-conn-btn" onclick="alert('Em breve: adicione novas integrações como Totvs, SAP, APIs REST, etc.')">
+                    <i class='bx bx-plus-circle'></i>
+                    <span>Adicionar Nova Conexão</span>
+                    <span style="font-size:0.78rem; opacity:0.6;">Totvs, SAP, REST API e mais...</span>
+                </button>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="app.js"></script>
+<script>
+    // ── Auth ──────────────────────────────────────────────────────────────
+    const user = localStorage.getItem('loggedUsername');
+    if (!user) window.location.replace('index.html');
+    else {
+        document.getElementById('welcomeUser').textContent = 'Olá, ' + user;
+        document.querySelector('.avatar-circle').textContent = user.charAt(0).toUpperCase();
+    }
+
+    const API = window.location.origin + '/api';
+
+    // ── Load saved config on page open ───────────────────────────────────
+    async function loadConnections() {
+        try {
+            const res = await fetch(`${API}/connections`, { headers: { 'ngrok-skip-browser-warning': 'true' } });
+            if (!res.ok) return;
+            const data = await res.json();
+
+            if (data.senior) {
+                const s = data.senior;
+                document.getElementById('senior-server').value = s.server || '';
+                document.getElementById('senior-port').value   = s.port   || 1433;
+                document.getElementById('senior-db').value     = s.database || '';
+                document.getElementById('senior-user').value   = s.username || '';
+                // Password is never returned for security
+            }
+        } catch (e) { /* silent */ }
+    }
+
+    // ── Test Connection ───────────────────────────────────────────────────
+    async function testConnection(id) {
+        const btn = document.getElementById(`btn-test-${id}`);
+        const log = document.getElementById(`log-${id}`);
+        const statusEl = document.getElementById(`status-${id}`);
+        const labelEl  = document.getElementById(`status-label-${id}`);
+
+        const payload = {
+            server:   document.getElementById(`${id}-server`).value.trim(),
+            port:     parseInt(document.getElementById(`${id}-port`).value) || 1433,
+            database: document.getElementById(`${id}-db`).value.trim(),
+            username: document.getElementById(`${id}-user`).value.trim(),
+            password: document.getElementById(`${id}-pass`).value,
+        };
+
+        if (!payload.server || !payload.database || !payload.username) {
+            log.className = 'test-log error';
+            log.textContent = '⚠ Preencha Servidor, Database e Usuário antes de testar.';
+            return;
+        }
+
+        btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Testando...";
+        btn.disabled = true;
+        log.className = 'test-log loading';
+        log.textContent = '🔄 Tentando conectar ao banco de dados...';
+        statusEl.className = 'conn-status pending';
+        labelEl.textContent = 'Testando...';
+
+        try {
+            const res = await fetch(`${API}/connections/${id}/test`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                log.className = 'test-log success';
+                log.innerHTML = `✅ <b>Conexão bem-sucedida!</b><br>🗄 Banco: ${data.database}<br>🏷 Versão: ${data.version}<br>⏱ Latência: ${data.latencyMs}ms`;
+                statusEl.className = 'conn-status ok';
+                labelEl.textContent = 'Conectada';
+            } else {
+                throw new Error(data.error || data.message || 'Falha na conexão');
+            }
+        } catch (e) {
+            log.className = 'test-log error';
+            log.innerHTML = `❌ <b>Falha na conexão:</b><br>${e.message}`;
+            statusEl.className = 'conn-status error';
+            labelEl.textContent = 'Erro';
+        } finally {
+            btn.innerHTML = "<i class='bx bx-wifi'></i> Testar Conexão";
+            btn.disabled = false;
+        }
+    }
+
+    // ── Save Connection ───────────────────────────────────────────────────
+    async function saveConnection(id) {
+        const payload = {
+            server:   document.getElementById(`${id}-server`).value.trim(),
+            port:     parseInt(document.getElementById(`${id}-port`).value) || 1433,
+            database: document.getElementById(`${id}-db`).value.trim(),
+            username: document.getElementById(`${id}-user`).value.trim(),
+            password: document.getElementById(`${id}-pass`).value,
+        };
+
+        try {
+            const res = await fetch(`${API}/connections/${id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
+                body: JSON.stringify(payload)
+            });
+
+            const log = document.getElementById(`log-${id}`);
+            if (res.ok) {
+                log.className = 'test-log success';
+                log.innerHTML = '💾 <b>Configuração salva com sucesso!</b> As consultas ao banco passarão a usar esta conexão.';
+            } else {
+                log.className = 'test-log error';
+                log.textContent = '❌ Erro ao salvar as configurações.';
+            }
+        } catch (e) {
+            alert('Erro de comunicação: ' + e.message);
+        }
+    }
+
+    loadConnections();
+</script>
+</body>
+</html>

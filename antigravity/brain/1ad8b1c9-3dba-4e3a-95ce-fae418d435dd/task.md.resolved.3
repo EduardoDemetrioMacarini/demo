@@ -1,4 +1,0 @@
-- [x] Iniciar e estabilizar o Backend (.NET)
-- [ ] Autenticar e iniciar o túnel Ngrok (Bloqueado: Necessita Authtoken)
-- [ ] Obter a URL pública de acesso
-- [ ] Validar acesso externo

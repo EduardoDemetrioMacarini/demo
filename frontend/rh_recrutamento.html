@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutamento & Seleção - ATS Global</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <style>
+        .dashboard-body { font-family: 'Inter', sans-serif; }
+        
+        .page-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+        
+        /* PREMIUM KPIS */
+        .grid-kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-bottom: 2rem; }
+        .kpi-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            border-radius: 16px; 
+            padding: 1.5rem; 
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: rgba(255, 255, 255, 0.04); }
+        .kpi-title { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
+        .kpi-val { font-size: 2.2rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 5px; }
+        .kpi-sub { font-size: 0.8rem; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 5px; }
+        
+        .kpi-primary { border-bottom: 3px solid #8b5cf6; }
+        .kpi-primary .kpi-val { background: linear-gradient(90deg, #a78bfa, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .kpi-success { border-bottom: 3px solid #10b981; }
+        .kpi-success .kpi-val { background: linear-gradient(90deg, #34d399, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .kpi-info { border-bottom: 3px solid #0ea5e9; }
+        .kpi-info .kpi-val { background: linear-gradient(90deg, #38bdf8, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .kpi-alert { border-bottom: 3px solid #f43f5e; }
+        .kpi-alert .kpi-val { background: linear-gradient(90deg, #fb7185, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+
+        .chart-container { background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); }
+        .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .chart-title { font-size: 1.1rem; color: #fff; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .chart-title i { color: #8b5cf6; font-size: 1.4rem; }
+
+        /* VAGAS & CANDIDATOS TABLE (EXPANDABLE) */
+        .vagas-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 10px; }
+        .vagas-table th { 
+            background: rgba(139, 92, 246, 0.05); 
+            color: rgba(255,255,255,0.5); 
+            padding: 14px 15px; 
+            text-align: left; 
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        .vagas-table td { padding: 16px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #fff; vertical-align: middle; }
+        
+        .vaga-row { cursor: pointer; transition: background 0.2s; }
+        .vaga-row:hover { background: rgba(255,255,255,0.02); }
+        .vaga-title { font-weight: 600; font-size: 1rem; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .vaga-dept { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        
+        .badge-candidates { background: rgba(59,130,246,0.15); color: #60a5fa; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; }
+        
+        /* EXPANDABLE SECTION */
+        .candidatos-row { display: none; }
+        .candidatos-row.open { display: table-row; }
+        .candidatos-container { padding: 1.5rem; background: rgba(0,0,0,0.25); margin: 0; box-shadow: inset 0 5px 15px rgba(0,0,0,0.2); }
+        .cand-list { display: flex; flex-direction: column; gap: 10px; }
+        
+        .cand-item { 
+            display: flex; align-items: center; justify-content: space-between; 
+            padding: 12px 15px; background: rgba(255,255,255,0.04); 
+            border-radius: 8px; border-left: 3px solid transparent; 
+        }
+        .cand-item.match-high { border-left-color: #10b981; }
+        .cand-item.match-med { border-left-color: #f59e0b; }
+        
+        .cand-info { display: flex; align-items: center; gap: 12px; }
+        .cand-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1rem; color: #fff; }
+        .cand-name { font-weight: 500; font-size: 0.95rem; color: #fff; }
+        .cand-stage { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+        
+        .match-score { display: flex; flex-direction: column; align-items: flex-end; }
+        .match-val { font-weight: 700; font-size: 1.1rem; }
+        .match-text { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+        .text-green { color: #10b981; }
+        .text-yellow { color: #f59e0b; }
+
+        /* RECRUTADORES BARS */
+        .rec-item { margin-bottom: 20px; }
+        .rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .rec-name { font-weight: 500; font-size: 0.95rem; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .rec-avatar { width: 28px; height: 28px; border-radius: 50%; background: #0ea5e9; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; }
+        .rec-stats { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+        .rec-stats b { color: #fff; margin-left: 4px; }
+        
+        .progress-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; display: flex; }
+        .progress-fill { height: 100%; }
+        /* Green for Fechadas, Purple for Aberta, Red for Atrasada */
+        .fill-done { background: #10b981; }
+        .fill-open { background: #8b5cf6; }
+        .fill-late { background: #f43f5e; }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.8); z-index: 9999; backdrop-filter: blur(10px);
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+            width: 90%; max-width: 900px; max-height: 85vh; overflow-y: auto; padding: 2rem;
+            position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+        .modal-title { font-size: 1.4rem; color: #fff; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .modal-close { background: transparent; border: none; font-size: 2rem; color: rgba(255,255,255,0.5); cursor: pointer; transition: color 0.2s; }
+        .modal-close:hover { color: #f43f5e; }
+        
+        .grid-vagas-detail { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+        .vaga-detail-card {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.2rem;
+        }
+        .vaga-detail-title { font-weight: 600; font-size: 1.05rem; color: #fff; margin-bottom: 5px; }
+        .vaga-detail-attr { font-size: 0.8rem; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 5px; margin-bottom: 4px; }
+        .vaga-detail-badge { margin-top: 10px; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+        
+    </style>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body class="dashboard-body">
+<div class="dashboard-container">
+
+    <!-- Sidebar Menu Inject -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/logo.png" width="40" height="40" style="border-radius:6px; flex-shrink:0;">
+            <span class="logo-text">Control<span style="font-weight:300;">Pro</span></span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="home.html"><i class='bx bx-home-alt'></i><span class="menu-text">Página Inicial</span></a></li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-clv')"><i class='bx bx-diamond'></i><span class="menu-text">Visão Executiva</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-clv" style="display:none;">
+                    <li><a href="analytics_clevel.html"><i class='bx bx-pulse'></i>Analytics (Vendas)</a></li>
+                </ul>
+            </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-vendas')"><i class='bx bx-cart'></i><span class="menu-text">Vendas</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-vendas" style="display:none;">
+                        <li><a href="vendas.html"><i class='bx bx-line-chart'></i>Painel de Vendas</a></li>
+                    </ul>
+                </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-fin')"><i class='bx bx-line-chart'></i><span class="menu-text">Financeiro</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-fin" style="display:none;">
+                    <li><a href="financeiro_dre.html"><i class='bx bx-file'></i>DRE e Resumo</a></li>
+                </ul>
+            </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-rh')"><i class='bx bx-briefcase'></i><span class="menu-text">Recursos Humanos</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-rh" style="display:none;">
+                    <li><a href="rh_recrutamento.html"><i class='bx bx-user-plus'></i>Recrutamento</a></li>
+                </ul>
+            </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-dp')"><i class='bx bx-group'></i><span class="menu-text">Departamento Pessoal</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-dp" style="display:none;">
+                    <li><a href="dp_quadro.html"><i class='bx bx-user-pin'></i>Quadro Ativo</a></li>
+                    <li><a href="dp.html"><i class='bx bx-folder'></i>Dossiê do Colaborador</a></li>
+                    <li><a href="vale_alimentacao.html"><i class='bx bx-restaurant'></i>Vale Alimentação</a></li>
+                </ul>
+            </li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event,'submenu-ti')"><i class='bx bx-laptop'></i><span class="menu-text">TI / Sistema</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                <ul class="submenu" id="submenu-ti" style="display:none;">
+                    <li><a href="rotinas.html"><i class='bx bx-data'></i>Rotinas</a></li>
+                    <li><a href="conexoes.html"><i class='bx bx-plug'></i>Conexões</a></li>
+                    <li><a href="usuarios.html"><i class='bx bx-user-circle'></i>Usuários</a></li>
+                    <li><a href="grupos.html"><i class='bx bx-shield-alt-2'></i>Grupos</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="index.html" class="logout-btn" onclick="localStorage.removeItem('loggedUsername')">
+                <i class='bx bx-log-out'></i>
+                <span class="logout-text">Sair do Sistema</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1>Gestão de <span style="color:#0ea5e9;">Recrutamento</span></h1>
+            <div class="user-info">
+                <span id="welcomeUser">Carregando...</span>
+                <div class="avatar-circle"></div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            
+            <!-- KPIs Premium -->
+            <div class="grid-kpi">
+                <div class="kpi-card kpi-info" style="cursor:pointer;" onclick="openVagasModal()" title="Clique para ver detalhado">
+                    <div class="kpi-title">Vagas Ativas</div>
+                    <div class="kpi-val">28</div>
+                    <div class="kpi-sub"><i class='bx bx-search-alt' style="color:#34d399"></i> Clique para explodir detalhes</div>
+                </div>
+                <div class="kpi-card kpi-primary">
+                    <div class="kpi-title">Candidatos no Funil</div>
+                    <div class="kpi-val">1.240</div>
+                    <div class="kpi-sub"><i class='bx bx-group'></i> 44 candidatos por vaga (média)</div>
+                </div>
+                <div class="kpi-card kpi-success">
+                    <div class="kpi-title">Tempo de Contratação (TTH)</div>
+                    <div class="kpi-val">18d</div>
+                    <div class="kpi-sub"><i class='bx bx-check-circle' style="color:#34d399"></i> Dentro da meta (SLA 21d)</div>
+                </div>
+                <div class="kpi-card kpi-alert">
+                    <div class="kpi-title">Custo Médio (CPH)</div>
+                    <div class="kpi-val">R$ 850</div>
+                    <div class="kpi-sub"><i class='bx bx-error-circle' style="color:#fb7185"></i> Redução de 5% a/a</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Expanded Table: Vagas e Candidatos -->
+                <div class="chart-container" style="padding:0; display: flex; flex-direction: column;">
+                    <div class="chart-header" style="padding: 1.5rem 1.5rem 0 1.5rem;">
+                        <h3 class="chart-title"><i class='bx bx-briefcase-alt-2'></i> Candidatos por Vaga (Pipeline Ativo)</h3>
+                        <span style="font-size:0.8rem; color:rgba(255,255,255,0.4);">Clique na vaga para ver os candidatos</span>
+                    </div>
+                    
+                    <div style="flex:1; overflow-y:auto; padding-bottom: 1rem;">
+                        <table class="vagas-table">
+                            <thead>
+                                <tr>
+                                    <th>Vaga / Departamento</th>
+                                    <th>Recrutador</th>
+                                    <th>Status SLA</th>
+                                    <th>Candidatos / Fit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vagasTbody">
+                                <!-- Generated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Column: Funil e Capacidade -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    
+                    <!-- Funnel Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3 class="chart-title"><i class='bx bx-filter-alt'></i> Funil de Conversão (YTD)</h3>
+                        </div>
+                        <div style="position: relative; height: 180px;">
+                            <canvas id="funnelChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recrutadores Capacidade -->
+                    <div class="chart-container" style="flex:1;">
+                        <div class="chart-header">
+                            <h3 class="chart-title"><i class='bx bx-line-chart'></i> Ocupação dos Recrutadores</h3>
+                        </div>
+                        <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom: 20px; display:flex; gap:15px;">
+                            <span style="display:flex; align-items:center; gap:5px;"><div style="width:8px;height:8px;background:#10b981;border-radius:2px;"></div> Fechadas</span>
+                            <span style="display:flex; align-items:center; gap:5px;"><div style="width:8px;height:8px;background:#8b5cf6;border-radius:2px;"></div> Em Andamento</span>
+                            <span style="display:flex; align-items:center; gap:5px;"><div style="width:8px;height:8px;background:#f43f5e;border-radius:2px;"></div> Atrasadas (>21d)</span>
+                        </div>
+                        
+                        <div id="recrutadoresList">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<!-- Modal Vagas Ativas -->
+<div class="modal-overlay" id="vagasModal" onclick="closeVagasModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title"><i class='bx bx-list-check' style="color:#0ea5e9;"></i> Detalhamento - Vagas Ativas</div>
+            <button class="modal-close" onclick="closeVagasModal()"><i class='bx bx-x'></i></button>
+        </div>
+        <p style="color:rgba(255,255,255,0.6); margin-bottom:1.5rem; font-size:0.9rem;">Visualizando todas as 28 vagas abertas no pipeline atualmente.</p>
+        <div class="grid-vagas-detail" id="vagasDetailGrid">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+    // System Initialization
+    const user = localStorage.getItem('loggedUsername');
+    if (!user) window.location.replace('index.html');
+    else {
+        document.getElementById('welcomeUser').textContent = 'Olá, ' + user;
+        document.querySelector('.avatar-circle').textContent = user.charAt(0).toUpperCase();
+    }
+
+    // ==========================================
+    // MOCK DATA GENERATION: Vagas & Candidatos
+    // ==========================================
+    const vagas = [
+        { 
+            id: 1, cargo: "Desenvolvedor Full Stack Sênior", dep: "Tecnologia / Engenharia", rec: "Ana Souza", sla: "No prazo", dias: 12,
+            candTotais: 142, candTriagem: 5,
+            candidatos: [
+                { nome: "Carlos Oliveira", stage: "Entrevista Técnica", match: 94, avatarUrl: null },
+                { nome: "Julia Azevedo", stage: "Fit Cultural", match: 88, avatarUrl: null },
+                { nome: "Roberto Silva", stage: "Teste Prático", match: 85, avatarUrl: null }
+            ]
+        },
+        { 
+            id: 2, cargo: "Analista Financeiro Pleno", dep: "Financeiro / Controladoria", rec: "Carlos Mendes", sla: "Atrasado", dias: 26,
+            candTotais: 85, candTriagem: 3,
+            candidatos: [
+                { nome: "Mariana Costa", stage: "Proposta Enviada", match: 96, avatarUrl: null },
+                { nome: "Fernanda Dias", stage: "Entrevista Gestor", match: 89, avatarUrl: null }
+            ]
+        },
+        { 
+            id: 3, cargo: "Gerente de Vendas (B2B)", dep: "Comercial", rec: "Beatriz Lima", sla: "Atenção", dias: 19,
+            candTotais: 210, candTriagem: 4,
+            candidatos: [
+                { nome: "Ricardo Torres", stage: "Entrevista Final", match: 91, avatarUrl: null },
+                { nome: "Leonardo Pires", stage: "Validação Referências", match: 87, avatarUrl: null },
+                { nome: "Amanda Rocha", stage: "Entrevista Comercial", match: 82, avatarUrl: null },
+                { nome: "Thiago Mendes", stage: "Triagem", match: 78, avatarUrl: null }
+            ]
+        }
+    ];
+
+    function toggleVaga(id) {
+        document.getElementById(`cand-row-${id}`).classList.toggle('open');
+    }
+
+    function renderVagas() {
+        const tbody = document.getElementById('vagasTbody');
+        let html = '';
+        
+        vagas.forEach(v => {
+            let slaColor = v.sla === 'No prazo' ? '#10b981' : v.sla === 'Atrasado' ? '#f43f5e' : '#f59e0b';
+            
+            // Tabela Master - Vaga
+            html += `
+            <tr class="vaga-row" onclick="toggleVaga(${v.id})">
+                <td>
+                    <div class="vaga-title">${v.cargo}</div>
+                    <div class="vaga-dept">${v.dep}</div>
+                </td>
+                <td>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <div style="width:24px;height:24px;border-radius:50%;background:#0ea5e9;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold;">${v.rec.charAt(0)}</div>
+                        <span style="font-size:0.85rem;">${v.rec}</span>
+                    </div>
+                </td>
+                <td>
+                    <span style="font-size:0.8rem; font-weight:600; color:${slaColor}">${v.sla} (${v.dias}d)</span>
+                </td>
+                <td>
+                    <div class="badge-candidates">
+                        <i class='bx bx-group'></i> ${v.candTotais} total
+                    </div>
+                </td>
+            </tr>
+            `;
+
+            // Expandable Row - Candidatos Selects daquela vaga 
+            let candsHtml = v.candidatos.map(c => {
+                let mClass = c.match >= 90 ? 'match-high text-green' : 'match-med text-yellow';
+                return `
+                <div class="cand-item ${mClass.split(' ')[0]}">
+                    <div class="cand-info">
+                        <div class="cand-avatar">${c.nome.charAt(0)}</div>
+                        <div>
+                            <div class="cand-name">${c.nome}</div>
+                            <div class="cand-stage"><i class='bx bx-check-double'></i> Estágio Atual: ${c.stage}</div>
+                        </div>
+                    </div>
+                    <div class="match-score">
+                        <span class="match-val ${mClass.split(' ')[1]}">${c.match}%</span>
+                        <span class="match-text">Match Score</span>
+                    </div>
+                </div>`;
+            }).join('');
+
+            html += `
+            <tr class="candidatos-row" id="cand-row-${v.id}">
+                <td colspan="4" style="padding:0;">
+                    <div class="candidatos-container">
+                        <div style="font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:12px; font-weight:600;"><i class='bx bx-target-lock'></i> Top Candidatos pelo Algoritmo ATS:</div>
+                        <div class="cand-list">
+                            ${candsHtml}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            `;
+        });
+        
+        tbody.innerHTML = html;
+    }
+
+    renderVagas();
+
+    // ==========================================
+    // MODAL EXPLOSÃO DE VAGAS ATIVAS
+    // ==========================================
+    const vagasDetailData = [
+        { title: "Engenheiro de Dados Pleno", rec: "Carlos Mendes", status: "Aberta há 12 dias", cand: 45, dep: "Engenharia" },
+        { title: "Analista de Marketing Jr", rec: "Ana Souza", status: "Aberta há 5 dias", cand: 112, dep: "Marketing" },
+        { title: "Tech Lead Mobile", rec: "Beatriz Lima", status: "SLA Atrasado (35 dias)", cand: 14, dep: "Mobile App", alert: true },
+        { title: "Analista Financeiro", rec: "Carlos Mendes", status: "Aberta há 2 dias", cand: 55, dep: "Financeiro" },
+        { title: "Executivo de Contas B2B", rec: "Beatriz Lima", status: "Aberta há 14 dias", cand: 89, dep: "Vendas" },
+        { title: "Assistente de RH", rec: "Ana Souza", status: "Aberta há 8 dias", cand: 210, dep: "Recursos Humanos" },
+        { title: "Desenvolvedor Backend Sr", rec: "Ana Souza", status: "Aberta há 22 dias", cand: 32, dep: "Sistemas" },
+        { title: "Coordenador de Produto", rec: "Beatriz Lima", status: "SLA Atrasado (28 dias)", cand: 19, dep: "Produto", alert: true },
+        { title: "Especialista em UX/UI", rec: "Carlos Mendes", status: "Aberta há 15 dias", cand: 65, dep: "Design" },
+        { title: "Gerente de Projetos", rec: "Ana Souza", status: "Aberta há 19 dias", cand: 88, dep: "Projetos" },
+        { title: "Analista de Suporte N1", rec: "Beatriz Lima", status: "Aberta há 3 dias", cand: 140, dep: "T.I." },
+        { title: "Cientista de Dados", rec: "Carlos Mendes", status: "Aberta há 20 dias", cand: 28, dep: "Dados" },
+        { title: "Assistente Administrativo", rec: "Ana Souza", status: "Aberta há 1 dia", cand: 320, dep: "Administrativo" },
+        { title: "Desenvolvedor Frontend Pleno", rec: "Beatriz Lima", status: "SLA Atrasado (25 dias)", cand: 25, dep: "Sistemas", alert: true },
+        { title: "Engenheiro DevOps", rec: "Carlos Mendes", status: "Aberta há 11 dias", cand: 17, dep: "Infraestrutura" },
+        { title: "Analista de SEO", rec: "Ana Souza", status: "Aberta há 7 dias", cand: 60, dep: "Marketing" },
+        { title: "Copywriter Pleno", rec: "Beatriz Lima", status: "Aberta há 9 dias", cand: 50, dep: "Marketing" },
+        { title: "Scrum Master", rec: "Carlos Mendes", status: "Aberta há 14 dias", cand: 42, dep: "Projetos" },
+        { title: "Analista de Tesouraria", rec: "Ana Souza", status: "Aberta há 6 dias", cand: 72, dep: "Financeiro" },
+        { title: "Vendedor Interno", rec: "Beatriz Lima", status: "Aberta há 18 dias", cand: 105, dep: "Vendas" },
+        { title: "Jovem Aprendiz", rec: "Carlos Mendes", status: "Aberta há 2 dias", cand: 450, dep: "Geral" },
+        { title: "Consultor SAP FI", rec: "Ana Souza", status: "SLA Atrasado (40 dias)", cand: 8, dep: "Sistemas", alert: true },
+        { title: "Arquiteto de Software", rec: "Beatriz Lima", status: "Aberta há 17 dias", cand: 12, dep: "Engenharia" },
+        { title: "Recepcionista Multilíngue", rec: "Carlos Mendes", status: "Aberta há 10 dias", cand: 180, dep: "Administrativo" },
+        { title: "Especialista em Logística", rec: "Ana Souza", status: "Aberta há 13 dias", cand: 34, dep: "Operações" },
+        { title: "Motorista Entregador", rec: "Beatriz Lima", status: "Aberta há 4 dias", cand: 190, dep: "Operações" },
+        { title: "Analista de Contratos", rec: "Carlos Mendes", status: "Aberta há 8 dias", cand: 45, dep: "Jurídico" },
+        { title: "Auditor Interno Sênior", rec: "Ana Souza", status: "Aberta há 21 dias", cand: 15, dep: "Governança" }
+    ]; 
+
+    function openVagasModal() {
+        const modal = document.getElementById('vagasModal');
+        const grid = document.getElementById('vagasDetailGrid');
+        
+        grid.innerHTML = vagasDetailData.map(v => {
+            let badgeBg = v.alert ? 'rgba(244, 63, 94, 0.15)' : 'rgba(16, 185, 129, 0.15)';
+            let badgeCo = v.alert ? '#f43f5e' : '#10b981';
+            let icon = v.alert ? 'bx-error-circle' : 'bx-time-five';
+            
+            return `
+            <div class="vaga-detail-card">
+                <div class="vaga-detail-title">${v.title}</div>
+                <div class="vaga-detail-attr"><i class='bx bx-building'></i> ${v.dep}</div>
+                <div class="vaga-detail-attr"><i class='bx bx-user'></i> Recrutador: ${v.rec}</div>
+                <div class="vaga-detail-attr"><i class='bx bx-group'></i> ${v.cand} Candidatos</div>
+                <div class="vaga-detail-badge" style="background:${badgeBg}; color:${badgeCo};">
+                    <i class='bx ${icon}'></i> ${v.status}
+                </div>
+            </div>
+            `;
+        }).join('');
+        
+        modal.style.display = 'flex';
+    }
+
+    function closeVagasModal(e) {
+        if(e && e.target !== document.getElementById('vagasModal')) return;
+        document.getElementById('vagasModal').style.display = 'none';
+    }
+
+    // ==========================================
+    // MOCK DATA: Capacidade dos Recrutadores
+    // ==========================================
+    const recStats = [
+        { nome: 'Ana Souza', fechadas: 34, abertas: 12, atrasadas: 2, capX: 80 }, // total 48
+        { nome: 'Carlos Mendes', fechadas: 18, abertas: 20, atrasadas: 8, capX: 60 }, // total 46
+        { nome: 'Beatriz Lima', fechadas: 56, abertas: 24, atrasadas: 4, capX: 100 }  // total 84
+    ];
+
+    document.getElementById('recrutadoresList').innerHTML = recStats.map(r => {
+        let total = r.fechadas + r.abertas + r.atrasadas;
+        let pF = (r.fechadas / total) * 100;
+        let pA = (r.abertas / total) * 100;
+        let pL = (r.atrasadas / total) * 100;
+
+        return `
+        <div class="rec-item">
+            <div class="rec-header">
+                <div class="rec-name"><div class="rec-avatar">${r.nome.charAt(0)}</div> ${r.nome}</div>
+                <div class="rec-stats">Total Alocado: <b>${total} Vagas</b></div>
+            </div>
+            <div class="progress-bg">
+                <div class="progress-fill fill-done" style="width: ${pF}%" title="Fechadas: ${r.fechadas}"></div>
+                <div class="progress-fill fill-open" style="width: ${pA}%" title="Andamento: ${r.abertas}"></div>
+                <div class="progress-fill fill-late" style="width: ${pL}%" title="Atrasadas: ${r.atrasadas}"></div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // ==========================================
+    // CHART JS: Funil de Candidatos
+    // ==========================================
+    Chart.defaults.color = 'rgba(255,255,255,0.6)';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
+    // Global DataLabels Config
+    Chart.register(ChartDataLabels);
+    Chart.defaults.set('plugins.datalabels', {
+        color: '#FFF',
+        font: { weight: '600', size: 11 },
+        anchor: 'center',
+        align: 'center',
+        display: 'auto',
+        formatter: (value) => value.toLocaleString('pt-BR')
+    });
+
+    new Chart(document.getElementById('funnelChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: ['Inscritos', 'Triagem OK', 'Entrevistas', 'Contratados'],
+            datasets: [{
+                label: 'Candidatos',
+                data: [4500, 1200, 320, 85],
+                backgroundColor: [
+                    'rgba(56, 189, 248, 0.8)',   // Azul ciano
+                    'rgba(139, 92, 246, 0.8)',   // Roxo
+                    'rgba(16, 185, 129, 0.8)',   // Verde
+                    'rgba(245, 158, 11, 0.8)'    // Amarelo
+                ],
+                borderRadius: 6,
+                barPercentage: 0.6
+            }]
+        },
+        options: {
+            indexAxis: 'y', // Horizontal bar chart acting as a funnel
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { 
+                legend: { display: false },
+                tooltip: { backgroundColor: 'rgba(0,0,0,0.8)', titleFont: { size: 13 }, bodyFont: { size: 14, weight: 'bold' } }
+            },
+            scales: {
+                x: { display: false },
+                y: { grid: { display: false }, border: { display: false } }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

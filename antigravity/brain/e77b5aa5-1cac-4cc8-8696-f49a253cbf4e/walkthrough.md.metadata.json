@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary": "Walkthrough final sobre a implementação da Base por Escala Real do Senior. O sistema agora projeta o ciclo de trabalho (7 dias ou revezamento) baseado na R006HOR e desconta feriados nacionais automaticamente. Estudo a infraestrutura de dados. Estudo a viabilidade do cálculo por escala.",
-  "updatedAt": "2026-03-31T16:31:07.767523400Z",
-  "version": "5"
-}

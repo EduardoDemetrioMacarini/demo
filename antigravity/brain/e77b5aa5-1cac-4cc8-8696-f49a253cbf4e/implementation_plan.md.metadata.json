@@ -1,7 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plano final para resolver o cálculo de Base (VA) para todos os 3967 colaboradores. Como a parametrização do Senior é inconsistente no campo TipHor, usaremos detecção por palavra-chave (DSR, Folga, etc) no nome do horário. Projetaremos as 314 escalas do tipo 'P' associando os dias ao ciclo de 7 dias (Segunda-Domingo). Estudo a infraestrutura de dados. Estudo a viabilidade do cálculo por escala.",
-  "updatedAt": "2026-03-31T16:40:58.026574200Z",
-  "version": "10",
-  "requestFeedback": true
-}

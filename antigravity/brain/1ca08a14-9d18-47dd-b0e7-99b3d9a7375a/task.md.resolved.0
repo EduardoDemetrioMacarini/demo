@@ -1,5 +1,0 @@
-# Ngrok Status Check
-
-- [/] Verificar se o processo ngrok está rodando
-- [ ] Consultar a API local do ngrok para túneis ativos
-- [ ] Reportar URL pública ao usuário

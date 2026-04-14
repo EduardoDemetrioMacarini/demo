@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários TI - ControlPro</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* MODAL STYLES */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.8); z-index: 9999; backdrop-filter: blur(10px);
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            width: 100%; max-width: 450px; padding: 2rem; position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+        .modal-title { font-size: 1.2rem; color: #fff; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .modal-close { background: transparent; border: none; font-size: 1.5rem; color: rgba(255,255,255,0.5); cursor: pointer; transition: color 0.2s; }
+        .modal-close:hover { color: #f43f5e; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 10px 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+        .form-group input:focus { border-color: #8b5cf6; }
+        .btn-success { width: 100%; margin-top: 1rem; padding: 10px; background: linear-gradient(90deg, #10b981, #059669); border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+        .btn-success:hover { opacity: 0.85; }
+    </style>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo.png" width="40" height="40" style="border-radius:6px; flex-shrink:0;">
+                <span class="logo-text">Control<span style="font-weight:300;">Pro</span></span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="home.html"><i class='bx bx-home-alt'></i><span class="menu-text">Página Inicial</span></a></li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-clv')"><i class='bx bx-diamond'></i><span class="menu-text">Visão Executiva</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-clv" style="display:none;">
+                        <li><a href="analytics_clevel.html"><i class='bx bx-pulse'></i>Analytics (Vendas)</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-vendas')"><i class='bx bx-cart'></i><span class="menu-text">Vendas</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-vendas" style="display:none;">
+                        <li><a href="vendas.html"><i class='bx bx-line-chart'></i>Painel de Vendas</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-fin')"><i class='bx bx-line-chart'></i><span class="menu-text">Financeiro</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-fin" style="display:none;">
+                        <li><a href="financeiro_dre.html"><i class='bx bx-file'></i>DRE e Resumo</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-rh')"><i class='bx bx-briefcase'></i><span class="menu-text">Recursos Humanos</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-rh" style="display:none;">
+                        <li><a href="rh_recrutamento.html"><i class='bx bx-user-plus'></i>Recrutamento</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-dp')"><i class='bx bx-group'></i><span class="menu-text">Departamento Pessoal</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-dp" style="display:none;">
+                        <li><a href="dp_quadro.html"><i class='bx bx-user-pin'></i>Quadro Ativo</a></li>
+                        <li><a href="dp.html"><i class='bx bx-folder'></i>Dossiê do Colaborador</a></li>
+                        <li><a href="vale_alimentacao.html"><i class='bx bx-restaurant'></i>Vale Alimentação</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-ti')"><i class='bx bx-laptop'></i><span class="menu-text">TI / Sistema</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-ti" style="display:none;">
+                        <li><a href="rotinas.html"><i class='bx bx-data'></i>Rotinas</a></li>
+                        <li><a href="conexoes.html"><i class='bx bx-plug'></i>Conexões</a></li>
+                        <li><a href="usuarios.html"><i class='bx bx-user-circle'></i>Usuários</a></li>
+                        <li><a href="grupos.html"><i class='bx bx-shield-alt-2'></i>Grupos</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="index.html" class="logout-btn" onclick="localStorage.removeItem('loggedUsername')">
+                    <i class='bx bx-log-out'></i>
+                    <span class="logout-text">Sair do Sistema</span>
+                </a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Painel de Administração - Gestão de Usuários</h1>
+                <div class="user-info">
+                    <span id="welcomeUser">Carregando...</span>
+                    <!-- Generating an implicit avatar -->
+                    <div class="avatar-circle">TI</div>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="glass-card full-width">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="margin: 0;">Usuários Cadastrados</h3>
+                            <p style="margin: 4px 0 0; color: rgba(255,255,255,0.5); font-size: 0.85rem;">Controle quem tem acesso ao sistema de painéis.</p>
+                        </div>
+                        <button onclick="openAddUserModal()" class="btn-primary" style="background: linear-gradient(90deg, #3b82f6, #2563eb); border: none; padding: 5px 12px; border-radius: 6px; margin: 0; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;"><i class='bx bx-user-plus'></i> Adicionar</button>
+                    </div>
+                    
+                    <div id="usersList" style="color: rgba(255,255,255,0.7);">Carregando usuários do banco local...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        const user = localStorage.getItem('loggedUsername');
+        if (!user) window.location.replace('index.html');
+        else document.getElementById('welcomeUser').textContent = "Olá, " + user;
+
+
+
+        let allGroups = [];
+
+        async function loadUsers() {
+            try {
+                // Carrega grupos do Demo LocalDB
+                allGroups = JSON.parse(localStorage.getItem("demoGroups")) || [];
+                const data = JSON.parse(localStorage.getItem("demoUsers")) || [];
+                
+                let html = '<table style="width:100%; text-align:left; border-collapse: collapse; font-size: 0.85rem;">';
+                html += '<tr style="border-bottom: 1px solid rgba(255,255,255,0.1);"><th style="padding: 10px 0; color:#fff;">Usuário</th><th style="color:#fff;">E-mail</th><th style="color:#fff;">Grupo</th><th style="color:#fff;">Status</th><th style="color:#fff;">Ações</th></tr>';
+                
+                if(data.length === 0) {
+                    html += '<tr><td colspan="5" style="padding: 15px 0;">Nenhum usuário cadastrado.</td></tr>';
+                } else {
+                    data.forEach(u => {
+                        let isA = u.isActive;
+                        let statusHTML = isA ? `<span style="color: #3b82f6;"><i class='bx bx-check-circle'></i></span>` : `<span style="color: #ffbaba;"><i class='bx bx-block'></i></span>`;
+                        
+                        let groupOptions = allGroups.map(g => `<option value="${g.id}" ${u.groupId === g.id ? 'selected' : ''}>${g.name}</option>`).join('');
+                        
+                        html += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px 0; color:#fff;">${u.username}</td>
+                            <td style="color:rgba(255,255,255,0.6);">${u.email}</td>
+                            <td>
+                                <select onchange="assignGroup(${u.id}, this.value)" style="background:rgba(255,255,255,0.05); color:white; border:1px solid rgba(255,255,255,0.1); border-radius:4px; padding:2px 5px;">
+                                    ${groupOptions}
+                                </select>
+                            </td>
+                            <td>${statusHTML}</td>
+                            <td>
+                                <button onclick="toggleUser(${u.id})" class="btn-primary" style="padding:4px 10px; width:auto; font-size:0.75rem; margin:0; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.4); color: #60a5fa;">${isA ? '<i class="bx bx-block"></i> Desativar' : '<i class="bx bx-check"></i> Ativar'}</button>
+                                <button onclick="deleteUser(${u.id})" class="btn-primary" style="padding:4px 10px; width:auto; font-size:0.75rem; margin:0; margin-left:5px; background: rgba(244,63,94,0.15); border: 1px solid rgba(244,63,94,0.4); color: #fb7185;"><i class="bx bx-trash"></i> Excluir</button>
+                            </td>
+                        </tr>`;
+                    });
+                }
+                html += '</table>';
+                document.getElementById('usersList').innerHTML = html;
+            } catch(e) {
+                document.getElementById('usersList').innerHTML = '<span style="color:#ffbaba;">Erro: ' + e.message + '</span>';
+            }
+        }
+
+        window.toggleUser = function(id) {
+            let users = JSON.parse(localStorage.getItem("demoUsers")) || [];
+            let u = users.find(x => x.id === id);
+            if (u) {
+                u.isActive = !u.isActive;
+                localStorage.setItem("demoUsers", JSON.stringify(users));
+                loadUsers();
+            }
+        }
+
+        window.deleteUser = function(id) {
+            if(!confirm("Tem certeza que deseja excluir permanentemente este usuário?")) return;
+            let users = JSON.parse(localStorage.getItem("demoUsers")) || [];
+            users = users.filter(x => x.id !== id);
+            localStorage.setItem("demoUsers", JSON.stringify(users));
+            loadUsers();
+        }
+
+        window.assignGroup = function(userId, groupId) {
+            let users = JSON.parse(localStorage.getItem("demoUsers")) || [];
+            let u = users.find(x => x.id === parseInt(userId));
+            if (u) {
+                u.groupId = parseInt(groupId);
+                localStorage.setItem("demoUsers", JSON.stringify(users));
+                alert("Grupo alterado com sucesso.");
+            }
+        }
+
+        // Modal Functions
+        window.openAddUserModal = function() {
+            document.getElementById('addUserForm').reset();
+            document.getElementById('addUserModal').style.display = 'flex';
+        }
+
+        window.closeAddUserModal = function() {
+            document.getElementById('addUserModal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('addUserForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('newUsername').value.trim();
+                const email = document.getElementById('newEmail').value.trim();
+                const password = document.getElementById('newPassword').value;
+
+                let users = JSON.parse(localStorage.getItem("demoUsers")) || [];
+                if (users.find(u => u.username.toLowerCase() === username.toLowerCase() || u.email.toLowerCase() === email.toLowerCase())) {
+                    alert("Erro: E-mail ou Usuário já estão em uso!");
+                    return;
+                }
+                
+                const newUser = {
+                    id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                    username, email, password, groupId: 2, isActive: true
+                };
+                users.push(newUser);
+                localStorage.setItem("demoUsers", JSON.stringify(users));
+                
+                closeAddUserModal();
+                loadUsers();
+            });
+        });
+
+        loadUsers();
+    </script>
+
+    <!-- Modal Adicionar Usuário -->
+    <div class="modal-overlay" id="addUserModal" onclick="closeAddUserModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title"><i class='bx bx-user-plus' style="color:#10b981;"></i> Adicionar Usuário</div>
+                <button type="button" class="modal-close" onclick="closeAddUserModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label>Nome de Usuário</label>
+                    <input type="text" id="newUsername" required placeholder="Ex: joao.silva">
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="newEmail" required placeholder="joao@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="newPassword" required placeholder="Mínimo 6 caracteres" minlength="6">
+                </div>
+                <button type="submit" class="btn-success">Cadastrar Usuário</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

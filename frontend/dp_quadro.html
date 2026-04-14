@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DP - Quadro Ativo Insights</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <style>
+        .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .kpi-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;}
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+        .kpi-card.kpi-primary::before { background: #0ea5e9; }
+        .kpi-card.kpi-success::before { background: #10b981; }
+        .kpi-card.kpi-danger::before { background: #f43f5e; }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); background: rgba(255,255,255,0.08); }
+        .kpi-title { font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
+        .kpi-val { font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 5px;}
+        .kpi-sub { font-size: 0.8rem; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 5px;}
+
+        .charts-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        @media (max-width: 1024px) { .charts-row { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .charts-row { grid-template-columns: 1fr; } }
+        .chart-container { background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+        .chart-title { font-size: 1.05rem; color: #fff; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px;}
+
+        /* MASTER-DETAIL TABLE STYLES */
+        .drill-table-container { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 1rem; overflow-x: auto; }
+        .drill-table { border-collapse: collapse; width: 100%; min-width: 800px; }
+        .drill-table th { padding: 1rem; text-align: left; font-size: 0.85rem; color: rgba(255,255,255,0.5); text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .row-master { cursor: pointer; transition: background 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .row-master:hover { background: rgba(255,255,255,0.05); }
+        .row-master td { padding: 1.2rem 1rem; color: #fff; font-size: 0.95rem; font-weight: 500;}
+        .dep-icon { width: 35px; height: 35px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; }
+        .dep-tech { background: rgba(14,165,233,0.15); color: #0ea5e9; }
+        .dep-adm { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+        .dep-com { background: rgba(16,185,129,0.15); color: #10b981; }
+        .dep-ops { background: rgba(244,63,94,0.15); color: #f43f5e; }
+        
+        .row-detail { display: none; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .row-detail.active { display: table-row; animation: dropDown 0.3s ease forwards; }
+        @keyframes dropDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .colab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; padding: 1.5rem; }
+        .colab-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.2rem; display: flex; align-items: center; transition: 0.2s; }
+        .colab-card:hover { border-color: rgba(14,165,233,0.5); transform: scale(1.02); }
+        .colab-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #1e293b, #334155); display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; border: 2px solid rgba(255,255,255,0.1); margin-right: 15px; flex-shrink: 0; }
+        .colab-info { flex-grow: 1; }
+        .colab-name { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 3px; }
+        .colab-role { font-size: 0.8rem; color: #0ea5e9; font-weight: 500; margin-bottom: 8px; }
+        .colab-meta { font-size: 0.75rem; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
+        .colab-salary { margin-left: auto; text-align: right; }
+        .salary-val { font-size: 1.1rem; font-weight: 700; color: #10b981; }
+        .salary-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+
+        .currency-mask { font-family: 'Courier New', Courier, monospace; letter-spacing: 1px;}
+    </style>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo.png" width="40" height="40" style="border-radius:6px; flex-shrink:0;">
+                <span class="logo-text">Control<span style="font-weight:300;">Pro</span></span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="home.html"><i class='bx bx-home-alt'></i><span class="menu-text">Página Inicial</span></a></li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-clv')"><i class='bx bx-diamond'></i><span class="menu-text">Visão Executiva</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-clv" style="display:none;">
+                        <li><a href="analytics_clevel.html"><i class='bx bx-pulse'></i>Analytics (Vendas)</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-vendas')"><i class='bx bx-cart'></i><span class="menu-text">Vendas</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-vendas" style="display:none;">
+                        <li><a href="vendas.html"><i class='bx bx-line-chart'></i>Painel de Vendas</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-fin')"><i class='bx bx-line-chart'></i><span class="menu-text">Financeiro</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-fin" style="display:none;">
+                        <li><a href="financeiro_dre.html"><i class='bx bx-file'></i>DRE e Resumo</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-rh')"><i class='bx bx-briefcase'></i><span class="menu-text">Recursos Humanos</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-rh" style="display:none;">
+                        <li><a href="rh_recrutamento.html"><i class='bx bx-user-plus'></i>Recrutamento</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-dp')"><i class='bx bx-group'></i><span class="menu-text">Departamento Pessoal</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-dp" style="display:none;">
+                        <li><a href="dp_quadro.html"><i class='bx bx-user-pin'></i>Quadro Ativo</a></li>
+                        <li><a href="dp.html"><i class='bx bx-folder'></i>Dossiê do Colaborador</a></li>
+                        <li><a href="vale_alimentacao.html"><i class='bx bx-restaurant'></i>Vale Alimentação</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-ti')"><i class='bx bx-laptop'></i><span class="menu-text">TI / Sistema</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-ti" style="display:none;">
+                        <li><a href="rotinas.html"><i class='bx bx-data'></i>Rotinas</a></li>
+                        <li><a href="conexoes.html"><i class='bx bx-plug'></i>Conexões</a></li>
+                        <li><a href="usuarios.html"><i class='bx bx-user-circle'></i>Usuários</a></li>
+                        <li><a href="grupos.html"><i class='bx bx-shield-alt-2'></i>Grupos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Painel de Insights: <span style="color:#0ea5e9;">Quadro de Colaboradores</span></h1>
+                <div class="user-info">
+                    <span id="welcomeUser">Carregando...</span>
+                    <div class="avatar-circle"></div>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                
+                <!-- KPIs -->
+                <div class="grid-kpi">
+                    <div class="kpi-card kpi-primary">
+                        <div class="kpi-title">Efetivo Ativo Total</div>
+                        <div class="kpi-val" id="kpiTotal">0</div>
+                        <div class="kpi-sub"><i class='bx bx-line-chart' style="color:#0ea5e9"></i> Fechamento Atual da Folha</div>
+                    </div>
+                    <div class="kpi-card kpi-success">
+                        <div class="kpi-title">Folha Total (Salários Base)</div>
+                        <div class="kpi-val currency-mask" id="kpiFolha">R$ 0,00</div>
+                        <div class="kpi-sub"><i class='bx bx-trending-up' style="color:#10b981"></i> Somatório excluindo encargos</div>
+                    </div>
+                    <div class="kpi-card kpi-danger">
+                        <div class="kpi-title">Turnover Mês Anterior</div>
+                        <div class="kpi-val" id="kpiTurno">2.4%</div>
+                        <div class="kpi-sub"><i class='bx bx-error-circle' style="color:#f43f5e"></i> Levemente acima da média</div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Analíticos -->
+                <div class="charts-row">
+                    <div class="chart-container">
+                        <div class="chart-title"><i class='bx bx-buildings' style="color:#8b5cf6"></i> Concentração por Custos</div>
+                        <div style="position: relative; height: 250px; width: 100%;">
+                            <canvas id="ccChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-title"><i class='bx bx-pie-chart-alt' style="color:#0ea5e9"></i> Distribuição de Gênero</div>
+                        <div style="position: relative; height: 250px; width: 100%;">
+                            <canvas id="genderChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-title"><i class='bx bx-network-chart' style="color:#10b981"></i> Lotação por Função</div>
+                        <div style="position: relative; height: 250px; width: 100%;">
+                            <canvas id="roleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mestre-Detalhe Departamento -->
+                <h3 style="margin-bottom: 1rem; color: #fff; font-weight: 600;"><i class='bx bx-sitemap' style="color:#0ea5e9"></i> Headcount por Unidade Departamental</h3>
+                <p style="color: rgba(255,255,255,0.6); margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    Clique sobre uma linha do departamento para verificar o Drill-Down com dados unitários de todo o time associado.
+                </p>
+                
+                <div class="drill-table-container">
+                    <table class="drill-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40%">Área / Departamento</th>
+                                <th style="width: 20%">Gestor Responsável</th>
+                                <th style="width: 20%">Efetivo Lotado</th>
+                                <th style="width: 20%; text-align:right;">Gasto Base Mensal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="masterTableBody">
+                            <!-- Populated heavily by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts da Página -->
+    <script src="app.js"></script>
+    <script>
+        const usr = localStorage.getItem('loggedUsername');
+        if(usr) { document.getElementById('welcomeUser').textContent = "Olá, " + usr; document.querySelector('.avatar-circle').textContent = usr.charAt(0).toUpperCase(); }
+
+        Chart.defaults.color = 'rgba(255,255,255,0.6)';
+        Chart.defaults.font.family = "'Inter', sans-serif";
+
+        // Global DataLabels Config
+        Chart.register(ChartDataLabels);
+        Chart.defaults.set('plugins.datalabels', {
+            color: '#FFF',
+            font: { weight: '600', size: 10 },
+            anchor: 'center',
+            align: 'center',
+            display: 'auto',
+            formatter: (value) => value
+        });
+
+        // ==========================================
+        // DATA GENERATION: MOCK ENGINE
+        // ==========================================
+        // Construindo bases robustas via computação em tempo real para simular um excelente banco.
+        const firstNamesM = ["Carlos", "João", "Marcos", "Lucas", "Gabriel", "Bruno", "Eduardo", "Caio", "Felipe", "Rodrigo"];
+        const firstNamesF = ["Ana", "Mariana", "Julia", "Fernanda", "Beatriz", "Carla", "Letícia", "Bruna", "Aline", "Camila"];
+        const lastNames = ["Silva", "Santos", "Oliveira", "Costa", "Almeida", "Rodrigues", "Pereira", "Gomes", "Mendes", "Lima"];
+
+        function getRand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function randDate() {
+            const start = new Date(2018, 0, 1).getTime();
+            const end = new Date(2025, 0, 1).getTime();
+            const date = new Date(start + Math.random() * (end - start));
+            return date.toLocaleDateString("pt-BR");
+        }
+        function gColab(role, minS, maxS, forceCC) {
+            const isM = Math.random() > 0.45; // 55% M, 45% F genérico
+            const gender = isM ? "Masculino" : "Feminino";
+            const name = isM ? getRand(firstNamesM) : getRand(firstNamesF);
+            const surname = getRand(lastNames);
+            const salary = Math.floor(Math.random() * (maxS - minS + 1) + minS);
+            
+            return {
+                nome: `${name} ${surname}`, gender, role, admission: randDate(), cc: forceCC, salary
+            };
+        }
+
+        // Criando departamentos e gerando Colaboradores
+        const depData = [
+            {
+                id: 'D01', name: 'Tecnologia da Informação', gestor: 'Ricardo Souza', iconClass: 'dep-tech', icon: 'bx-code-alt',
+                ccList: ['CC-DEV', 'CC-INFRA', 'CC-DADOS'],
+                config: [
+                    { qty: 4, role: 'Desenvolvedor Sênior', min: 11000, max: 14000, cc: 'CC-DEV'},
+                    { qty: 6, role: 'Desenvolvedor Pleno', min: 7000, max: 9500, cc: 'CC-DEV'},
+                    { qty: 2, role: 'Engenheiro de Dados', min: 10000, max: 13000, cc: 'CC-DADOS'},
+                    { qty: 3, role: 'Analista de Infra', min: 6000, max: 8000, cc: 'CC-INFRA'}
+                ]
+            },
+            {
+                id: 'D02', name: 'Comercial & Vendas B2B', gestor: 'Mariana Lima', iconClass: 'dep-com', icon: 'bx-line-chart-down',
+                ccList: ['CC-VENDAS', 'CC-CS'],
+                config: [
+                    { qty: 3, role: 'Key Account Manager', min: 6500, max: 9000, cc: 'CC-VENDAS'},
+                    { qty: 12, role: 'Executivo de Vendas', min: 3500, max: 5000, cc: 'CC-VENDAS'},
+                    { qty: 5, role: 'Analista de CS', min: 4000, max: 5500, cc: 'CC-CS'}
+                ]
+            },
+            {
+                id: 'D03', name: 'Administrativo & Financeiro', gestor: 'Fernando Costa', iconClass: 'dep-adm', icon: 'bx-wallet',
+                ccList: ['CC-FIN', 'CC-ADM'],
+                config: [
+                    { qty: 4, role: 'Analista Financeiro Pl', min: 4500, max: 6200, cc: 'CC-FIN'},
+                    { qty: 2, role: 'Coordenador', min: 8000, max: 9500, cc: 'CC-FIN'},
+                    { qty: 6, role: 'Assistente Administrativo', min: 2200, max: 2800, cc: 'CC-ADM'}
+                ]
+            },
+            {
+                id: 'D04', name: 'Operações e Logística', gestor: 'Carlos Almeida', iconClass: 'dep-ops', icon: 'bx-package',
+                ccList: ['CC-LOG'],
+                config: [
+                    { qty: 4, role: 'Coordenador Logístico', min: 4500, max: 6000, cc: 'CC-LOG'},
+                    { qty: 25, role: 'Operador Especializado', min: 2500, max: 3200, cc: 'CC-LOG'}
+                ]
+            }
+        ];
+
+        let globalColabs = [];
+
+        // Build Process
+        depData.forEach(dep => {
+            dep.colabs = [];
+            dep.config.forEach(cfg => {
+                for(let i=0; i<cfg.qty; i++){
+                    let c = gColab(cfg.role, cfg.min, cfg.max, cfg.cc);
+                    c.depName = dep.name;
+                    dep.colabs.push(c);
+                    globalColabs.push(c);
+                }
+            });
+            dep.totalHC = dep.colabs.length;
+            dep.totalSal = dep.colabs.reduce((acc, curr) => acc + curr.salary, 0);
+        });
+
+        const totalCompanySal = globalColabs.reduce((acc, c) => acc + c.salary, 0);
+
+        // Update KPIs
+        document.getElementById('kpiTotal').textContent = globalColabs.length;
+        document.getElementById('kpiFolha').textContent = totalCompanySal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+
+        // ==========================================
+        // UI RENDER AND DRILL-DOWN LOGIC
+        // ==========================================
+        const tbody = document.getElementById('masterTableBody');
+        let htmlTable = "";
+
+        depData.forEach(dep => {
+            htmlTable += `
+            <tr class="row-master" onclick="toggleDetail('det-${dep.id}')">
+                <td>
+                    <div style="display:flex; align-items:center;">
+                        <span class="dep-icon ${dep.iconClass}"><i class='bx ${dep.icon}'></i></span>
+                        <span style="font-weight:600;">${dep.name}</span>
+                    </div>
+                </td>
+                <td><i class='bx bx-user-pin' style="color:rgba(255,255,255,0.4)"></i> ${dep.gestor}</td>
+                <td><span style="background:rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px; font-weight: 600;">${dep.totalHC} ativos</span></td>
+                <td style="text-align:right; font-family:'Courier New', monospace; color:#10b981; font-weight:600;">${dep.totalSal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</td>
+            </tr>
+            <tr class="row-detail" id="det-${dep.id}">
+                <td colspan="4" style="padding:0;">
+                    <div class="colab-grid">
+                        ${dep.colabs.sort((a,b) => b.salary - a.salary).map(c => `
+                            <div class="colab-card">
+                                <div class="colab-avatar">${c.nome.charAt(0)}</div>
+                                <div class="colab-info">
+                                    <div class="colab-name">${c.nome}</div>
+                                    <div class="colab-role">${c.role}</div>
+                                    <div class="colab-meta"><i class='bx bx-calendar'></i> Adm: ${c.admission}</div>
+                                    <div class="colab-meta"><i class='bx bx-hash'></i> ${c.cc}</div>
+                                </div>
+                                <div class="colab-salary">
+                                    <div class="salary-label">Básico Mensal</div>
+                                    <div class="salary-val">${c.salary.toLocaleString('pt-BR', {style:'currency', currency:'BRL'})}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </td>
+            </tr>
+            `;
+        });
+        tbody.innerHTML = htmlTable;
+
+        window.toggleDetail = function(id) {
+            const el = document.getElementById(id);
+            const isAc = el.classList.contains('active');
+            // Fechar os outros
+            document.querySelectorAll('.row-detail').forEach(d => d.classList.remove('active'));
+            if(!isAc) { el.classList.add('active'); }
+        };
+
+        // ==========================================
+        // CHART RENDER LOGIC WITH DATA REDUCTION
+        // ==========================================
+        
+        // --- GENDER ---
+        let maleCt = globalColabs.filter(c => c.gender === 'Masculino').length;
+        let femCt = globalColabs.filter(c => c.gender === 'Feminino').length;
+
+        new Chart(document.getElementById('genderChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Masculino', 'Feminino'],
+                datasets: [{ 
+                    data: [maleCt, femCt], 
+                    backgroundColor: ['#0ea5e9', '#d946ef'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                cutout: '70%', 
+                plugins: { 
+                    legend: { position: 'bottom' },
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                            return (value * 100 / sum).toFixed(0) + "%";
+                        },
+                        color: '#000',
+                        font: { weight: '700' }
+                    }
+                } 
+            }
+        });
+
+        // --- COST CENTERS ---
+        let ccGroup = {};
+        globalColabs.forEach(c => { ccGroup[c.cc] = (ccGroup[c.cc] || 0) + 1; });
+        let ccLabels = Object.keys(ccGroup);
+        let ccData = Object.values(ccGroup);
+
+        new Chart(document.getElementById('ccChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ccLabels.map(l => l.replace('CC-','')),
+                datasets: [{ 
+                    label: 'Colaboradores', 
+                    data: ccData, 
+                    backgroundColor: 'rgba(139, 92, 246, 0.8)',
+                    borderRadius: 6,
+                    borderWidth: 0 
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { legend: {display: false}}, 
+                scales: { 
+                    y: { display: false }, 
+                    x: { grid: { display: false }, border: { display: false } } 
+                } 
+            }
+        });
+
+        // --- ROLES (Top 5) ---
+        let roleGrp = {};
+        globalColabs.forEach(c => { roleGrp[c.role] = (roleGrp[c.role] || 0) + 1; });
+        let sortRoles = Object.keys(roleGrp).sort((a,b) => roleGrp[b] - roleGrp[a]).slice(0, 6);
+        let sRData = sortRoles.map(r => roleGrp[r]);
+
+        new Chart(document.getElementById('roleChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: sortRoles,
+                datasets: [{ 
+                    label: 'Volumetria', 
+                    data: sRData, 
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                    borderRadius: 6,
+                    borderWidth: 0 
+                }]
+            },
+            options: { 
+                responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                plugins: { legend: {display: false}}, 
+                scales: { 
+                    x: { display: false }, 
+                    y: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 } } } 
+                } 
+            }
+        });
+
+    </script>
+</body>
+</html>

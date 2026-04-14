@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visão Executiva - C-Level</title>
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <style>
+        .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .kpi-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden;}
+        .kpi-title { font-size: 0.95rem; color: rgba(255,255,255,0.7); margin-bottom: 8px; text-transform: uppercase; }
+        .kpi-val { font-size: 2.2rem; font-weight: 600; color: #fff; line-height: 1; transition: 0.3s; }
+        
+        .skeleton { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; z-index: 5; pointer-events: none;}
+        @keyframes skeleton-loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        
+        .charts-row { display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; margin-bottom: 2rem; }
+        @media (max-width: 1024px) { .charts-row { grid-template-columns: 1fr; } }
+        .chart-container { background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s, box-shadow 0.2s;}
+        .chart-container:hover { box-shadow: 0 5px 25px rgba(0,0,0,0.2) ; border-color: rgba(14, 165, 233, 0.3);}
+        .chart-title { font-size: 1.1rem; color: #0ea5e9; margin-bottom: 5px; font-weight: 600; }
+        .chart-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 15px; }
+
+        .btn-reset { display:none; background: rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:#fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; float: right; font-size: 0.8rem;}
+        .btn-reset:hover { background: rgba(255, 75, 75, 0.2); border-color:#ff4b4b; color: #ffbaba; }
+    </style>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+
+        <!-- Main Content -->
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo.png" width="40" height="40" style="border-radius:6px; flex-shrink:0;">
+                <span class="logo-text">Control<span style="font-weight:300;">Pro</span></span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="home.html"><i class='bx bx-home-alt'></i><span class="menu-text">Página Inicial</span></a></li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-clv')"><i class='bx bx-diamond'></i><span class="menu-text">Visão Executiva</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-clv" style="display:none;">
+                        <li><a href="analytics_clevel.html"><i class='bx bx-pulse'></i>Analytics (Vendas)</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-vendas')"><i class='bx bx-cart'></i><span class="menu-text">Vendas</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-vendas" style="display:none;">
+                        <li><a href="vendas.html"><i class='bx bx-line-chart'></i>Painel de Vendas</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-fin')"><i class='bx bx-line-chart'></i><span class="menu-text">Financeiro</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-fin" style="display:none;">
+                        <li><a href="financeiro_dre.html"><i class='bx bx-file'></i>DRE e Resumo</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-rh')"><i class='bx bx-briefcase'></i><span class="menu-text">Recursos Humanos</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-rh" style="display:none;">
+                        <li><a href="rh_recrutamento.html"><i class='bx bx-user-plus'></i>Recrutamento</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-dp')"><i class='bx bx-group'></i><span class="menu-text">Departamento Pessoal</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-dp" style="display:none;">
+                        <li><a href="dp_quadro.html"><i class='bx bx-user-pin'></i>Quadro Ativo</a></li>
+                        <li><a href="dp.html"><i class='bx bx-folder'></i>Dossiê do Colaborador</a></li>
+                        <li><a href="vale_alimentacao.html"><i class='bx bx-restaurant'></i>Vale Alimentação</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#" onclick="toggleSubmenu(event,'submenu-ti')"><i class='bx bx-laptop'></i><span class="menu-text">TI / Sistema</span><i class='bx bx-chevron-down submenu-icon'></i></a>
+                    <ul class="submenu" id="submenu-ti" style="display:none;">
+                        <li><a href="rotinas.html"><i class='bx bx-data'></i>Rotinas</a></li>
+                        <li><a href="conexoes.html"><i class='bx bx-plug'></i>Conexões</a></li>
+                        <li><a href="usuarios.html"><i class='bx bx-user-circle'></i>Usuários</a></li>
+                        <li><a href="grupos.html"><i class='bx bx-shield-alt-2'></i>Grupos</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="index.html" class="logout-btn" onclick="localStorage.removeItem('loggedUsername')">
+                    <i class='bx bx-log-out'></i>
+                    <span class="logout-text">Sair do Sistema</span>
+                </a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Painel Executivo Global <span style="font-size:0.9rem; color:#8b5cf6;" class="badge">Next-Gen BI</span></h1>
+                <div class="user-info">
+                    <span id="welcomeUser">Demo (CEO)</span>
+                    <div class="avatar-circle">D</div>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="glass-card full-width">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
+                        <h3>Resumo Corporativo Consolidado</h3>
+                        <div class="toggle-group" style="display:flex; gap: 10px;">
+                            <button id="btnMes" class="btn-toggle active" onclick="setPeriodo('mes')">Mês Atual (Abr/26)</button>
+                            <button id="btnAno" class="btn-toggle" onclick="setPeriodo('ano')">Acumulado (YTD)</button>
+                        </div>
+                    </div>
+
+                    <!-- KPIs -->
+                    <div class="grid-kpi">
+                        <div class="kpi-card" id="card-fat">
+                            <div class="kpi-title">Faturamento</div>
+                            <div class="kpi-val" style="color:#0ea5e9;">R$ <span class="odometer" id="val-fat">0</span></div>
+                            <div class="kpi-var" id="var-fat" style="font-size:0.85rem; margin-top:5px; padding: 2px 6px; border-radius:4px; display:inline-block;"><i class='bx bx-trending-up'></i> +0% YoY</div>
+                        </div>
+                        <div class="kpi-card" id="card-ped">
+                            <div class="kpi-title">Pedidos de Venda (Vol)</div>
+                            <div class="kpi-val"><span class="odometer" id="val-ped">0</span></div>
+                            <div class="kpi-var" id="var-ped" style="font-size:0.85rem; margin-top:5px; padding: 2px 6px; border-radius:4px; display:inline-block;"><i class='bx bx-trending-up'></i> +0% YoY</div>
+                        </div>
+                        <div class="kpi-card" id="card-res">
+                            <div class="kpi-title">Resultado Líquido</div>
+                            <div class="kpi-val" style="color:#4bff7d;">R$ <span class="odometer" id="val-res">0</span></div>
+                            <div class="kpi-var" id="var-res" style="font-size:0.85rem; margin-top:5px; padding: 2px 6px; border-radius:4px; display:inline-block;"><i class='bx bx-trending-up'></i> +0% YoY</div>
+                        </div>
+                        <div class="kpi-card" id="card-mar">
+                            <div class="kpi-title">Margem EBITDA</div>
+                            <div class="kpi-val" style="color:#8b5cf6;"><span class="odometer" id="val-mar">0</span>%</div>
+                            <div class="kpi-var" id="var-mar" style="font-size:0.85rem; margin-top:5px; padding: 2px 6px; border-radius:4px; display:inline-block;"><i class='bx bx-trending-up'></i> +0pp YoY</div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos -->
+                    <div class="charts-row">
+                        <div class="chart-container">
+                            <div class="chart-title"><i class='bx bx-bar-chart'></i> Evolução: Faturamento x Resultado</div>
+                            <div class="chart-desc">Comparativos anuais de performance ($1000s)</div>
+                            <div style="position:relative; height:280px;">
+                                <canvas id="chartEvolucao"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-title"><i class='bx bx-pie-chart-alt'></i> Principais Gastos (OpEx / CapEx)</div>
+                            <div class="chart-desc">Distribuição de saídas de caixa no período</div>
+                            <div style="position:relative; height:280px;">
+                                <canvas id="chartGastos"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <style>
+        .btn-toggle { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 0.85rem;}
+        .btn-toggle:hover { border-color: #0ea5e9; color: #0ea5e9; }
+        .btn-toggle.active { background: rgba(14, 165, 233, 0.15); border-color: #0ea5e9; color: #0ea5e9; font-weight: bold; }
+        .var-up { background: rgba(75, 255, 125, 0.2); color: #4bff7d !important; }
+        .var-down { background: rgba(255, 75, 75, 0.2); color: #ff4b4b !important; }
+    </style>
+    <script>
+        
+        const user = localStorage.getItem('loggedUsername');
+        if(user) { document.getElementById('welcomeUser').textContent = user; document.querySelector('.avatar-circle').textContent = user.charAt(0); }
+
+        Chart.defaults.color = 'rgba(255,255,255,0.7)';
+        Chart.defaults.font.family = 'Inter';
+
+        // Global DataLabels Config
+        Chart.register(ChartDataLabels);
+        Chart.defaults.set('plugins.datalabels', {
+            color: '#FFF',
+            font: { weight: '600', size: 10 },
+            anchor: 'end',
+            align: 'end',
+            offset: 4,
+            display: 'auto',
+            formatter: (value) => {
+                if (typeof value === 'number') {
+                    if (value >= 1000) return (value/1000).toFixed(0) + 'k';
+                    return value;
+                }
+                return value;
+            }
+        });
+
+        // --- DATABASE FICTÍCIA ---
+        const dados = {
+            mes: {
+                fat: 1250000, fat_var: 12.5, fat_dir: 'up',
+                ped: 450, ped_var: 5.2, ped_dir: 'up',
+                res: 350000, res_var: 18.0, res_dir: 'up',
+                mar: 28.0, mar_var: 2.1, mar_dir: 'up',
+                gastos: [350000, 180000, 120000, 80000, 45000] // Folha, Impostos, Serv Terceiros, Marketing, TI
+            },
+            ano: {
+                fat: 4850000, fat_var: 8.4, fat_dir: 'up',
+                ped: 1850, ped_var: -2.0, ped_dir: 'down',
+                res: 1280000, res_var: 14.5, res_dir: 'up',
+                mar: 26.4, mar_var: 1.5, mar_dir: 'up',
+                gastos: [1400000, 720000, 480000, 320000, 180000]
+            }
+        };
+
+        const dadosGrafico = {
+            meses: ['Jan', 'Fev', 'Mar', 'Abr'],
+            fatAnoAtual: [1100, 1150, 1350, 1250],
+            fatAnoAnt: [950, 1080, 1200, 1100],
+            resAnoAtual: [280, 290, 360, 350],
+            resAnoAnt: [210, 240, 290, 280]
+        };
+
+        let chartEvolucao, chartGastos;
+
+        function animateValue(el, start, end, duration, floatDecimals = 0) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 4);
+                let current = progress * (end - start) + start;
+                
+                if(floatDecimals > 0) {
+                    el.innerHTML = current.toFixed(floatDecimals).replace('.', ',');
+                } else {
+                    el.innerHTML = Math.floor(current).toLocaleString('pt-BR');
+                }
+                if (progress < 1) window.requestAnimationFrame(step);
+                else el.innerHTML = floatDecimals > 0 ? end.toFixed(floatDecimals).replace('.', ',') : end.toLocaleString('pt-BR');
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function setVarBadge(elId, val, dir, unitLabel) {
+            const el = document.getElementById(elId);
+            el.className = 'kpi-var ' + (dir === 'up' ? 'var-up' : 'var-down');
+            el.innerHTML = `<i class='bx bx-trending-${dir}'></i> ${dir === 'up' ? '+' : ''}${val.toFixed(1).replace('.',',')}${unitLabel} YoY`;
+        }
+
+        function setPeriodo(periodo) {
+            document.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
+            document.getElementById(periodo === 'mes' ? 'btnMes' : 'btnAno').classList.add('active');
+
+            const dt = dados[periodo];
+            
+            animateValue(document.getElementById('val-fat'), 0, dt.fat, 1200);
+            setVarBadge('var-fat', dt.fat_var, dt.fat_dir, '%');
+
+            animateValue(document.getElementById('val-ped'), 0, dt.ped, 1200);
+            setVarBadge('var-ped', dt.ped_var, dt.ped_dir, '%');
+
+            animateValue(document.getElementById('val-res'), 0, dt.res, 1200);
+            setVarBadge('var-res', dt.res_var, dt.res_dir, '%');
+
+            animateValue(document.getElementById('val-mar'), 0, dt.mar, 1200, 1);
+            setVarBadge('var-mar', dt.mar_var, dt.mar_dir, 'pp');
+
+            // Atualiza grafico rosca
+            if(chartGastos) {
+                chartGastos.data.datasets[0].data = dt.gastos;
+                chartGastos.update();
+            }
+        }
+
+        function initCharts() {
+            // Linha e barra combinados
+            chartEvolucao = new Chart(document.getElementById('chartEvolucao').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: dadosGrafico.meses,
+                    datasets: [
+                        { type: 'bar', label: 'Fat. Ano Atual', data: dadosGrafico.fatAnoAtual, backgroundColor: 'rgba(14, 165, 233, 0.8)', borderRadius: 4, order: 2 },
+                        { type: 'bar', label: 'Fat. Ano Anterior', data: dadosGrafico.fatAnoAnt, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderRadius: 4, order: 3 },
+                        { type: 'line', label: 'Res. Ano Atual', data: dadosGrafico.resAnoAtual, borderColor: '#4bff7d', backgroundColor: '#4bff7d', borderWidth: 3, tension: 0.3, order: 1 },
+                        { type: 'line', label: 'Res. Ano Anterior', data: dadosGrafico.resAnoAnt, borderColor: 'rgba(255,255,255,0.4)', borderWidth: 2, borderDash: [5, 5], tension: 0.3, order: 4 }
+                    ]
+                },
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    plugins: { legend: { position: 'bottom' } },
+                    scales: {
+                        y: { display: false },
+                        x: { grid: { display: false }, border: { display: false } }
+                    }
+                }
+            });
+
+            // Torta / Rosca
+            chartGastos = new Chart(document.getElementById('chartGastos').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Folha de Pagamento', 'Impostos e Taxas', 'Serv. Terceirizados', 'Vendas e MKT', 'Tecnologia'],
+                    datasets: [{
+                        data: dados.mes.gastos,
+                        backgroundColor: ['#8b5cf6', '#eab308', '#0ea5e9', '#ec4899', '#10b981'],
+                        borderWidth: 2, borderColor: '#1e293b'
+                    }]
+                },
+                options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { 
+                    legend: { position: 'right' },
+                    datalabels: {
+                        anchor: 'center',
+                        align: 'center',
+                        color: '#000',
+                        font: { weight: '700' },
+                        formatter: (value, ctx) => {
+                            let sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                            let percentage = (value * 100 / sum).toFixed(0) + "%";
+                            return percentage;
+                        }
+                    }
+                }, 
+                cutout: '65%' 
+            }
+            });
+        }
+
+        setTimeout(() => {
+            initCharts();
+            setPeriodo('mes');
+        }, 300);
+    </script>
+</body>
+</html>

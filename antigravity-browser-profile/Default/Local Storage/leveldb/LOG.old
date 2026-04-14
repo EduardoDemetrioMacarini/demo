@@ -1,4 +1,0 @@
-2026/04/10-12:02:01.766 5004 Reusing MANIFEST C:\Users\SETUP\.gemini\antigravity-browser-profile\Default\Local Storage\leveldb/MANIFEST-000001
-2026/04/10-12:02:01.772 5004 Recovering log #13
-2026/04/10-12:02:01.772 5004 (ignoring error) C:\Users\SETUP\.gemini\antigravity-browser-profile\Default\Local Storage\leveldb/000013.log: dropping 579 bytes; Corruption: missing start of fragmented record(2)
-2026/04/10-12:02:01.776 5004 Reusing old log C:\Users\SETUP\.gemini\antigravity-browser-profile\Default\Local Storage\leveldb/000013.log 
