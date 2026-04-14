@@ -1,0 +1,19 @@
+# AI Assistant data
+antigravity/
+antigravity-browser-profile/
+
+# Technical & Secrets
+ngrok.exe
+tunnels.json
+backend/appsettings.json
+backend/connections.json
+
+# .NET Build output
+**/bin/
+**/obj/
+
+# Common OS/IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
