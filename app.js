@@ -71,6 +71,8 @@ function initLocalDB() {
     
     localStorage.setItem("demoUsers", JSON.stringify(users));
 
+    let groups = JSON.parse(localStorage.getItem("demoGroups"));
+    
     if (!groups) {
         groups = [
             { id: 1, name: "Administrador", screens: ['home.html', 'dp.html', 'vale_alimentacao.html', 'rh_recrutamento.html', 'analytics_clevel.html', 'vendas.html', 'financeiro_dre.html', 'dp_quadro.html', 'rotinas.html', 'conexoes.html', 'usuarios.html', 'grupos.html'] },
